@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text"><span class="brand-title">Kart Kapitol</span></div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <button class="btn ghost small" id="signOutBtn">Sign out</button>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Admin — Event Manager</h2>
+        <p id="who" class="muted">Checking access…</p>
+      </div>
+
+      <div class="grid two">
+        <!-- Editor -->
+        <div class="card">
+          <h3>Create / Update Event</h3>
+
+          <label>Title<br><input id="title" style="width:100%"></label><br><br>
+
+          <label>Status<br>
+            <select id="status" style="width:100%">
+              <option value="upcoming">Upcoming</option>
+              <option value="recent">Recent</option>
+              <option value="past">Past</option>
+            </select>
+          </label><br><br>
+
+          <label>Date (YYYY-MM-DD)<br><input id="date" placeholder="2026-03-14" style="width:100%"></label><br><br>
+
+          <label>Time<br><input id="time" placeholder="6:00 PM" style="width:100%"></label><br><br>
+
+          <label>Location name<br><input id="location_name" style="width:100%"></label><br><br>
+
+          <label>Address<br><input id="address" style="width:100%"></label><br><br>
+
+          <label>Short blurb (shows in featured cards)<br>
+            <input id="short_blurb" style="width:100%">
+          </label><br><br>
+
+          <label>Description (full exhibit label)<br>
+            <textarea id="description" rows="6" style="width:100%"></textarea>
+          </label><br><br>
+
+          <label>Image path (optional)<br>
+            <input id="image" placeholder="assets/events/my-event.jpg" style="width:100%">
+          </label><br><br>
+
+          <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+            <label style="display:flex; gap:8px; align-items:center; margin:0;">
+              <input id="featured" type="checkbox"> Featured
+            </label>
+
+            <span class="muted" id="editingLabel"></span>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <button class="btn primary" id="saveBtn">Save event</button>
+            <button class="btn secondary" id="clearBtn">Clear</button>
+            <button class="btn ghost" id="deleteBtn" disabled>Delete</button>
+          </div>
+
+          <p class="muted" id="msg" style="margin-top:12px;"></p>
+          <p class="muted" style="margin-top:8px;">
+            Tip: <strong>Featured</strong> events show at the top of Events. Set <strong>Status = past</strong> when done.
+          </p>
+        </div>
+
+        <!-- List -->
+        <div class="card">
+          <div class="events-head">
+            <h3>Existing Events</h3>
+            <button class="btn ghost small" id="refreshBtn">Refresh</button>
+          </div>
+
+          <ul id="eventsList" class="events-list" aria-live="polite"></ul>
+          <p class="muted">Click any event to edit it.</p>
+
+          <div class="card" style="margin-top:14px;">
+            <h3 style="margin-top:0;">Need admin access?</h3>
+            <p class="muted">
+              If you’re signed in but blocked, add your UID to Firestore:
+              <code>roles/{uid}</code> with <code>role: "admin"</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Kart Kapitol</p>
+      <p class="muted">Admin tools — handle with care.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import {
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    import {
+      collection,
+      deleteDoc,
+      doc,
+      getDoc,
+      getDocs,
+      orderBy,
+      query,
+      serverTimestamp,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const who = document.getElementById("who");
+    const msg = document.getElementById("msg");
+    const editingLabel = document.getElementById("editingLabel");
+
+    const els = {
+      title: document.getElementById("title"),
+      status: document.getElementById("status"),
+      date: document.getElementById("date"),
+      time: document.getElementById("time"),
+      location_name: document.getElementById("location_name"),
+      address: document.getElementById("address"),
+      short_blurb: document.getElementById("short_blurb"),
+      description: document.getElementById("description"),
+      image: document.getElementById("image"),
+      featured: document.getElementById("featured"),
+      list: document.getElementById("eventsList")
+    };
+
+    const saveBtn = document.getElementById("saveBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const deleteBtn = document.getElementById("deleteBtn");
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    let currentUser = null;
+    let currentId = null; // doc id
+
+    function slugify(s){
+      return (s || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    }
+
+    function buildId(){
+      const d = els.date.value.trim();
+      const t = els.title.value.trim();
+      return `${d}-${slugify(t)}`;
+    }
+
+    function clearForm(){
+      currentId = null;
+      els.title.value = "";
+      els.status.value = "upcoming";
+      els.date.value = "";
+      els.time.value = "";
+      els.location_name.value = "";
+      els.address.value = "";
+      els.short_blurb.value = "";
+      els.description.value = "";
+      els.image.value = "";
+      els.featured.checked = false;
+      msg.textContent = "";
+      editingLabel.textContent = "";
+      deleteBtn.disabled = true;
+    }
+
+    async function isAdmin(uid){
+      const roleSnap = await getDoc(doc(db, "roles", uid));
+      return roleSnap.exists() && roleSnap.data()?.role === "admin";
+    }
+
+    function rowHTML(e, id){
+      const featured = e.featured ? " · ★" : "";
+      const status = (e.status || "upcoming").toUpperCase();
+      return `
+        <div>
+          <strong>${(e.title || id)}${featured}</strong>
+          <span>${e.location_name || ""} · ${status}</span>
+        </div>
+        <div>
+          <strong>${e.date_start || ""}</strong>
+        </div>
+      `;
+    }
+
+    async function refreshList(){
+      els.list.innerHTML = "";
+      const q = query(collection(db, "events"), orderBy("date_start", "desc"));
+      const snap = await getDocs(q);
+
+      if (snap.empty){
+        const li = document.createElement("li");
+        li.className = "event";
+        li.innerHTML = `<div><strong>No events yet</strong><span>Add one on the left.</span></div><div><strong>—</strong></div>`;
+        els.list.appendChild(li);
+        return;
+      }
+
+      snap.forEach((d) => {
+        const e = d.data();
+        const li = document.createElement("li");
+        li.className = "event";
+        li.style.cursor = "pointer";
+        li.innerHTML = rowHTML(e, d.id);
+        li.addEventListener("click", () => loadEvent(d.id));
+        els.list.appendChild(li);
+      });
+    }
+
+    async function loadEvent(id){
+      const snap = await getDoc(doc(db, "events", id));
+      if (!snap.exists()) return;
+
+      const e = snap.data();
+      currentId = id;
+
+      els.title.value = e.title || "";
+      els.status.value = e.status || "upcoming";
+      els.date.value = e.date_start || "";
+      els.time.value = e.time || "";
+      els.location_name.value = e.location_name || "";
+      els.address.value = e.address || "";
+      els.short_blurb.value = e.short_blurb || "";
+      els.description.value = e.description || "";
+      els.image.value = e.image || "";
+      els.featured.checked = !!e.featured;
+
+      editingLabel.textContent = `Editing: ${id}`;
+      msg.textContent = "";
+      deleteBtn.disabled = false;
+    }
+
+    async function saveEvent(){
+      const title = els.title.value.trim();
+      const date = els.date.value.trim();
+
+      if (!title || !date){
+        msg.textContent = "Title and Date are required.";
+        return;
+      }
+
+      const id = currentId || buildId();
+
+      const payload = {
+        title,
+        status: els.status.value,
+        date_start: date,
+        date_end: date,
+        time: els.time.value.trim(),
+        location_name: els.location_name.value.trim(),
+        address: els.address.value.trim(),
+        short_blurb: els.short_blurb.value.trim(),
+        description: els.description.value.trim(),
+        image: els.image.value.trim(),
+        featured: !!els.featured.checked,
+        updated_at: serverTimestamp()
+      };
+
+      await setDoc(doc(db, "events", id), payload, { merge: true });
+
+      currentId = id;
+      editingLabel.textContent = `Editing: ${id}`;
+      msg.textContent = `Saved: ${id}`;
+      deleteBtn.disabled = false;
+
+      await refreshList();
+    }
+
+    async function deleteEvent(){
+      if (!currentId) return;
+      const ok = confirm(`Delete event "${currentId}"? This cannot be undone.`);
+      if (!ok) return;
+
+      await deleteDoc(doc(db, "events", currentId));
+      msg.textContent = `Deleted: ${currentId}`;
+      clearForm();
+      await refreshList();
+    }
+
+    saveBtn.addEventListener("click", saveEvent);
+    clearBtn.addEventListener("click", clearForm);
+    deleteBtn.addEventListener("click", deleteEvent);
+    refreshBtn.addEventListener("click", refreshList);
+
+    document.getElementById("signOutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+
+    // Gate access
+    onAuthStateChanged(auth, async (user) => {
+      if (!user){
+        window.location.href = "login.html";
+        return;
+      }
+
+      currentUser = user;
+      who.textContent = `Signed in as ${user.email || user.uid}`;
+
+      const ok = await isAdmin(user.uid);
+      if (!ok){
+        msg.textContent = "You are signed in, but you are not approved as an admin. Add your UID to roles/{uid} with role='admin'.";
+        // lock UI
+        saveBtn.disabled = true;
+        deleteBtn.disabled = true;
+        refreshBtn.disabled = true;
+        return;
+      }
+
+      who.textContent = `Admin access: ${user.email || user.uid}`;
+      await refreshList();
+    });
+  </script>
+</body>
+</html>
