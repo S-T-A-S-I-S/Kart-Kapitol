@@ -51,41 +51,52 @@
 
       <div class="grid two">
         <div class="card">
-          <h3>Sign in</h3>
-          <p class="muted">
-            This area is for staff/admins. Visitors don’t need an account.
-          </p>
+          <h3>Continue with Google</h3>
+          <p class="muted">Fastest sign-in method.</p>
 
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-            <button class="btn primary" id="googleBtn">Continue with Google</button>
-            <button class="btn ghost" id="homeBtn">Back to home</button>
+          <button class="btn primary" id="googleBtn">Continue with Google</button>
+
+          <hr style="border:none; height:1px; background:rgba(255,255,255,.08); margin:16px 0;">
+
+          <h3>Email & Password</h3>
+          <p class="muted">Use this if you want staff accounts without Google.</p>
+
+          <label>Email<br>
+            <input id="email" type="email" autocomplete="email" style="width:100%" placeholder="name@email.com">
+          </label><br><br>
+
+          <label>Password<br>
+            <input id="password" type="password" autocomplete="current-password" style="width:100%" placeholder="••••••••">
+          </label><br><br>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn secondary" id="emailSignInBtn" type="button">Sign in</button>
+            <button class="btn ghost" id="emailCreateBtn" type="button">Create account</button>
           </div>
 
           <p class="muted" id="status" style="margin-top:12px;"></p>
 
-          <div class="card" style="margin-top:14px;">
-            <h3 style="margin-top:0;">If you get blocked</h3>
-            <p class="muted">
-              Firebase login won’t work from <code>file://</code>. It must be served over HTTPS
-              (GitHub Pages is perfect).
-            </p>
+          <div style="margin-top:14px;">
+            <button class="btn ghost" id="homeBtn" type="button">Back to home</button>
           </div>
+
+          <p class="muted" style="margin-top:10px;">
+            Note: Access is still controlled by Firestore roles.
+          </p>
         </div>
 
         <div class="card">
-          <h3>What signing in unlocks</h3>
+          <h3>Troubleshooting (popup closes instantly)</h3>
           <ul class="mini-list">
-            <li>Admin-only event uploads</li>
-            <li>Live updates to Events page (Firestore)</li>
-            <li>Featured events for the “big wall”</li>
+            <li>Don’t use <code>file://</code> — test on GitHub Pages or localhost</li>
+            <li>Add your domain to Firebase Authorized domains</li>
+            <li>Enable Google provider + set Support email</li>
+            <li>Allow popups for this site</li>
           </ul>
 
           <p class="muted">
-            Access is controlled by roles in Firestore. If you can’t access Admin, you need your UID
-            added to <code>roles</code> as <strong>admin</strong>.
+            If it still fails, I’ll help you read the exact error from the console (F12 → Console).
           </p>
-
-          <a class="link" href="events.html">View public events →</a>
         </div>
       </div>
     </div>
@@ -104,10 +115,17 @@
     import { auth, googleProvider } from "./firebase.js";
     import {
       signInWithPopup,
-      onAuthStateChanged
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
     const status = document.getElementById("status");
+
+    const emailEl = document.getElementById("email");
+    const passEl = document.getElementById("password");
+
+    function setStatus(text){ status.textContent = text; }
 
     document.getElementById("homeBtn").addEventListener("click", () => {
       window.location.href = "index.html";
@@ -115,15 +133,41 @@
 
     document.getElementById("googleBtn").addEventListener("click", async () => {
       try {
-        status.textContent = "Signing in…";
+        setStatus("Signing in with Google…");
         await signInWithPopup(auth, googleProvider);
       } catch (err) {
         console.error(err);
-        status.textContent = `Login failed: ${err?.message || err}`;
+        setStatus(`Google sign-in failed: ${err?.message || err}`);
       }
     });
 
-    // If already signed in, go to admin
+    document.getElementById("emailSignInBtn").addEventListener("click", async () => {
+      try {
+        const email = emailEl.value.trim();
+        const password = passEl.value;
+        if (!email || !password) return setStatus("Enter email and password.");
+        setStatus("Signing in…");
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        console.error(err);
+        setStatus(`Email sign-in failed: ${err?.message || err}`);
+      }
+    });
+
+    document.getElementById("emailCreateBtn").addEventListener("click", async () => {
+      try {
+        const email = emailEl.value.trim();
+        const password = passEl.value;
+        if (!email || !password) return setStatus("Enter email and password.");
+        setStatus("Creating account…");
+        await createUserWithEmailAndPassword(auth, email, password);
+        setStatus("Account created. Redirecting…");
+      } catch (err) {
+        console.error(err);
+        setStatus(`Account creation failed: ${err?.message || err}`);
+      }
+    });
+
     onAuthStateChanged(auth, (user) => {
       if (user) window.location.href = "admin.html";
     });
