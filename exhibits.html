@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Exhibits</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Page transition overlay -->
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text">
+          <span class="brand-title">Kart Kapitol</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html" class="is-active">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link is-active">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/kapitol.jpeg" alt="" />
+      </div>
+
+      <div class="kart-streak" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <h1>Exhibits</h1>
+
+        <p class="lead">
+          Welcome to the exhibit hall. Each exhibit is a curated lens on Marshalltown’s esports story—
+          the spaces, the people, the culture, and the impact.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#hall">Enter the hall</a>
+          <button class="btn ghost" data-open-modal="curator">Curator’s note</button>
+        </div>
+
+        <div class="hero-badges" aria-label="Exhibit highlights">
+          <div class="badge">
+            <span class="badge-top">Gallery</span>
+            <span class="badge-bottom">5 Exhibits</span>
+          </div>
+          <div class="badge">
+            <span class="badge-top">Wall</span>
+            <span class="badge-bottom">Timeline</span>
+          </div>
+          <div class="badge">
+            <span class="badge-top">Collection</span>
+            <span class="badge-bottom">Artifacts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXHIBIT HALL -->
+    <section id="hall" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Exhibit Hall</h2>
+          <p>Pick a wing. Each one opens a curated display panel.</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3>Exhibit A: The Rise</h3>
+            <p>How esports grew into a real community presence.</p>
+            <button class="btn secondary" data-open-modal="exhibitRise">Open exhibit</button>
+          </article>
+
+          <article class="card">
+            <h3>Exhibit B: The Arena</h3>
+            <p>Venues, events, broadcasts, and watch parties.</p>
+            <button class="btn secondary" data-open-modal="exhibitArena">Open exhibit</button>
+          </article>
+
+          <article class="card">
+            <h3>Exhibit C: The People</h3>
+            <p>Organizers, creators, volunteers, and the community behind the scenes.</p>
+            <button class="btn secondary" data-open-modal="exhibitPeople">Open exhibit</button>
+          </article>
+
+          <article class="card">
+            <h3>Exhibit D: The Impact</h3>
+            <p>Education, careers, tourism, and measurable local value.</p>
+            <button class="btn secondary" data-open-modal="exhibitImpact">Open exhibit</button>
+          </article>
+
+          <article class="card">
+            <h3>Exhibit E: Highlights</h3>
+            <p>Rotating wall of moments: photos, clips, winners, and recaps.</p>
+            <button class="btn secondary" data-open-modal="exhibitHighlights">Open exhibit</button>
+          </article>
+
+          <article class="card accent">
+            <h3>Curated Standards</h3>
+            <p>This exhibit is designed to feel intentional: concise, shareable, and visitor-first.</p>
+            <button class="link btn-inline" data-open-modal="curator">Read →</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE WALL -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Timeline Wall</h2>
+          <p>A guided walk through key milestones. Tap a plaque to open the display.</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3>Milestone 1</h3>
+            <p>Origin moment: the first spark that started local momentum.</p>
+            <button class="btn secondary" data-open-modal="timeline1">Open plaque</button>
+          </article>
+
+          <article class="card">
+            <h3>Milestone 2</h3>
+            <p>The first big event: a turning point that brought people in.</p>
+            <button class="btn secondary" data-open-modal="timeline2">Open plaque</button>
+          </article>
+
+          <article class="card">
+            <h3>Milestone 3</h3>
+            <p>Broadcast era: production, streaming, and shareable moments.</p>
+            <button class="btn secondary" data-open-modal="timeline3">Open plaque</button>
+          </article>
+
+          <article class="card">
+            <h3>Milestone 4</h3>
+            <p>Community expansion: new partnerships, venues, or formats.</p>
+            <button class="btn secondary" data-open-modal="timeline4">Open plaque</button>
+          </article>
+
+          <article class="card">
+            <h3>Milestone 5</h3>
+            <p>Recognition: a highlight worth framing on the wall.</p>
+            <button class="btn secondary" data-open-modal="timeline5">Open plaque</button>
+          </article>
+
+          <article class="card accent">
+            <h3>Milestone 6</h3>
+            <p>The next chapter: what Marshalltown is building toward.</p>
+            <button class="btn primary" data-open-modal="timeline6">Open plaque</button>
+          </article>
+        </div>
+
+        <p class="muted" style="margin-top:12px;">
+          Tip: Replace milestone titles and descriptions with real dates and named events once you decide
+          the “museum canon.”
+        </p>
+      </div>
+    </section>
+
+    <!-- COLLECTIONS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Collections</h2>
+          <p>Organized like a museum: artifacts, media, and stories—ready to be expanded.</p>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>Artifacts</h3>
+            <p>Logos, flyers, posters, bracket screenshots, signage—visual history.</p>
+            <button class="btn secondary" data-open-modal="collectionArtifacts">Open collection</button>
+          </div>
+
+          <div class="card">
+            <h3>Media</h3>
+            <p>Highlight reels, photos, recaps, and broadcast clips.</p>
+            <button class="btn secondary" data-open-modal="collectionMedia">Open collection</button>
+          </div>
+
+          <div class="card">
+            <h3>Stories</h3>
+            <p>Short exhibit labels: the “why it mattered” behind big moments.</p>
+            <button class="btn secondary" data-open-modal="collectionStories">Open collection</button>
+          </div>
+
+          <div class="card accent">
+            <h3>Submit an Artifact</h3>
+            <p>Have something that belongs in the archive? Add it to the exhibit.</p>
+            <button class="btn primary" data-open-modal="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXIT SIGN -->
+    <section class="section alt">
+      <div class="container split">
+        <div>
+          <h2>Continue the Tour</h2>
+          <p>
+            You’ve explored the exhibit hall. Next: see what’s happening now, or plan a visit around upcoming moments.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="events.html">Go to Events</a>
+            <a class="btn ghost" href="visit.html">Plan your visit</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Quick exits</h3>
+          <a class="panel-link" href="events.html">Events calendar</a>
+          <a class="panel-link" href="visit.html">Visitor guide</a>
+          <a class="panel-link" href="partners.html">Partners & impact</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Kart Kapitol</p>
+      <p class="muted">Exhibits are curated. The story grows as the city grows.</p>
+    </div>
+  </footer>
+
+  <!-- Modal (shared across pages) -->
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="btn ghost small" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn secondary" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
