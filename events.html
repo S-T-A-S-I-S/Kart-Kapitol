@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Events</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text"><span class="brand-title">Kart Kapitol</span></div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html" class="is-active">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link is-active">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/kapitol.jpeg" alt="" />
+      </div>
+      <div class="kart-streak" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <h1>Events</h1>
+        <p class="lead">
+          Live calendar + museum archive. Featured moments up front, everything else organized for visitors.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn primary" data-open-modal="submit">Submit an event</button>
+          <a class="btn ghost" href="login.html">Staff login</a>
+        </div>
+
+        <div class="hero-badges" aria-label="Event categories">
+          <div class="badge"><span class="badge-top">Now</span><span class="badge-bottom">Upcoming</span></div>
+          <div class="badge"><span class="badge-top">Wall</span><span class="badge-bottom">Featured</span></div>
+          <div class="badge"><span class="badge-top">Archive</span><span class="badge-bottom">Past</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Featured</h2>
+          <p>These are the “big wall” moments — highlighted for visitors and press.</p>
+        </div>
+
+        <div id="featuredGrid" class="grid cards"></div>
+        <p id="featuredEmpty" class="muted" style="display:none;">No featured events yet. Mark an event as <strong>featured</strong> in the admin panel.</p>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Upcoming & Recent</h2>
+          <p>What’s next (and what just happened). Perfect for “Plan Your Visit.”</p>
+        </div>
+
+        <div class="card">
+          <div class="events-head">
+            <h3>Event feed</h3>
+            <button class="btn ghost small" id="refreshBtn">Refresh</button>
+          </div>
+
+          <ul id="upcomingList" class="events-list" aria-live="polite"></ul>
+          <p id="upcomingEmpty" class="muted" style="display:none;">No upcoming events yet. Add one in <a class="link" href="admin.html">Admin</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Past Events Archive</h2>
+          <p>Documented moments that build Marshalltown’s esports story.</p>
+        </div>
+
+        <div class="card">
+          <ul id="pastList" class="events-list" aria-live="polite"></ul>
+          <p id="pastEmpty" class="muted" style="display:none;">No past events yet. When events pass, switch <strong>status</strong> to <em>past</em> in Admin.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Kart Kapitol</p>
+      <p class="muted">Powered by Firestore — updates live without redeploying.</p>
+    </div>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="btn ghost small" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn secondary" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+
+  <!-- Firestore feed -->
+  <script type="module">
+    import { db } from "./firebase.js";
+    import {
+      collection,
+      getDocs,
+      orderBy,
+      query
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const featuredGrid = document.getElementById("featuredGrid");
+    const featuredEmpty = document.getElementById("featuredEmpty");
+
+    const upcomingList = document.getElementById("upcomingList");
+    const upcomingEmpty = document.getElementById("upcomingEmpty");
+
+    const pastList = document.getElementById("pastList");
+    const pastEmpty = document.getElementById("pastEmpty");
+
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    function safe(s){ return (s ?? "").toString(); }
+
+    function sortByDateAsc(a, b){
+      return safe(a.date_start).localeCompare(safe(b.date_start));
+    }
+
+    function makeFeaturedCard(ev){
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const img = ev.image ? `<img src="${ev.image}" alt="" style="width:100%; border-radius:16px; margin-bottom:12px;">` : "";
+
+      card.innerHTML = `
+        ${img}
+        <h3>${safe(ev.title) || "Untitled Event"}</h3>
+        <p>${safe(ev.short_blurb) || safe(ev.description).slice(0, 140) || "A featured event in the Kart Kapitol archive."}</p>
+        <div class="meta muted" style="margin-top:10px;">
+          <span><strong>${safe(ev.date_start) || "TBD"}</strong>${ev.time ? " · " + safe(ev.time) : ""}</span><br>
+          <span>${safe(ev.location_name) || ""}${ev.address ? " · " + safe(ev.address) : ""}</span>
+        </div>
+      `;
+      return card;
+    }
+
+    function makeEventRow(ev){
+      const li = document.createElement("li");
+      li.className = "event";
+
+      li.innerHTML = `
+        <div>
+          <strong>${safe(ev.title) || "Untitled Event"}</strong>
+          <span>${safe(ev.location_name) || safe(ev.address) || ""}</span>
+        </div>
+        <div>
+          <strong>${safe(ev.date_start) || "TBD"}</strong>
+        </div>
+      `;
+      return li;
+    }
+
+    async function loadEvents(){
+      // Clear UI
+      featuredGrid.innerHTML = "";
+      upcomingList.innerHTML = "";
+      pastList.innerHTML = "";
+      featuredEmpty.style.display = "none";
+      upcomingEmpty.style.display = "none";
+      pastEmpty.style.display = "none";
+
+      const q = query(collection(db, "events"), orderBy("date_start", "desc"));
+      const snap = await getDocs(q);
+
+      const events = [];
+      snap.forEach(doc => events.push({ id: doc.id, ...doc.data() }));
+
+      const featured = events.filter(e => !!e.featured);
+      const upcoming = events.filter(e => (e.status || "upcoming") !== "past");
+      const past = events.filter(e => (e.status || "") === "past");
+
+      // Featured
+      if (featured.length === 0){
+        featuredEmpty.style.display = "block";
+      } else {
+        // sort newest first for featured wall
+        featured.forEach(ev => featuredGrid.appendChild(makeFeaturedCard(ev)));
+      }
+
+      // Upcoming/Recent (sorted by soonest)
+      const upcomingSorted = [...upcoming].sort(sortByDateAsc);
+      if (upcomingSorted.length === 0){
+        upcomingEmpty.style.display = "block";
+      } else {
+        upcomingSorted.forEach(ev => upcomingList.appendChild(makeEventRow(ev)));
+      }
+
+      // Past archive (already date desc from query, keep that feel)
+      if (past.length === 0){
+        pastEmpty.style.display = "block";
+      } else {
+        past.forEach(ev => pastList.appendChild(makeEventRow(ev)));
+      }
+    }
+
+    refreshBtn?.addEventListener("click", loadEvents);
+    loadEvents();
+  </script>
+</body>
+</html>
