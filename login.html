@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text"><span class="brand-title">Kart Kapitol</span></div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Staff Login</h2>
+        <p>Sign in to manage events and curated exhibit content.</p>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>Sign in</h3>
+          <p class="muted">
+            This area is for staff/admins. Visitors don’t need an account.
+          </p>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+            <button class="btn primary" id="googleBtn">Continue with Google</button>
+            <button class="btn ghost" id="homeBtn">Back to home</button>
+          </div>
+
+          <p class="muted" id="status" style="margin-top:12px;"></p>
+
+          <div class="card" style="margin-top:14px;">
+            <h3 style="margin-top:0;">If you get blocked</h3>
+            <p class="muted">
+              Firebase login won’t work from <code>file://</code>. It must be served over HTTPS
+              (GitHub Pages is perfect).
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>What signing in unlocks</h3>
+          <ul class="mini-list">
+            <li>Admin-only event uploads</li>
+            <li>Live updates to Events page (Firestore)</li>
+            <li>Featured events for the “big wall”</li>
+          </ul>
+
+          <p class="muted">
+            Access is controlled by roles in Firestore. If you can’t access Admin, you need your UID
+            added to <code>roles</code> as <strong>admin</strong>.
+          </p>
+
+          <a class="link" href="events.html">View public events →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Kart Kapitol</p>
+      <p class="muted">Staff access only.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script type="module">
+    import { auth, googleProvider } from "./firebase.js";
+    import {
+      signInWithPopup,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const status = document.getElementById("status");
+
+    document.getElementById("homeBtn").addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+
+    document.getElementById("googleBtn").addEventListener("click", async () => {
+      try {
+        status.textContent = "Signing in…";
+        await signInWithPopup(auth, googleProvider);
+      } catch (err) {
+        console.error(err);
+        status.textContent = `Login failed: ${err?.message || err}`;
+      }
+    });
+
+    // If already signed in, go to admin
+    onAuthStateChanged(auth, (user) => {
+      if (user) window.location.href = "admin.html";
+    });
+  </script>
+</body>
+</html>
