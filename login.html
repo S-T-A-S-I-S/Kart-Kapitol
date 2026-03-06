@@ -111,66 +111,125 @@
 
   <script src="app.js"></script>
 
-  <script type="module">
-    import { auth, googleProvider } from "./firebase.js";
-    import {
-      signInWithPopup,
-      onAuthStateChanged,
-      signInWithEmailAndPassword,
-      createUserWithEmailAndPassword
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+<script type="module">
+  import { auth, googleProvider } from "./firebase.js";
+  import {
+    signInWithPopup,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-    const status = document.getElementById("status");
+  const status = document.getElementById("status");
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
 
-    const emailEl = document.getElementById("email");
-    const passEl = document.getElementById("password");
+  const googleBtn = document.getElementById("googleBtn");
+  const emailSignInBtn = document.getElementById("emailSignInBtn");
+  const emailCreateBtn = document.getElementById("emailCreateBtn");
+  const homeBtn = document.getElementById("homeBtn");
 
-    function setStatus(text){ status.textContent = text; }
+  let busy = false;
 
-    document.getElementById("homeBtn").addEventListener("click", () => {
-      window.location.href = "index.html";
-    });
+  function setStatus(text) {
+    status.textContent = text;
+  }
 
-    document.getElementById("googleBtn").addEventListener("click", async () => {
-      try {
-        setStatus("Signing in with Google…");
-        await signInWithPopup(auth, googleProvider);
-      } catch (err) {
-        console.error(err);
-        setStatus(`Google sign-in failed: ${err?.message || err}`);
+  function setBusy(nextBusy) {
+    busy = nextBusy;
+    googleBtn.disabled = nextBusy;
+    emailSignInBtn.disabled = nextBusy;
+    emailCreateBtn.disabled = nextBusy;
+    homeBtn.disabled = nextBusy;
+  }
+
+  async function goToAdmin() {
+    setStatus("Signed in. Redirecting to admin…");
+    window.location.href = "admin.html";
+  }
+
+  homeBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  googleBtn.addEventListener("click", async () => {
+    if (busy) return;
+    try {
+      setBusy(true);
+      setStatus("Opening Google sign-in…");
+      await setPersistence(auth, browserLocalPersistence);
+      const result = await signInWithPopup(auth, googleProvider);
+      setStatus(`Signed in as ${result.user.email || "user"}. Redirecting…`);
+      await goToAdmin();
+    } catch (err) {
+      console.error("Google sign-in error:", err);
+      setStatus(`Google sign-in failed: ${err?.code || ""} ${err?.message || err}`);
+      setBusy(false);
+    }
+  });
+
+  emailSignInBtn.addEventListener("click", async () => {
+    if (busy) return;
+    try {
+      const email = emailEl.value.trim();
+      const password = passEl.value;
+      if (!email || !password) {
+        setStatus("Enter email and password.");
+        return;
       }
-    });
 
-    document.getElementById("emailSignInBtn").addEventListener("click", async () => {
-      try {
-        const email = emailEl.value.trim();
-        const password = passEl.value;
-        if (!email || !password) return setStatus("Enter email and password.");
-        setStatus("Signing in…");
-        await signInWithEmailAndPassword(auth, email, password);
-      } catch (err) {
-        console.error(err);
-        setStatus(`Email sign-in failed: ${err?.message || err}`);
+      setBusy(true);
+      setStatus("Signing in…");
+      await setPersistence(auth, browserSessionPersistence);
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      setStatus(`Signed in as ${result.user.email || "user"}. Redirecting…`);
+      await goToAdmin();
+    } catch (err) {
+      console.error("Email sign-in error:", err);
+      setStatus(`Email sign-in failed: ${err?.code || ""} ${err?.message || err}`);
+      setBusy(false);
+    }
+  });
+
+  emailCreateBtn.addEventListener("click", async () => {
+    if (busy) return;
+    try {
+      const email = emailEl.value.trim();
+      const password = passEl.value;
+      if (!email || !password) {
+        setStatus("Enter email and password.");
+        return;
       }
-    });
 
-    document.getElementById("emailCreateBtn").addEventListener("click", async () => {
-      try {
-        const email = emailEl.value.trim();
-        const password = passEl.value;
-        if (!email || !password) return setStatus("Enter email and password.");
-        setStatus("Creating account…");
-        await createUserWithEmailAndPassword(auth, email, password);
-        setStatus("Account created. Redirecting…");
-      } catch (err) {
-        console.error(err);
-        setStatus(`Account creation failed: ${err?.message || err}`);
-      }
-    });
+      setBusy(true);
+      setStatus("Creating account…");
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      setStatus(`Account created for ${result.user.email || "user"}. Redirecting…`);
+      await goToAdmin();
+    } catch (err) {
+      console.error("Account creation error:", err);
+      setStatus(`Account creation failed: ${err?.code || ""} ${err?.message || err}`);
+      setBusy(false);
+    }
+  });
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) window.location.href = "admin.html";
-    });
-  </script>
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+    if (window.location.pathname.endsWith("/login.html")) {
+      setStatus(`Session found for ${user.email || "user"}. Redirecting…`);
+      await goToAdmin();
+    }
+  });
+
+  window.addEventListener("unhandledrejection", (event) => {
+    console.error("Unhandled promise rejection:", event.reason);
+    setStatus(`Unexpected error: ${event.reason?.message || event.reason || "Unknown error"}`);
+    setBusy(false);
+  });
+</script>
 </body>
 </html>
