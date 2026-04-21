@@ -278,10 +278,13 @@
       // Demo bypass: show the page immediately in read-only preview mode
       if (whoEl) whoEl.textContent = "Demo preview mode — client presentation only.";
     } else {
-      // Hide page until auth is verified
+      // Hide page until auth is verified.
+      // authStateReady() waits for Firebase to fully resolve the session from
+      // persistence before we check — prevents a false null that bounces the user.
       document.body.classList.add("auth-loading");
 
-      onAuthStateChanged(auth, (user) => {
+      auth.authStateReady().then(() => {
+        const user = auth.currentUser;
         if (!user) {
           window.location.replace("login.html");
           return;
