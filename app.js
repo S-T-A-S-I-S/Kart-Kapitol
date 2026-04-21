@@ -129,6 +129,14 @@
     window.setTimeout(() => streak?.classList.remove("run"), 1500);
   }
 
+  function getPhotoSlots() {
+    try {
+      return JSON.parse(localStorage.getItem("kartKapitolPhotoSlots") || "{}");
+    } catch {
+      return {};
+    }
+  }
+
   function getStoredContentOverrides() {
     try {
       return JSON.parse(localStorage.getItem("kartKapitolContentOverrides") || "{}");
@@ -194,6 +202,7 @@
   }
 
   function applyContent(content) {
+    const photoSlots = getPhotoSlots();
     // Home hero
     const homeEyebrow = $("#home-eyebrow");
     const homeTitle = $("#home-title");
@@ -252,9 +261,16 @@
     if (spotlightText && content.home?.spotlightText) spotlightText.textContent = content.home.spotlightText;
 
     if (homeSpotlights && Array.isArray(content.home?.spotlights)) {
-      homeSpotlights.innerHTML = content.home.spotlights.map((item) => `
-        <div class="spotlight-tile">${item}</div>
-      `).join("");
+      homeSpotlights.innerHTML = content.home.spotlights.map((item, index) => {
+        const src = photoSlots[`spotlight_${index}`];
+        if (src) {
+          return `<div class="spotlight-tile" style="position:relative;overflow:hidden;padding:0;">
+            <img src="${src}" alt="${item}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+            <span style="position:relative;padding:12px;font-weight:700;">${item}</span>
+          </div>`;
+        }
+        return `<div class="spotlight-tile">${item}</div>`;
+      }).join("");
     }
 
     // Photo section
@@ -265,10 +281,20 @@
     if (photoSubtitle && content.home?.photoSubtitle) photoSubtitle.textContent = content.home.photoSubtitle;
 
     if (homeGallery && Array.isArray(content.home?.gallery)) {
-      homeGallery.innerHTML = content.home.gallery.map((item, index) => `
-        <div class="gallery-panel ${index === 0 ? "large" : ""}">${item}</div>
-      `).join("");
+      homeGallery.innerHTML = content.home.gallery.map((item, index) => {
+        const src = photoSlots[`gallery_${index}`];
+        if (src) {
+          return `<div class="gallery-panel ${index === 0 ? "large" : ""}" style="position:relative;padding:0;overflow:hidden;">
+            <img src="${src}" alt="${item}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+          </div>`;
+        }
+        return `<div class="gallery-panel ${index === 0 ? "large" : ""}">${item}</div>`;
+      }).join("");
     }
+
+    // Hero photo override
+    const heroImg = $("#hero-image");
+    if (heroImg && photoSlots.hero) heroImg.src = photoSlots.hero;
 
     // Footer
     const footerBrand = $(".footer-brand");

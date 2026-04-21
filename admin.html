@@ -20,7 +20,8 @@
       gap:12px;
     }
     .admin-form-grid input,
-    .admin-form-grid textarea{
+    .admin-form-grid textarea,
+    .admin-form-grid select{
       width:100%;
       margin-top:6px;
       padding:12px 14px;
@@ -30,23 +31,33 @@
       color:var(--text);
       outline:none;
       font: inherit;
+      appearance: none;
     }
     .admin-form-grid input:focus,
-    .admin-form-grid textarea:focus{
+    .admin-form-grid textarea:focus,
+    .admin-form-grid select:focus{
       border-color: rgba(5,168,234,.40);
       box-shadow: 0 0 0 3px rgba(5,168,234,.15);
+    }
+    .admin-form-grid select{ cursor:pointer; }
+    .checkbox-label{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+    }
+    .checkbox-label input[type="checkbox"]{
+      width:18px;
+      height:18px;
+      accent-color:var(--sky, #05a8ea);
+      flex-shrink:0;
+      margin:0;
     }
     .admin-toolbar{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin-top:12px;
-    }
-    .admin-note{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(5,168,234,.18);
-      background: rgba(5,168,234,.08);
     }
     .admin-list-item{
       padding:12px 14px;
@@ -55,12 +66,166 @@
       background: rgba(255,255,255,.03);
       margin-bottom:10px;
       cursor:pointer;
+      transition: border-color .15s;
+    }
+    .admin-list-item:hover{
+      border-color: rgba(5,168,234,.35);
     }
     .admin-list-item strong{
       display:block;
     }
+    /* Photo slots */
+    .photo-slots-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    .photo-slot{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .photo-slot-label{
+      font-size:.82rem;
+      font-weight:700;
+      color:var(--muted, #7a8a9a);
+      text-transform:uppercase;
+      letter-spacing:.07em;
+    }
+    .photo-slot-preview{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted, #7a8a9a);
+      font-size:.78rem;
+    }
+    .photo-slot-preview img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .photo-slot input[type="url"]{
+      width:100%;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      outline:none;
+      font:inherit;
+      font-size:.85rem;
+      margin:0;
+    }
+    .photo-slot input[type="url"]:focus{
+      border-color: rgba(5,168,234,.40);
+      box-shadow: 0 0 0 3px rgba(5,168,234,.15);
+    }
+    .photo-slot-actions{
+      display:flex;
+      gap:6px;
+    }
+    .photo-slot-actions input[type="file"]{
+      display:none;
+    }
+    /* Page tabs */
+    .page-tabs{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+      padding-bottom:14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .page-tab-btn{
+      padding:7px 18px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      cursor:pointer;
+      font:inherit;
+      font-size:.88rem;
+      font-weight:600;
+      transition:border-color .15s, background .15s, color .15s;
+    }
+    .page-tab-btn:hover{
+      border-color:rgba(5,168,234,.35);
+      background:rgba(5,168,234,.08);
+    }
+    .page-tab-btn.active{
+      border-color:var(--sky, #05a8ea);
+      background:rgba(5,168,234,.15);
+      color:var(--sky, #05a8ea);
+    }
+    /* Page sections */
+    .page-section{ display:none; }
+    .page-section.active{ display:grid; gap:12px; }
+    /* Content + preview layout */
+    .content-editor-layout{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      align-items:start;
+    }
+    /* Preview panel */
+    .preview-panel{
+      position:sticky;
+      top:80px;
+    }
+    .preview-label{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:.8rem;
+      font-weight:700;
+      color:var(--muted, #7a8a9a);
+      text-transform:uppercase;
+      letter-spacing:.07em;
+      margin-bottom:8px;
+    }
+    .preview-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--sky, #05a8ea);
+      flex-shrink:0;
+      animation:previewPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes previewPulse{
+      0%,100%{ opacity:1; }
+      50%{ opacity:.35; }
+    }
+    .preview-frame-wrap{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      background:#0b0f14;
+      height:480px;
+      position:relative;
+    }
+    .preview-frame-wrap iframe{
+      width:200%;
+      height:200%;
+      border:none;
+      transform:scale(.5);
+      transform-origin:top left;
+      pointer-events:none;
+    }
     @media (max-width: 920px){
       .admin-layout{ grid-template-columns: 1fr; }
+      .content-editor-layout{ grid-template-columns: 1fr; }
+      .preview-panel{ position:static; }
     }
   </style>
 </head>
@@ -96,133 +261,250 @@
     <div class="container">
       <div class="section-head">
         <h2>Admin Control Center</h2>
-        <p id="who">Demo content manager for the client presentation.</p>
+        <p id="who">Signed in.</p>
       </div>
 
-      <div id="demoModeBanner" class="card" style="margin-bottom:16px;">
-        <h3 style="margin-top:0;">Demo Content Mode</h3>
-        <p class="muted" style="margin-bottom:0;">
-          Changes made here update browser-stored demo content and immediately affect the public-facing pages on this device/browser.
-        </p>
-      </div>
+      <!-- Page Content Editor + Live Preview -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="section-head" style="margin-bottom:12px;">
+          <h2>Page Content</h2>
+          <p>Editing: <strong id="activePageLabel">Home</strong></p>
+        </div>
 
-      <div class="admin-layout">
-        <div class="card">
-          <div class="section-head" style="margin-bottom:10px;">
-            <h2>Home Page Content</h2>
-            <p>Edit the main content file values used on the homepage.</p>
-          </div>
+        <div class="page-tabs" role="tablist" aria-label="Page selector">
+          <button class="page-tab-btn active" data-tab="home"     type="button" role="tab" aria-selected="true">Home</button>
+          <button class="page-tab-btn"         data-tab="exhibits" type="button" role="tab" aria-selected="false">Exhibits</button>
+          <button class="page-tab-btn"         data-tab="visit"    type="button" role="tab" aria-selected="false">Visit</button>
+          <button class="page-tab-btn"         data-tab="partners" type="button" role="tab" aria-selected="false">Partners</button>
+        </div>
 
-          <div class="admin-form-grid">
-            <label>
-              Eyebrow
-              <input id="content-eyebrow" type="text">
-            </label>
+        <div class="content-editor-layout">
+          <!-- Form column -->
+          <div>
+            <!-- Home fields -->
+            <div class="page-section active" id="section-home">
+              <label>Eyebrow
+                <input id="content-eyebrow" type="text">
+              </label>
+              <label>Home Title
+                <input id="content-title" type="text">
+              </label>
+              <label>Lead Text
+                <textarea id="content-lead" rows="4"></textarea>
+              </label>
+              <label>Section Title
+                <input id="content-section-title" type="text">
+              </label>
+              <label>Section Subtitle
+                <textarea id="content-section-subtitle" rows="3"></textarea>
+              </label>
+              <label>Spotlight Title
+                <input id="content-spotlight-title" type="text">
+              </label>
+              <label>Spotlight Text
+                <textarea id="content-spotlight-text" rows="3"></textarea>
+              </label>
+              <label>Photo Section Title
+                <input id="content-photo-title" type="text">
+              </label>
+              <label>Photo Section Subtitle
+                <textarea id="content-photo-subtitle" rows="3"></textarea>
+              </label>
+            </div>
 
-            <label>
-              Home Title
-              <input id="content-title" type="text">
-            </label>
+            <!-- Exhibits fields -->
+            <div class="page-section" id="section-exhibits">
+              <label>Page Title
+                <input id="content-exhibits-title" type="text">
+              </label>
+              <label>Lead Text
+                <textarea id="content-exhibits-lead" rows="5"></textarea>
+              </label>
+            </div>
 
-            <label>
-              Lead Text
-              <textarea id="content-lead" rows="4"></textarea>
-            </label>
+            <!-- Visit fields -->
+            <div class="page-section" id="section-visit">
+              <label>Page Title
+                <input id="content-visit-title" type="text">
+              </label>
+              <label>Lead Text
+                <textarea id="content-visit-lead" rows="5"></textarea>
+              </label>
+            </div>
 
-            <label>
-              Section Title
-              <input id="content-section-title" type="text">
-            </label>
+            <!-- Partners fields -->
+            <div class="page-section" id="section-partners">
+              <label>Page Title
+                <input id="content-partners-title" type="text">
+              </label>
+              <label>Lead Text
+                <textarea id="content-partners-lead" rows="5"></textarea>
+              </label>
+            </div>
 
-            <label>
-              Section Subtitle
-              <textarea id="content-section-subtitle" rows="3"></textarea>
-            </label>
-
-            <label>
-              Spotlight Title
-              <input id="content-spotlight-title" type="text">
-            </label>
-
-            <label>
-              Spotlight Text
-              <textarea id="content-spotlight-text" rows="3"></textarea>
-            </label>
-
-            <label>
-              Photo Section Title
-              <input id="content-photo-title" type="text">
-            </label>
-
-            <label>
-              Photo Section Subtitle
-              <textarea id="content-photo-subtitle" rows="3"></textarea>
-            </label>
-
-            <div class="admin-toolbar">
-              <button class="btn primary" id="saveContentBtn" type="button">Save page content</button>
+            <div class="admin-toolbar" style="margin-top:16px;">
+              <button class="btn primary"   id="saveContentBtn"  type="button">Save page content</button>
               <button class="btn secondary" id="resetContentBtn" type="button">Reset content overrides</button>
             </div>
+            <p class="muted" id="contentMsg">Select a tab above to edit that page's content.</p>
+          </div>
 
-            <p class="muted" id="contentMsg">This updates the homepage content bindings.</p>
+          <!-- Preview column -->
+          <div class="preview-panel">
+            <div class="preview-label">
+              <span class="preview-dot"></span>
+              Live Preview — <span id="previewPageName">Home</span>
+            </div>
+            <div class="preview-frame-wrap">
+              <iframe id="pagePreviewFrame" src="index.html" title="Page preview"
+                sandbox="allow-same-origin allow-scripts"></iframe>
+            </div>
+            <div class="admin-toolbar" style="margin-top:10px;">
+              <button class="btn ghost small" id="reloadPreviewBtn" type="button">Reload preview</button>
+              <a class="btn ghost small" id="openPreviewLink" href="index.html" target="_blank">Open in new tab ↗</a>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="card">
-          <div class="section-head" style="margin-bottom:10px;">
-            <h2>Demo Events</h2>
-            <p>Manage the short event list shown on the homepage.</p>
+      <!-- Homepage Event Preview -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="section-head" style="margin-bottom:10px;">
+          <h2>Homepage Event Preview</h2>
+          <p>The short event list shown on the homepage. For the full Events page, use the Events section below.</p>
+        </div>
+
+        <div class="admin-form-grid">
+          <label>
+            Event Title
+            <input id="event-title" type="text" placeholder="Marshalltown Esports Showcase">
+          </label>
+
+          <label>
+            Event Date
+            <input id="event-date" type="text" placeholder="Spring 2026">
+          </label>
+
+          <label>
+            Event Location
+            <input id="event-location" type="text" placeholder="Featured Venue">
+          </label>
+
+          <div class="admin-toolbar">
+            <button class="btn primary"   id="saveEventBtn"   type="button">Save event</button>
+            <button class="btn secondary" id="clearEventBtn"  type="button">Clear form</button>
+            <button class="btn ghost"     id="deleteEventBtn" type="button" disabled>Delete event</button>
           </div>
 
+          <p class="muted" id="eventMsg">Click an existing event below to edit it.</p>
+        </div>
+
+        <div class="section-head" style="margin:22px 0 10px;">
+          <h2>Existing Events</h2>
+          <p>These appear on the homepage.</p>
+        </div>
+
+        <div id="previewEventsList"></div>
+      </div>
+
+      <!-- Full Events (Firestore) -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="section-head" style="margin-bottom:10px;">
+          <h2>Events</h2>
+          <p>Add and manage events shown on the Events page. Featured events appear on the big wall.</p>
+        </div>
+
+        <div class="admin-layout">
           <div class="admin-form-grid">
             <label>
-              Event Title
-              <input id="event-title" type="text" placeholder="Marshalltown Esports Showcase">
+              Title
+              <input id="ev-title" type="text" placeholder="Marshalltown Esports Showcase">
+            </label>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <label>
+                Date
+                <input id="ev-date" type="date">
+              </label>
+              <label>
+                Time
+                <input id="ev-time" type="text" placeholder="7:00 PM">
+              </label>
+            </div>
+
+            <label>
+              Venue / Location Name
+              <input id="ev-location-name" type="text" placeholder="Community Center">
             </label>
 
             <label>
-              Event Date
-              <input id="event-date" type="text" placeholder="Spring 2026">
+              Address
+              <input id="ev-address" type="text" placeholder="123 Main St, Marshalltown IA">
             </label>
 
             <label>
-              Event Location
-              <input id="event-location" type="text" placeholder="Featured Venue">
+              Image URL
+              <input id="ev-image" type="url" placeholder="https://…">
+            </label>
+
+            <label>
+              Short Blurb <span class="muted" style="font-weight:400;">(shown on featured card)</span>
+              <textarea id="ev-short-blurb" rows="2" placeholder="One sentence about this event."></textarea>
+            </label>
+
+            <label>
+              Full Description
+              <textarea id="ev-description" rows="3" placeholder="Full details about the event…"></textarea>
+            </label>
+
+            <label>
+              Status
+              <select id="ev-status">
+                <option value="upcoming">Upcoming</option>
+                <option value="past">Past</option>
+              </select>
+            </label>
+
+            <label class="checkbox-label">
+              <input id="ev-featured" type="checkbox">
+              Feature this event (shown on the Events page wall)
             </label>
 
             <div class="admin-toolbar">
-              <button class="btn primary" id="saveEventBtn" type="button">Save event</button>
-              <button class="btn secondary" id="clearEventBtn" type="button">Clear form</button>
-              <button class="btn ghost" id="deleteEventBtn" type="button" disabled>Delete event</button>
+              <button class="btn primary"   id="saveEvBtn"   type="button">Save event</button>
+              <button class="btn secondary" id="clearEvBtn"  type="button">Clear form</button>
+              <button class="btn ghost"     id="deleteEvBtn" type="button" disabled>Delete event</button>
             </div>
 
-            <p class="muted" id="eventMsg">Click an existing event below to edit it.</p>
+            <p class="muted" id="evMsg">Fill in the form to add a new event.</p>
           </div>
 
-          <div class="section-head" style="margin:22px 0 10px;">
-            <h2>Existing Demo Events</h2>
-            <p>These power the homepage preview list.</p>
+          <div>
+            <div class="section-head" style="margin-bottom:10px;">
+              <h2>Saved Events</h2>
+              <p>Click an event to edit it.</p>
+            </div>
+            <div id="firestoreEventsList"><p class="muted">Loading…</p></div>
           </div>
-
-          <div id="demoEventsList"></div>
         </div>
       </div>
 
-      <div class="card" style="margin-top:16px;">
+      <!-- Photo Slots -->
+      <div class="card" style="margin-bottom:16px;">
         <div class="section-head" style="margin-bottom:10px;">
-          <h2>How This Works</h2>
-          <p>Client-demo-safe content control without needing live backend writing.</p>
+          <h2>Photo Slots</h2>
+          <p>Assign images to specific spots on the site. Paste a URL or upload from your device.</p>
         </div>
 
-        <div class="admin-note">
-          <ul class="mini-list" style="margin-top:0;">
-            <li><strong>content.json</strong> remains the baseline source</li>
-            <li><strong>Admin edits</strong> are stored in localStorage as overrides</li>
-            <li><strong>app.js</strong> merges the baseline content and demo overrides</li>
-            <li>The homepage reflects those changes instantly on reload</li>
-          </ul>
+        <div class="photo-slots-grid" id="photoSlotsGrid"></div>
+
+        <div class="admin-toolbar" style="margin-top:16px;">
+          <button class="btn primary" id="savePhotosBtn" type="button">Save photo assignments</button>
+          <button class="btn ghost"   id="resetPhotosBtn" type="button">Clear all photos</button>
         </div>
+        <p class="muted" id="photosMsg">Saved assignments appear on the public site on next page load.</p>
       </div>
+
     </div>
   </main>
 
@@ -230,7 +512,7 @@
     <div class="container footer-stack">
       <div>
         <p class="footer-brand">Kart Kapitol Admin</p>
-        <p class="muted">Control center for the client-facing experience.</p>
+        <p class="muted">Control center for Kart Kapitol.</p>
       </div>
 
       <div class="footer-links">
@@ -261,7 +543,7 @@
 
   <script src="app.js"></script>
 
-  <!-- Auth guard: blocks page until Firebase confirms a valid session -->
+  <!-- Auth guard -->
   <script type="module">
     import { auth } from "./firebase.js";
     import {
@@ -269,153 +551,354 @@
       signOut
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-    const params  = new URLSearchParams(location.search);
-    const isDemo  = params.get("demo") === "1"
-                 || sessionStorage.getItem("kartKapitolDemoAdmin") === "true";
-    const whoEl   = document.getElementById("who");
+    const whoEl = document.getElementById("who");
 
-    if (isDemo) {
-      // Demo bypass: show the page immediately in read-only preview mode
-      if (whoEl) whoEl.textContent = "Demo preview mode — client presentation only.";
-    } else {
-      // Hide page until auth is verified.
-      // authStateReady() waits for Firebase to fully resolve the session from
-      // persistence before we check — prevents a false null that bounces the user.
-      document.body.classList.add("auth-loading");
+    document.body.classList.add("auth-loading");
 
-      auth.authStateReady().then(() => {
-        const user = auth.currentUser;
-        if (!user) {
-          window.location.replace("login.html");
-          return;
-        }
-        document.body.classList.remove("auth-loading");
-        if (whoEl) whoEl.textContent = `Signed in as ${user.email}`;
-      });
-    }
-
-    // Sign-out: properly clears Firebase session
-    document.getElementById("signOutBtn")?.addEventListener("click", async () => {
-      sessionStorage.removeItem("kartKapitolDemoAdmin");
-      if (!isDemo) {
-        try { await signOut(auth); } catch (e) { console.error(e); }
+    auth.authStateReady().then(() => {
+      const user = auth.currentUser;
+      if (!user) {
+        window.location.replace("login.html");
+        return;
       }
+      document.body.classList.remove("auth-loading");
+      if (whoEl) whoEl.textContent = `Signed in as ${user.email}`;
+    });
+
+    document.getElementById("signOutBtn")?.addEventListener("click", async () => {
+      try { await signOut(auth); } catch (e) { console.error(e); }
       window.location.href = "login.html";
     });
   </script>
 
+  <!-- Events (Firestore) -->
+  <script type="module">
+    import { db } from "./firebase.js";
+    import {
+      collection,
+      addDoc,
+      updateDoc,
+      deleteDoc,
+      getDocs,
+      doc,
+      orderBy,
+      query,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const evTitle        = document.getElementById("ev-title");
+    const evDate         = document.getElementById("ev-date");
+    const evTime         = document.getElementById("ev-time");
+    const evLocationName = document.getElementById("ev-location-name");
+    const evAddress      = document.getElementById("ev-address");
+    const evImage        = document.getElementById("ev-image");
+    const evShortBlurb   = document.getElementById("ev-short-blurb");
+    const evDescription  = document.getElementById("ev-description");
+    const evStatus       = document.getElementById("ev-status");
+    const evFeatured     = document.getElementById("ev-featured");
+    const evMsg          = document.getElementById("evMsg");
+    const evList         = document.getElementById("firestoreEventsList");
+    const saveEvBtn      = document.getElementById("saveEvBtn");
+    const clearEvBtn     = document.getElementById("clearEvBtn");
+    const deleteEvBtn    = document.getElementById("deleteEvBtn");
+
+    let editingEvId = null;
+
+    function trim(el) { return (el?.value || "").trim(); }
+
+    function clearEvForm() {
+      editingEvId = null;
+      evTitle.value = "";
+      evDate.value = "";
+      evTime.value = "";
+      evLocationName.value = "";
+      evAddress.value = "";
+      evImage.value = "";
+      evShortBlurb.value = "";
+      evDescription.value = "";
+      evStatus.value = "upcoming";
+      evFeatured.checked = false;
+      deleteEvBtn.disabled = true;
+      evMsg.textContent = "Fill in the form to add a new event.";
+    }
+
+    function loadEvIntoForm(ev) {
+      editingEvId = ev.id;
+      evTitle.value        = ev.title || "";
+      evDate.value         = ev.date_start || "";
+      evTime.value         = ev.time || "";
+      evLocationName.value = ev.location_name || "";
+      evAddress.value      = ev.address || "";
+      evImage.value        = ev.image || "";
+      evShortBlurb.value   = ev.short_blurb || "";
+      evDescription.value  = ev.description || "";
+      evStatus.value       = ev.status || "upcoming";
+      evFeatured.checked   = !!ev.featured;
+      deleteEvBtn.disabled = false;
+      evMsg.textContent    = `Editing: ${ev.title || "Untitled Event"}`;
+    }
+
+    async function renderEvents() {
+      evList.innerHTML = `<p class="muted">Loading…</p>`;
+      try {
+        const q = query(collection(db, "events"), orderBy("date_start", "desc"));
+        const snap = await getDocs(q);
+        const events = [];
+        snap.forEach(d => events.push({ id: d.id, ...d.data() }));
+
+        evList.innerHTML = "";
+        if (!events.length) {
+          evList.innerHTML = `<p class="muted">No events yet. Add one using the form.</p>`;
+          return;
+        }
+
+        events.forEach(ev => {
+          const item = document.createElement("div");
+          item.className = "admin-list-item";
+          const featTag = ev.featured ? " · Featured" : "";
+          item.innerHTML = `
+            <strong>${ev.title || "Untitled Event"}</strong>
+            <span class="muted">${ev.date_start || "TBD"} · ${ev.location_name || "Marshalltown"}${featTag}</span>
+            <span class="muted" style="font-size:.82rem;text-transform:capitalize;">${ev.status || "upcoming"}</span>
+          `;
+          item.addEventListener("click", () => loadEvIntoForm(ev));
+          evList.appendChild(item);
+        });
+      } catch (err) {
+        console.error(err);
+        evList.innerHTML = `<p class="muted" style="color:var(--red,#f55);">Failed to load events. Check Firebase config.</p>`;
+      }
+    }
+
+    async function saveEvent() {
+      const title         = trim(evTitle);
+      const date_start    = trim(evDate);
+      const location_name = trim(evLocationName);
+
+      if (!title || !date_start || !location_name) {
+        evMsg.textContent = "Title, date, and location are required.";
+        return;
+      }
+
+      const payload = {
+        title,
+        date_start,
+        time:         trim(evTime),
+        location_name,
+        address:      trim(evAddress),
+        image:        trim(evImage),
+        short_blurb:  trim(evShortBlurb),
+        description:  trim(evDescription),
+        status:       evStatus.value,
+        featured:     evFeatured.checked,
+        updated_at:   serverTimestamp()
+      };
+
+      try {
+        saveEvBtn.disabled = true;
+        if (editingEvId) {
+          await updateDoc(doc(db, "events", editingEvId), payload);
+          evMsg.textContent = "Event updated.";
+        } else {
+          payload.created_at = serverTimestamp();
+          await addDoc(collection(db, "events"), payload);
+          evMsg.textContent = "Event added.";
+        }
+        clearEvForm();
+        renderEvents();
+      } catch (err) {
+        console.error(err);
+        evMsg.textContent = "Save failed — check the console for details.";
+      } finally {
+        saveEvBtn.disabled = false;
+      }
+    }
+
+    async function deleteEvent() {
+      if (!editingEvId) return;
+      const name = trim(evTitle) || "this event";
+      if (!confirm(`Delete "${name}"?`)) return;
+      try {
+        await deleteDoc(doc(db, "events", editingEvId));
+        evMsg.textContent = "Event deleted.";
+        clearEvForm();
+        renderEvents();
+      } catch (err) {
+        console.error(err);
+        evMsg.textContent = "Delete failed.";
+      }
+    }
+
+    saveEvBtn.addEventListener("click", saveEvent);
+    clearEvBtn.addEventListener("click", clearEvForm);
+    deleteEvBtn.addEventListener("click", deleteEvent);
+
+    renderEvents();
+  </script>
+
+  <!-- Page content editor, homepage preview events, photo slots -->
   <script>
     const CONTENT_KEY = "kartKapitolContentOverrides";
-    const EVENTS_KEY = "kartKapitolDemoEvents";
+    const EVENTS_KEY  = "kartKapitolDemoEvents";
+    const PHOTO_KEY   = "kartKapitolPhotoSlots";
 
-    const contentFields = {
-      eyebrow: document.getElementById("content-eyebrow"),
-      title: document.getElementById("content-title"),
-      lead: document.getElementById("content-lead"),
-      sectionTitle: document.getElementById("content-section-title"),
-      sectionSubtitle: document.getElementById("content-section-subtitle"),
-      spotlightTitle: document.getElementById("content-spotlight-title"),
-      spotlightText: document.getElementById("content-spotlight-text"),
-      photoTitle: document.getElementById("content-photo-title"),
-      photoSubtitle: document.getElementById("content-photo-subtitle")
+    // ── Page configs ──────────────────────────────────────────────────────────
+    const PAGE_CONFIGS = {
+      home: {
+        url:   "index.html",
+        label: "Home",
+        getFields: () => ({
+          eyebrow:         document.getElementById("content-eyebrow"),
+          title:           document.getElementById("content-title"),
+          lead:            document.getElementById("content-lead"),
+          sectionTitle:    document.getElementById("content-section-title"),
+          sectionSubtitle: document.getElementById("content-section-subtitle"),
+          spotlightTitle:  document.getElementById("content-spotlight-title"),
+          spotlightText:   document.getElementById("content-spotlight-text"),
+          photoTitle:      document.getElementById("content-photo-title"),
+          photoSubtitle:   document.getElementById("content-photo-subtitle")
+        })
+      },
+      exhibits: {
+        url:   "exhibits.html",
+        label: "Exhibits",
+        getFields: () => ({
+          title: document.getElementById("content-exhibits-title"),
+          lead:  document.getElementById("content-exhibits-lead")
+        })
+      },
+      visit: {
+        url:   "visit.html",
+        label: "Visit",
+        getFields: () => ({
+          title: document.getElementById("content-visit-title"),
+          lead:  document.getElementById("content-visit-lead")
+        })
+      },
+      partners: {
+        url:   "partners.html",
+        label: "Partners",
+        getFields: () => ({
+          title: document.getElementById("content-partners-title"),
+          lead:  document.getElementById("content-partners-lead")
+        })
+      }
     };
+
+    let currentTab  = "home";
+    let baseContent = {};
 
     const contentMsg = document.getElementById("contentMsg");
 
-    const eventTitle = document.getElementById("event-title");
-    const eventDate = document.getElementById("event-date");
-    const eventLocation = document.getElementById("event-location");
-    const eventMsg = document.getElementById("eventMsg");
-    const demoEventsList = document.getElementById("demoEventsList");
-    const deleteEventBtn = document.getElementById("deleteEventBtn");
-
-    let editingEventIndex = null;
-    let baseContent = {};
-
     function getContentOverrides() {
-      try {
-        return JSON.parse(localStorage.getItem(CONTENT_KEY) || "{}");
-      } catch {
-        return {};
-      }
+      try { return JSON.parse(localStorage.getItem(CONTENT_KEY) || "{}"); } catch { return {}; }
     }
-
-    function setContentOverrides(value) {
-      localStorage.setItem(CONTENT_KEY, JSON.stringify(value));
-    }
-
-    function getDemoEvents() {
-      try {
-        return JSON.parse(localStorage.getItem(EVENTS_KEY) || "[]");
-      } catch {
-        return [];
-      }
-    }
-
-    function setDemoEvents(value) {
-      localStorage.setItem(EVENTS_KEY, JSON.stringify(value));
-    }
+    function setContentOverrides(v) { localStorage.setItem(CONTENT_KEY, JSON.stringify(v)); }
 
     async function loadBaseContent() {
       try {
         const res = await fetch("content.json", { cache: "no-store" });
-        if (res.ok) {
-          baseContent = await res.json();
-        }
-      } catch (err) {
-        console.error("Failed to load base content:", err);
-      }
+        if (res.ok) baseContent = await res.json();
+      } catch (err) { console.error("Failed to load base content:", err); }
+    }
+
+    function reloadPreviewFrame() {
+      const frame = document.getElementById("pagePreviewFrame");
+      if (!frame) return;
+      const src = frame.src;
+      frame.src = "";
+      frame.src = src;
+    }
+
+    function switchPageTab(tab) {
+      currentTab = tab;
+      const cfg = PAGE_CONFIGS[tab];
+
+      document.querySelectorAll(".page-tab-btn").forEach(btn => {
+        const active = btn.dataset.tab === tab;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", String(active));
+      });
+
+      document.querySelectorAll(".page-section").forEach(sec => {
+        sec.classList.toggle("active", sec.id === "section-" + tab);
+      });
+
+      const activeLabel = document.getElementById("activePageLabel");
+      const previewName = document.getElementById("previewPageName");
+      const frame       = document.getElementById("pagePreviewFrame");
+      const openLink    = document.getElementById("openPreviewLink");
+
+      if (activeLabel) activeLabel.textContent = cfg.label;
+      if (previewName) previewName.textContent  = cfg.label;
+      if (frame)       frame.src                = cfg.url;
+      if (openLink)    openLink.href             = cfg.url;
+
+      populateContentForm();
     }
 
     function populateContentForm() {
       const overrides = getContentOverrides();
-      const home = { ...(baseContent.home || {}), ...(overrides.home || {}) };
-
-      contentFields.eyebrow.value = home.eyebrow || "";
-      contentFields.title.value = home.title || "";
-      contentFields.lead.value = home.lead || "";
-      contentFields.sectionTitle.value = home.sectionTitle || "";
-      contentFields.sectionSubtitle.value = home.sectionSubtitle || "";
-      contentFields.spotlightTitle.value = home.spotlightTitle || "";
-      contentFields.spotlightText.value = home.spotlightText || "";
-      contentFields.photoTitle.value = home.photoTitle || "";
-      contentFields.photoSubtitle.value = home.photoSubtitle || "";
+      const cfg       = PAGE_CONFIGS[currentTab];
+      const fields    = cfg.getFields();
+      const data      = Object.assign({}, baseContent[currentTab] || {}, overrides[currentTab] || {});
+      Object.keys(fields).forEach(key => {
+        const el = fields[key];
+        if (el) el.value = data[key] || "";
+      });
     }
 
     function saveContentForm() {
       const current = getContentOverrides();
-      current.home = {
-        ...(current.home || {}),
-        eyebrow: contentFields.eyebrow.value.trim(),
-        title: contentFields.title.value.trim(),
-        lead: contentFields.lead.value.trim(),
-        sectionTitle: contentFields.sectionTitle.value.trim(),
-        sectionSubtitle: contentFields.sectionSubtitle.value.trim(),
-        spotlightTitle: contentFields.spotlightTitle.value.trim(),
-        spotlightText: contentFields.spotlightText.value.trim(),
-        photoTitle: contentFields.photoTitle.value.trim(),
-        photoSubtitle: contentFields.photoSubtitle.value.trim()
-      };
-
+      const cfg     = PAGE_CONFIGS[currentTab];
+      const fields  = cfg.getFields();
+      if (!current[currentTab]) current[currentTab] = {};
+      Object.keys(fields).forEach(key => {
+        const el = fields[key];
+        if (el) current[currentTab][key] = el.value.trim();
+      });
       setContentOverrides(current);
-      contentMsg.textContent = "Homepage content overrides saved. Refresh the public page to review changes.";
+      contentMsg.textContent = cfg.label + " page content saved. Reloading preview…";
+      reloadPreviewFrame();
     }
 
     function resetContentForm() {
       localStorage.removeItem(CONTENT_KEY);
       populateContentForm();
       contentMsg.textContent = "Content overrides cleared. The site will now use the base content.json values.";
+      reloadPreviewFrame();
     }
 
-    function renderDemoEvents() {
-      const events = getDemoEvents();
-      demoEventsList.innerHTML = "";
+    document.getElementById("saveContentBtn").addEventListener("click", saveContentForm);
+    document.getElementById("resetContentBtn").addEventListener("click", resetContentForm);
+    document.getElementById("reloadPreviewBtn")?.addEventListener("click", reloadPreviewFrame);
 
+    document.querySelectorAll(".page-tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => switchPageTab(btn.dataset.tab));
+    });
+
+    // ── Homepage preview events (localStorage) ───────────────────────────────
+    const eventTitle     = document.getElementById("event-title");
+    const eventDate      = document.getElementById("event-date");
+    const eventLocation  = document.getElementById("event-location");
+    const eventMsg       = document.getElementById("eventMsg");
+    const previewList    = document.getElementById("previewEventsList");
+    const deleteEventBtn = document.getElementById("deleteEventBtn");
+
+    let editingEventIndex = null;
+
+    function getPreviewEvents() {
+      try { return JSON.parse(localStorage.getItem(EVENTS_KEY) || "[]"); } catch { return []; }
+    }
+    function setPreviewEvents(v) { localStorage.setItem(EVENTS_KEY, JSON.stringify(v)); }
+
+    function renderPreviewEvents() {
+      const events = getPreviewEvents();
+      previewList.innerHTML = "";
       if (!events.length) {
-        demoEventsList.innerHTML = `<p class="muted">No demo events saved yet.</p>`;
+        previewList.innerHTML = `<p class="muted">No events saved yet.</p>`;
         return;
       }
-
       events.forEach((event, index) => {
         const item = document.createElement("div");
         item.className = "admin-list-item";
@@ -423,78 +906,201 @@
           <strong>${event.title || "Untitled Event"}</strong>
           <span class="muted">${event.date || "TBD"} · ${event.location || "Marshalltown"}</span>
         `;
-        item.addEventListener("click", () => loadEventIntoForm(index));
-        demoEventsList.appendChild(item);
+        item.addEventListener("click", () => loadPreviewEventIntoForm(index));
+        previewList.appendChild(item);
       });
     }
 
-    function loadEventIntoForm(index) {
-      const events = getDemoEvents();
-      const event = events[index];
+    function loadPreviewEventIntoForm(index) {
+      const events = getPreviewEvents();
+      const event  = events[index];
       if (!event) return;
-
-      editingEventIndex = index;
-      eventTitle.value = event.title || "";
-      eventDate.value = event.date || "";
-      eventLocation.value = event.location || "";
+      editingEventIndex       = index;
+      eventTitle.value        = event.title || "";
+      eventDate.value         = event.date || "";
+      eventLocation.value     = event.location || "";
       deleteEventBtn.disabled = false;
-      eventMsg.textContent = `Editing event ${index + 1}.`;
+      eventMsg.textContent    = `Editing event ${index + 1}.`;
     }
 
     function clearEventForm() {
-      editingEventIndex = null;
-      eventTitle.value = "";
-      eventDate.value = "";
-      eventLocation.value = "";
+      editingEventIndex       = null;
+      eventTitle.value        = "";
+      eventDate.value         = "";
+      eventLocation.value     = "";
       deleteEventBtn.disabled = true;
-      eventMsg.textContent = "Click an existing event below to edit it.";
+      eventMsg.textContent    = "Click an existing event below to edit it.";
     }
 
     function saveEventForm() {
-      const title = eventTitle.value.trim();
-      const date = eventDate.value.trim();
+      const title    = eventTitle.value.trim();
+      const date     = eventDate.value.trim();
       const location = eventLocation.value.trim();
-
       if (!title || !date || !location) {
         eventMsg.textContent = "Fill in title, date, and location.";
         return;
       }
-
-      const events = getDemoEvents();
+      const events  = getPreviewEvents();
       const payload = { title, date, location };
-
       if (editingEventIndex === null) {
         events.push(payload);
       } else {
         events[editingEventIndex] = payload;
       }
-
-      setDemoEvents(events);
-      renderDemoEvents();
+      setPreviewEvents(events);
+      renderPreviewEvents();
       clearEventForm();
-      eventMsg.textContent = "Demo event saved. Refresh the homepage to see the updated list.";
+      eventMsg.textContent = "Event saved. Refresh the homepage to see the updated list.";
     }
 
     function deleteEventForm() {
       if (editingEventIndex === null) return;
-      const events = getDemoEvents();
+      const events = getPreviewEvents();
       events.splice(editingEventIndex, 1);
-      setDemoEvents(events);
-      renderDemoEvents();
+      setPreviewEvents(events);
+      renderPreviewEvents();
       clearEventForm();
-      eventMsg.textContent = "Demo event deleted.";
+      eventMsg.textContent = "Event deleted.";
     }
 
-    document.getElementById("saveContentBtn").addEventListener("click", saveContentForm);
-    document.getElementById("resetContentBtn").addEventListener("click", resetContentForm);
     document.getElementById("saveEventBtn").addEventListener("click", saveEventForm);
     document.getElementById("clearEventBtn").addEventListener("click", clearEventForm);
     document.getElementById("deleteEventBtn").addEventListener("click", deleteEventForm);
 
+    // ── Photo slots ──────────────────────────────────────────────────────────
+    const SLOT_DEFS = [
+      { key: "hero",        label: "Hero (Homepage)" },
+      { key: "gallery_0",   label: "Gallery 1" },
+      { key: "gallery_1",   label: "Gallery 2" },
+      { key: "gallery_2",   label: "Gallery 3" },
+      { key: "gallery_3",   label: "Gallery 4" },
+      { key: "spotlight_0", label: "Spotlight 1" },
+      { key: "spotlight_1", label: "Spotlight 2" },
+      { key: "spotlight_2", label: "Spotlight 3" },
+      { key: "spotlight_3", label: "Spotlight 4" }
+    ];
+
+    const stagedPhotos = {};
+
+    function getPhotoSlots() {
+      try { return JSON.parse(localStorage.getItem(PHOTO_KEY) || "{}"); } catch { return {}; }
+    }
+    function setPhotoSlots(v) { localStorage.setItem(PHOTO_KEY, JSON.stringify(v)); }
+
+    function renderPhotoSlots() {
+      const grid  = document.getElementById("photoSlotsGrid");
+      const slots = getPhotoSlots();
+      grid.innerHTML = "";
+
+      SLOT_DEFS.forEach(({ key, label }) => {
+        const saved   = slots[key] || "";
+        const staged  = stagedPhotos[key] || "";
+        const current = staged || saved;
+
+        const slotEl = document.createElement("div");
+        slotEl.className = "photo-slot";
+
+        slotEl.innerHTML = `
+          <div class="photo-slot-label">${label}</div>
+          <div class="photo-slot-preview" id="preview-${key}">
+            ${current
+              ? `<img src="${current}" alt="${label}">`
+              : `<span>No image</span>`}
+          </div>
+          <input type="url" id="slot-url-${key}" placeholder="Paste image URL…"
+            value="${current && !current.startsWith("data:") ? current : ""}">
+          <div class="photo-slot-actions">
+            <label class="btn ghost small" style="flex:1;text-align:center;cursor:pointer;">
+              Upload
+              <input type="file" accept="image/*" id="slot-file-${key}">
+            </label>
+            ${current
+              ? `<button class="btn ghost small" data-clear="${key}" type="button">✕</button>`
+              : ""}
+          </div>
+        `;
+        grid.appendChild(slotEl);
+
+        slotEl.querySelector(`#slot-file-${key}`).addEventListener("change", e => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            const src = ev.target.result;
+            stagedPhotos[key] = src;
+            const preview = document.getElementById(`preview-${key}`);
+            if (preview) preview.innerHTML = `<img src="${src}" alt="${label}">`;
+            const urlField = document.getElementById(`slot-url-${key}`);
+            if (urlField) urlField.value = "";
+            const actions = slotEl.querySelector(".photo-slot-actions");
+            if (actions && !actions.querySelector("[data-clear]")) {
+              const btn = document.createElement("button");
+              btn.className = "btn ghost small";
+              btn.dataset.clear = key;
+              btn.type = "button";
+              btn.textContent = "✕";
+              btn.addEventListener("click", () => clearSlot(key, slotEl, label));
+              actions.appendChild(btn);
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+
+        slotEl.querySelector(`[data-clear="${key}"]`)?.addEventListener("click", () => {
+          clearSlot(key, slotEl, label);
+        });
+      });
+    }
+
+    function clearSlot(key, slotEl, label) {
+      delete stagedPhotos[key];
+      const preview  = document.getElementById(`preview-${key}`);
+      const urlField = document.getElementById(`slot-url-${key}`);
+      if (preview)  preview.innerHTML = `<span>No image</span>`;
+      if (urlField) urlField.value    = "";
+      slotEl.querySelector(`[data-clear="${key}"]`)?.remove();
+    }
+
+    function savePhotoSlots() {
+      const current = getPhotoSlots();
+
+      SLOT_DEFS.forEach(({ key }) => {
+        const urlField = document.getElementById(`slot-url-${key}`);
+        const dataUrl  = stagedPhotos[key];
+        const urlVal   = urlField ? urlField.value.trim() : "";
+
+        if (dataUrl) {
+          current[key] = dataUrl;
+          delete stagedPhotos[key];
+        } else if (urlVal) {
+          current[key] = urlVal;
+        } else if (urlField && !urlVal && !dataUrl && key in current) {
+          delete current[key];
+        }
+      });
+
+      setPhotoSlots(current);
+      document.getElementById("photosMsg").textContent =
+        "Photo assignments saved. Refresh the public pages to see them.";
+      renderPhotoSlots();
+    }
+
+    function resetPhotoSlots() {
+      localStorage.removeItem(PHOTO_KEY);
+      Object.keys(stagedPhotos).forEach(k => delete stagedPhotos[k]);
+      document.getElementById("photosMsg").textContent = "All photo assignments cleared.";
+      renderPhotoSlots();
+    }
+
+    document.getElementById("savePhotosBtn").addEventListener("click", savePhotoSlots);
+    document.getElementById("resetPhotosBtn").addEventListener("click", resetPhotoSlots);
+
+    // ── Init ─────────────────────────────────────────────────────────────────
     (async function initAdmin() {
       await loadBaseContent();
       populateContentForm();
-      renderDemoEvents();
+      renderPreviewEvents();
+      renderPhotoSlots();
     })();
   </script>
 </body>

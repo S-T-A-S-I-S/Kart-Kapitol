@@ -144,17 +144,6 @@
       font-size: .92rem;
     }
 
-    .demo-banner{
-      margin-top: 14px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,163,1,.22);
-      background: rgba(255,163,1,.10);
-      color: var(--text);
-      font-size: .92rem;
-      text-align: left;
-    }
-
     .footer-admin-note{
       color: var(--muted);
       font-size: .9rem;
@@ -236,15 +225,9 @@
 
       <div class="login-actions">
         <button class="btn secondary" id="emailSignInBtn" type="button">Sign in</button>
-        <button class="btn ghost" id="demoPreviewBtn" type="button">Open demo preview</button>
       </div>
 
       <p class="login-meta" id="status">Use Google or email to continue.</p>
-
-      <div class="demo-banner">
-        <strong>Demo Preview:</strong> This opens a presentation-only admin preview for client review.
-        It is clearly separate from the real authentication workflow.
-      </div>
     </section>
   </main>
 
@@ -346,12 +329,6 @@
 
     passEl.addEventListener("keydown", (e) => {
       if (e.key === "Enter") emailBtn.click();
-    });
-
-    // --- Demo preview bypass ---
-    document.getElementById("demoPreviewBtn").addEventListener("click", () => {
-      sessionStorage.setItem("kartKapitolDemoAdmin", "true");
-      window.location.href = "admin.html?demo=1";
     });
   </script>
 </body>
