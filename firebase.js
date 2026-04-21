@@ -4,12 +4,12 @@ import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAunNnSwaIdSzq4t1jebGCdqJaTEtcQoFbk",
+  apiKey: "AIzaSyBRbb4HehSRvxHuZY5FF1Gy9K4z1m5BeKs",
   authDomain: "kart-kapitol-89d82.firebaseapp.com",
   projectId: "kart-kapitol-89d82",
   storageBucket: "kart-kapitol-89d82.firebasestorage.app",
   messagingSenderId: "488402375742",
-  appId: "1:488402375742:web:012cbddd266b07f4ba2d6f"
+  appId: "1:488402375742:web:e5ecafa834857f25ba2d6f"
 };
 
 const app = initializeApp(firebaseConfig);
