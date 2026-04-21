@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Team Login</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .login-shell{
+      min-height: calc(100vh - 84px);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow: hidden;
+    }
+
+    .login-bg{
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(11,15,20,.45), rgba(11,15,20,.78)),
+        url("assets/kapitol.jpeg") center/cover no-repeat;
+      transform: scale(1.06);
+      filter: blur(10px) saturate(1.05);
+      opacity: .9;
+    }
+
+    .login-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(700px 420px at 15% 10%, rgba(5,168,234,.22), transparent 62%),
+        radial-gradient(650px 420px at 85% 18%, rgba(255,163,1,.14), transparent 60%),
+        radial-gradient(520px 360px at 22% 84%, rgba(212,38,133,.12), transparent 62%);
+    }
+
+    .login-panel{
+      position: relative;
+      z-index: 2;
+      width: min(460px, 100%);
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(17,24,38,.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+      text-align: center;
+    }
+
+    .login-logo{
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg, rgba(5,168,234,.20), rgba(255,163,1,.14), rgba(212,38,133,.12)),
+        rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 0 16px 40px rgba(0,0,0,.28);
+    }
+
+    .login-title{
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+    }
+
+    .login-subtitle{
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .login-stack{
+      display: grid;
+      gap: 12px;
+      text-align: left;
+      margin-top: 18px;
+    }
+
+    .login-stack label{
+      font-size: .95rem;
+      color: var(--text);
+    }
+
+    .login-stack input{
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline: none;
+    }
+
+    .login-stack input::placeholder{
+      color: var(--muted);
+    }
+
+    .login-stack input:focus{
+      border-color: rgba(5,168,234,.45);
+      box-shadow: 0 0 0 3px rgba(5,168,234,.15);
+    }
+
+    .login-actions{
+      display:grid;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .login-actions .btn{
+      width:100%;
+    }
+
+    .login-divider{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin: 18px 0 8px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .login-divider::before,
+    .login-divider::after{
+      content:"";
+      flex:1;
+      height:1px;
+      background: rgba(255,255,255,.10);
+    }
+
+    .login-meta{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .demo-banner{
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,163,1,.22);
+      background: rgba(255,163,1,.10);
+      color: var(--text);
+      font-size: .92rem;
+      text-align: left;
+    }
+
+    .footer-admin-note{
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 640px){
+      .login-panel{
+        padding: 22px 18px;
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="login">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text">
+          <span class="brand-title">Kart Kapitol</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="login-shell">
+    <div class="login-bg" aria-hidden="true"></div>
+
+    <section class="login-panel" aria-label="Team login">
+      <div class="login-logo">KK</div>
+      <h1 class="login-title">Team Sign In</h1>
+      <p class="login-subtitle">
+        Access the Kart Kapitol management side for events, exhibits, and site content.
+      </p>
+
+      <div class="login-actions">
+        <button class="btn primary" id="googleBtn" type="button">Continue with Google</button>
+      </div>
+
+      <div class="login-divider">or use email</div>
+
+      <div class="login-stack">
+        <label>
+          Email
+          <input id="email" type="email" autocomplete="email" placeholder="team@kartkapitol.com" />
+        </label>
+
+        <label>
+          Password
+          <input id="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+        </label>
+      </div>
+
+      <div class="login-actions">
+        <button class="btn secondary" id="emailSignInBtn" type="button">Sign in</button>
+        <button class="btn ghost" id="demoPreviewBtn" type="button">Open demo preview</button>
+      </div>
+
+      <p class="login-meta" id="status">Use Google or email to continue.</p>
+
+      <div class="demo-banner">
+        <strong>Demo Preview:</strong> This opens a presentation-only admin preview for client review.
+        It is clearly separate from the real authentication workflow.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer site-footer-rich">
+    <div class="container footer-stack">
+      <div>
+        <p class="footer-brand">Kart Kapitol</p>
+        <p class="muted">A curated esports portfolio for Marshalltown.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="events.html">Events</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </div>
+
+      <div class="footer-admin">
+        <span class="footer-admin-note">Team Access</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script type="module">
+    import { auth, googleProvider } from "./firebase.js";
+    import {
+      signInWithRedirect,
+      getRedirectResult,
+      onAuthStateChanged,
+      signInWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const statusEl = document.getElementById("status");
+    const emailEl  = document.getElementById("email");
+    const passEl   = document.getElementById("password");
+    const googleBtn = document.getElementById("googleBtn");
+    const emailBtn  = document.getElementById("emailSignInBtn");
+
+    let busy = false;
+
+    function setStatus(text, isError = false) {
+      statusEl.textContent = text;
+      statusEl.style.color = isError ? "var(--red)" : "";
+    }
+
+    function setLoading(on) {
+      busy = on;
+      googleBtn.disabled = on;
+      emailBtn.disabled  = on;
+    }
+
+    // --- Handle return from Google redirect ---
+    setStatus("Checking sign-in status…");
+    setLoading(true);
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result?.user) {
+          window.location.replace("admin.html");
+        } else {
+          setStatus("Use Google or email to continue.");
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setStatus(`Google sign-in failed: ${err?.message || err}`, true);
+        setLoading(false);
+      });
+
+    // --- If already signed in, go straight to admin ---
+    onAuthStateChanged(auth, (user) => {
+      if (user) window.location.replace("admin.html");
+    });
+
+    // --- Google: use redirect (no popup) ---
+    googleBtn.addEventListener("click", () => {
+      if (busy) return;
+      setStatus("Redirecting to Google…");
+      setLoading(true);
+      signInWithRedirect(auth, googleProvider);
+    });
+
+    // --- Email / password sign-in ---
+    emailBtn.addEventListener("click", async () => {
+      if (busy) return;
+      const email    = emailEl.value.trim();
+      const password = passEl.value;
+      if (!email || !password) {
+        setStatus("Enter your email and password.", true);
+        return;
+      }
+      try {
+        setStatus("Signing in…");
+        setLoading(true);
+        await signInWithEmailAndPassword(auth, email, password);
+        // onAuthStateChanged handles the redirect
+      } catch (err) {
+        console.error(err);
+        const msg = err.code === "auth/invalid-credential"
+          ? "Incorrect email or password."
+          : err?.message || "Sign-in failed.";
+        setStatus(msg, true);
+        setLoading(false);
+      }
+    });
+
+    passEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") emailBtn.click();
+    });
+
+    // --- Demo preview bypass ---
+    document.getElementById("demoPreviewBtn").addEventListener("click", () => {
+      sessionStorage.setItem("kartKapitolDemoAdmin", "true");
+      window.location.href = "admin.html?demo=1";
+    });
+  </script>
+</body>
+</html>

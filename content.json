@@ -1,0 +1,84 @@
+{
+  "site": {
+    "name": "Kart Kapitol",
+    "tagline": "A curated esports portfolio for Marshalltown."
+  },
+  "home": {
+    "eyebrow": "Marshalltown Esports Tourism Portfolio",
+    "title": "Kart Kapitol",
+    "lead": "A curated digital showcase of Marshalltown’s esports culture, signature events, and visitor-facing experiences.",
+    "primaryCtaText": "View events",
+    "primaryCtaLink": "events.html",
+    "secondaryCtaText": "Explore exhibits",
+    "secondaryCtaLink": "exhibits.html",
+    "sectionTitle": "What Kart Kapitol Is",
+    "sectionSubtitle": "A clean front door into the esports story of Marshalltown.",
+    "cards": [
+      {
+        "label": "Featured Exhibit",
+        "title": "Exhibits",
+        "text": "Curated stories, timeline moments, and gallery-style highlights.",
+        "buttonText": "Open exhibits",
+        "buttonLink": "exhibits.html",
+        "accent": false
+      },
+      {
+        "label": "Visitor Experience",
+        "title": "Visit",
+        "text": "Plan a trip around showcases, broadcasts, and esports community moments.",
+        "buttonText": "Plan your visit",
+        "buttonLink": "visit.html",
+        "accent": false
+      },
+      {
+        "label": "Community Impact",
+        "title": "Partners",
+        "text": "See how local organizations, venues, and sponsors fit into the bigger picture.",
+        "buttonText": "See partners",
+        "buttonLink": "partners.html",
+        "accent": true
+      }
+    ],
+    "featuredTitle": "Recent & Featured Events",
+    "featuredSubtitle": "The biggest current moments, plus a few framed highlights from the archive.",
+    "spotlightTitle": "Spotlight Wall",
+    "spotlightText": "Big moments that define the public-facing identity of the project.",
+    "spotlights": [
+      "Showcase Night",
+      "Broadcast Feature",
+      "Tournament Weekend",
+      "Visitor Moment"
+    ],
+    "photoTitle": "Photo Opportunities",
+    "photoSubtitle": "Use these spaces for event shots, crowd moments, venue photography, or branded media.",
+    "gallery": [
+      "Hero Event Photo",
+      "Crowd / Venue",
+      "Broadcast Setup",
+      "Community Highlight"
+    ]
+  },
+  "exhibits": {
+    "title": "Exhibits",
+    "lead": "Welcome to the exhibit hall. Each exhibit is a curated lens on Marshalltown’s esports story—the spaces, the people, the culture, and the impact."
+  },
+  "visit": {
+    "title": "Visit",
+    "lead": "Build a trip around esports moments—showcases, watch parties, live production, and community energy."
+  },
+  "partners": {
+    "title": "Partners",
+    "lead": "Esports is a tourism story when the community builds it together—venues, sponsors, schools, and local business."
+  },
+  "footer": {
+    "text": "A curated esports portfolio for Marshalltown.",
+    "links": [
+      { "text": "Events", "href": "events.html" },
+      { "text": "Exhibits", "href": "exhibits.html" },
+      { "text": "Visit", "href": "visit.html" },
+      { "text": "Partners", "href": "partners.html" }
+    ],
+    "adminText": "Team Sign In",
+    "adminLink": "login.html"
+  }
+}

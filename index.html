@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="home">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text">
+          <span class="brand-title">Kart Kapitol</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="is-active">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link is-active">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero hero-home">
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/kapitol.jpeg" alt="" />
+      </div>
+      <div class="kart-streak" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <div class="eyebrow" id="home-eyebrow">Marshalltown Esports Tourism Portfolio</div>
+        <h1 id="home-title">Kart Kapitol</h1>
+        <p class="lead" id="home-lead">
+          A curated digital showcase of Marshalltown’s esports culture, signature events, and visitor-facing experiences.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" id="home-primary-cta" href="events.html">View events</a>
+          <a class="btn ghost" id="home-secondary-cta" href="exhibits.html">Explore exhibits</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="home-section-title">What Kart Kapitol Is</h2>
+          <p id="home-section-subtitle">A clean front door into the esports story of Marshalltown.</p>
+        </div>
+
+        <div class="grid cards" id="home-cards"></div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="home-featured-title">Recent & Featured Events</h2>
+          <p id="home-featured-subtitle">The biggest current moments, plus a few framed highlights from the archive.</p>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <div class="events-head">
+              <h3>Upcoming / Recent</h3>
+              <a class="btn ghost small" href="events.html">All events</a>
+            </div>
+            <ul id="eventsList" class="events-list" aria-live="polite"></ul>
+            <p class="muted">This section is intentionally brief. The full archive lives on the Events page.</p>
+          </div>
+
+          <div class="card">
+            <h3 id="home-spotlight-title">Spotlight Wall</h3>
+            <p class="muted" id="home-spotlight-text">Big moments that define the public-facing identity of the project.</p>
+            <div class="spotlight-grid" id="home-spotlights"></div>
+            <a class="link" href="events.html">Explore the archive →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="home-photo-title">Photo Opportunities</h2>
+          <p id="home-photo-subtitle">Use these spaces for event shots, crowd moments, venue photography, or branded media.</p>
+        </div>
+
+        <div class="gallery-strip" id="home-gallery"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer site-footer-rich">
+    <div class="container footer-stack">
+      <div>
+        <p class="footer-brand">Kart Kapitol</p>
+        <p class="muted">A curated esports portfolio for Marshalltown.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="events.html">Events</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </div>
+
+      <div class="footer-admin">
+        <a class="btn ghost small" href="login.html">Team Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="btn ghost small" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn secondary" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

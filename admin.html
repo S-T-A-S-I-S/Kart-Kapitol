@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Admin Control Center</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body.auth-loading main,
+    body.auth-loading footer{ visibility: hidden; }
+    .admin-shell{ padding-top: 10px; }
+    .admin-layout{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .admin-form-grid{
+      display:grid;
+      gap:12px;
+    }
+    .admin-form-grid input,
+    .admin-form-grid textarea{
+      width:100%;
+      margin-top:6px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      outline:none;
+      font: inherit;
+    }
+    .admin-form-grid input:focus,
+    .admin-form-grid textarea:focus{
+      border-color: rgba(5,168,234,.40);
+      box-shadow: 0 0 0 3px rgba(5,168,234,.15);
+    }
+    .admin-toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .admin-note{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(5,168,234,.18);
+      background: rgba(5,168,234,.08);
+    }
+    .admin-list-item{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      margin-bottom:10px;
+      cursor:pointer;
+    }
+    .admin-list-item strong{
+      display:block;
+    }
+    @media (max-width: 920px){
+      .admin-layout{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body data-page="admin">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-text">
+          <span class="brand-title">Kart Kapitol</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn ghost small" href="index.html">Public Site</a>
+        <button class="btn ghost small" id="signOutBtn" type="button">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section admin-shell">
+    <div class="container">
+      <div class="section-head">
+        <h2>Admin Control Center</h2>
+        <p id="who">Demo content manager for the client presentation.</p>
+      </div>
+
+      <div id="demoModeBanner" class="card" style="margin-bottom:16px;">
+        <h3 style="margin-top:0;">Demo Content Mode</h3>
+        <p class="muted" style="margin-bottom:0;">
+          Changes made here update browser-stored demo content and immediately affect the public-facing pages on this device/browser.
+        </p>
+      </div>
+
+      <div class="admin-layout">
+        <div class="card">
+          <div class="section-head" style="margin-bottom:10px;">
+            <h2>Home Page Content</h2>
+            <p>Edit the main content file values used on the homepage.</p>
+          </div>
+
+          <div class="admin-form-grid">
+            <label>
+              Eyebrow
+              <input id="content-eyebrow" type="text">
+            </label>
+
+            <label>
+              Home Title
+              <input id="content-title" type="text">
+            </label>
+
+            <label>
+              Lead Text
+              <textarea id="content-lead" rows="4"></textarea>
+            </label>
+
+            <label>
+              Section Title
+              <input id="content-section-title" type="text">
+            </label>
+
+            <label>
+              Section Subtitle
+              <textarea id="content-section-subtitle" rows="3"></textarea>
+            </label>
+
+            <label>
+              Spotlight Title
+              <input id="content-spotlight-title" type="text">
+            </label>
+
+            <label>
+              Spotlight Text
+              <textarea id="content-spotlight-text" rows="3"></textarea>
+            </label>
+
+            <label>
+              Photo Section Title
+              <input id="content-photo-title" type="text">
+            </label>
+
+            <label>
+              Photo Section Subtitle
+              <textarea id="content-photo-subtitle" rows="3"></textarea>
+            </label>
+
+            <div class="admin-toolbar">
+              <button class="btn primary" id="saveContentBtn" type="button">Save page content</button>
+              <button class="btn secondary" id="resetContentBtn" type="button">Reset content overrides</button>
+            </div>
+
+            <p class="muted" id="contentMsg">This updates the homepage content bindings.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head" style="margin-bottom:10px;">
+            <h2>Demo Events</h2>
+            <p>Manage the short event list shown on the homepage.</p>
+          </div>
+
+          <div class="admin-form-grid">
+            <label>
+              Event Title
+              <input id="event-title" type="text" placeholder="Marshalltown Esports Showcase">
+            </label>
+
+            <label>
+              Event Date
+              <input id="event-date" type="text" placeholder="Spring 2026">
+            </label>
+
+            <label>
+              Event Location
+              <input id="event-location" type="text" placeholder="Featured Venue">
+            </label>
+
+            <div class="admin-toolbar">
+              <button class="btn primary" id="saveEventBtn" type="button">Save event</button>
+              <button class="btn secondary" id="clearEventBtn" type="button">Clear form</button>
+              <button class="btn ghost" id="deleteEventBtn" type="button" disabled>Delete event</button>
+            </div>
+
+            <p class="muted" id="eventMsg">Click an existing event below to edit it.</p>
+          </div>
+
+          <div class="section-head" style="margin:22px 0 10px;">
+            <h2>Existing Demo Events</h2>
+            <p>These power the homepage preview list.</p>
+          </div>
+
+          <div id="demoEventsList"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="section-head" style="margin-bottom:10px;">
+          <h2>How This Works</h2>
+          <p>Client-demo-safe content control without needing live backend writing.</p>
+        </div>
+
+        <div class="admin-note">
+          <ul class="mini-list" style="margin-top:0;">
+            <li><strong>content.json</strong> remains the baseline source</li>
+            <li><strong>Admin edits</strong> are stored in localStorage as overrides</li>
+            <li><strong>app.js</strong> merges the baseline content and demo overrides</li>
+            <li>The homepage reflects those changes instantly on reload</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer site-footer-rich">
+    <div class="container footer-stack">
+      <div>
+        <p class="footer-brand">Kart Kapitol Admin</p>
+        <p class="muted">Control center for the client-facing experience.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="visit.html">Visit</a>
+      </div>
+
+      <div class="footer-admin">
+        <a class="btn ghost small" href="login.html">Back to Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="btn ghost small" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn secondary" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+
+  <!-- Auth guard: blocks page until Firebase confirms a valid session -->
+  <script type="module">
+    import { auth } from "./firebase.js";
+    import {
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const params  = new URLSearchParams(location.search);
+    const isDemo  = params.get("demo") === "1"
+                 || sessionStorage.getItem("kartKapitolDemoAdmin") === "true";
+    const whoEl   = document.getElementById("who");
+
+    if (isDemo) {
+      // Demo bypass: show the page immediately in read-only preview mode
+      if (whoEl) whoEl.textContent = "Demo preview mode — client presentation only.";
+    } else {
+      // Hide page until auth is verified
+      document.body.classList.add("auth-loading");
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          window.location.replace("login.html");
+          return;
+        }
+        document.body.classList.remove("auth-loading");
+        if (whoEl) whoEl.textContent = `Signed in as ${user.email}`;
+      });
+    }
+
+    // Sign-out: properly clears Firebase session
+    document.getElementById("signOutBtn")?.addEventListener("click", async () => {
+      sessionStorage.removeItem("kartKapitolDemoAdmin");
+      if (!isDemo) {
+        try { await signOut(auth); } catch (e) { console.error(e); }
+      }
+      window.location.href = "login.html";
+    });
+  </script>
+
+  <script>
+    const CONTENT_KEY = "kartKapitolContentOverrides";
+    const EVENTS_KEY = "kartKapitolDemoEvents";
+
+    const contentFields = {
+      eyebrow: document.getElementById("content-eyebrow"),
+      title: document.getElementById("content-title"),
+      lead: document.getElementById("content-lead"),
+      sectionTitle: document.getElementById("content-section-title"),
+      sectionSubtitle: document.getElementById("content-section-subtitle"),
+      spotlightTitle: document.getElementById("content-spotlight-title"),
+      spotlightText: document.getElementById("content-spotlight-text"),
+      photoTitle: document.getElementById("content-photo-title"),
+      photoSubtitle: document.getElementById("content-photo-subtitle")
+    };
+
+    const contentMsg = document.getElementById("contentMsg");
+
+    const eventTitle = document.getElementById("event-title");
+    const eventDate = document.getElementById("event-date");
+    const eventLocation = document.getElementById("event-location");
+    const eventMsg = document.getElementById("eventMsg");
+    const demoEventsList = document.getElementById("demoEventsList");
+    const deleteEventBtn = document.getElementById("deleteEventBtn");
+
+    let editingEventIndex = null;
+    let baseContent = {};
+
+    function getContentOverrides() {
+      try {
+        return JSON.parse(localStorage.getItem(CONTENT_KEY) || "{}");
+      } catch {
+        return {};
+      }
+    }
+
+    function setContentOverrides(value) {
+      localStorage.setItem(CONTENT_KEY, JSON.stringify(value));
+    }
+
+    function getDemoEvents() {
+      try {
+        return JSON.parse(localStorage.getItem(EVENTS_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function setDemoEvents(value) {
+      localStorage.setItem(EVENTS_KEY, JSON.stringify(value));
+    }
+
+    async function loadBaseContent() {
+      try {
+        const res = await fetch("content.json", { cache: "no-store" });
+        if (res.ok) {
+          baseContent = await res.json();
+        }
+      } catch (err) {
+        console.error("Failed to load base content:", err);
+      }
+    }
+
+    function populateContentForm() {
+      const overrides = getContentOverrides();
+      const home = { ...(baseContent.home || {}), ...(overrides.home || {}) };
+
+      contentFields.eyebrow.value = home.eyebrow || "";
+      contentFields.title.value = home.title || "";
+      contentFields.lead.value = home.lead || "";
+      contentFields.sectionTitle.value = home.sectionTitle || "";
+      contentFields.sectionSubtitle.value = home.sectionSubtitle || "";
+      contentFields.spotlightTitle.value = home.spotlightTitle || "";
+      contentFields.spotlightText.value = home.spotlightText || "";
+      contentFields.photoTitle.value = home.photoTitle || "";
+      contentFields.photoSubtitle.value = home.photoSubtitle || "";
+    }
+
+    function saveContentForm() {
+      const current = getContentOverrides();
+      current.home = {
+        ...(current.home || {}),
+        eyebrow: contentFields.eyebrow.value.trim(),
+        title: contentFields.title.value.trim(),
+        lead: contentFields.lead.value.trim(),
+        sectionTitle: contentFields.sectionTitle.value.trim(),
+        sectionSubtitle: contentFields.sectionSubtitle.value.trim(),
+        spotlightTitle: contentFields.spotlightTitle.value.trim(),
+        spotlightText: contentFields.spotlightText.value.trim(),
+        photoTitle: contentFields.photoTitle.value.trim(),
+        photoSubtitle: contentFields.photoSubtitle.value.trim()
+      };
+
+      setContentOverrides(current);
+      contentMsg.textContent = "Homepage content overrides saved. Refresh the public page to review changes.";
+    }
+
+    function resetContentForm() {
+      localStorage.removeItem(CONTENT_KEY);
+      populateContentForm();
+      contentMsg.textContent = "Content overrides cleared. The site will now use the base content.json values.";
+    }
+
+    function renderDemoEvents() {
+      const events = getDemoEvents();
+      demoEventsList.innerHTML = "";
+
+      if (!events.length) {
+        demoEventsList.innerHTML = `<p class="muted">No demo events saved yet.</p>`;
+        return;
+      }
+
+      events.forEach((event, index) => {
+        const item = document.createElement("div");
+        item.className = "admin-list-item";
+        item.innerHTML = `
+          <strong>${event.title || "Untitled Event"}</strong>
+          <span class="muted">${event.date || "TBD"} · ${event.location || "Marshalltown"}</span>
+        `;
+        item.addEventListener("click", () => loadEventIntoForm(index));
+        demoEventsList.appendChild(item);
+      });
+    }
+
+    function loadEventIntoForm(index) {
+      const events = getDemoEvents();
+      const event = events[index];
+      if (!event) return;
+
+      editingEventIndex = index;
+      eventTitle.value = event.title || "";
+      eventDate.value = event.date || "";
+      eventLocation.value = event.location || "";
+      deleteEventBtn.disabled = false;
+      eventMsg.textContent = `Editing event ${index + 1}.`;
+    }
+
+    function clearEventForm() {
+      editingEventIndex = null;
+      eventTitle.value = "";
+      eventDate.value = "";
+      eventLocation.value = "";
+      deleteEventBtn.disabled = true;
+      eventMsg.textContent = "Click an existing event below to edit it.";
+    }
+
+    function saveEventForm() {
+      const title = eventTitle.value.trim();
+      const date = eventDate.value.trim();
+      const location = eventLocation.value.trim();
+
+      if (!title || !date || !location) {
+        eventMsg.textContent = "Fill in title, date, and location.";
+        return;
+      }
+
+      const events = getDemoEvents();
+      const payload = { title, date, location };
+
+      if (editingEventIndex === null) {
+        events.push(payload);
+      } else {
+        events[editingEventIndex] = payload;
+      }
+
+      setDemoEvents(events);
+      renderDemoEvents();
+      clearEventForm();
+      eventMsg.textContent = "Demo event saved. Refresh the homepage to see the updated list.";
+    }
+
+    function deleteEventForm() {
+      if (editingEventIndex === null) return;
+      const events = getDemoEvents();
+      events.splice(editingEventIndex, 1);
+      setDemoEvents(events);
+      renderDemoEvents();
+      clearEventForm();
+      eventMsg.textContent = "Demo event deleted.";
+    }
+
+    document.getElementById("saveContentBtn").addEventListener("click", saveContentForm);
+    document.getElementById("resetContentBtn").addEventListener("click", resetContentForm);
+    document.getElementById("saveEventBtn").addEventListener("click", saveEventForm);
+    document.getElementById("clearEventBtn").addEventListener("click", clearEventForm);
+    document.getElementById("deleteEventBtn").addEventListener("click", deleteEventForm);
+
+    (async function initAdmin() {
+      await loadBaseContent();
+      populateContentForm();
+      renderDemoEvents();
+    })();
+  </script>
+</body>
+</html>
