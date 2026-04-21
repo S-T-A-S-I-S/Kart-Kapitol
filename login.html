@@ -273,15 +273,14 @@
   <script type="module">
     import { auth, googleProvider } from "./firebase.js";
     import {
-      signInWithRedirect,
-      getRedirectResult,
+      signInWithPopup,
       onAuthStateChanged,
       signInWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-    const statusEl = document.getElementById("status");
-    const emailEl  = document.getElementById("email");
-    const passEl   = document.getElementById("password");
+    const statusEl  = document.getElementById("status");
+    const emailEl   = document.getElementById("email");
+    const passEl    = document.getElementById("password");
     const googleBtn = document.getElementById("googleBtn");
     const emailBtn  = document.getElementById("emailSignInBtn");
 
@@ -298,35 +297,27 @@
       emailBtn.disabled  = on;
     }
 
-    // --- Handle return from Google redirect ---
-    setStatus("Checking sign-in status…");
-    setLoading(true);
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result?.user) {
-          window.location.replace("admin.html");
-        } else {
-          setStatus("Use Google or email to continue.");
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setStatus(`Google sign-in failed: ${err?.message || err}`, true);
-        setLoading(false);
-      });
-
     // --- If already signed in, go straight to admin ---
     onAuthStateChanged(auth, (user) => {
       if (user) window.location.replace("admin.html");
     });
 
-    // --- Google: use redirect (no popup) ---
-    googleBtn.addEventListener("click", () => {
+    // --- Google: popup (redirect is broken in Chrome 115+ due to state partitioning) ---
+    googleBtn.addEventListener("click", async () => {
       if (busy) return;
-      setStatus("Redirecting to Google…");
-      setLoading(true);
-      signInWithRedirect(auth, googleProvider);
+      try {
+        setStatus("Opening Google sign-in…");
+        setLoading(true);
+        await signInWithPopup(auth, googleProvider);
+        // onAuthStateChanged handles the redirect to admin
+      } catch (err) {
+        console.error(err);
+        const msg = err.code === "auth/popup-closed-by-user"
+          ? "Sign-in cancelled."
+          : err?.message || "Google sign-in failed.";
+        setStatus(msg, true);
+        setLoading(false);
+      }
     });
 
     // --- Email / password sign-in ---
