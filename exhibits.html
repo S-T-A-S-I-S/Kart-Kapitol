@@ -57,12 +57,12 @@
         <h1 id="page-title">Exhibits</h1>
 
         <p class="lead" id="page-lead">
-          Welcome to the exhibit hall. Each exhibit is a curated lens on Marshalltown’s esports story—the spaces, the people, the culture, and the impact.
+          Welcome to the exhibit hall. Each exhibit is a curated lens on Marshalltown's esports story—the spaces, the people, the culture, and the impact.
         </p>
 
         <div class="hero-actions">
           <a class="btn primary" href="#hall">Enter the hall</a>
-          <button class="btn ghost" data-open-modal="curator">Curator’s note</button>
+          <button class="btn ghost" data-open-modal="curator">Curator's note</button>
         </div>
 
         <div class="hero-badges" aria-label="Exhibit highlights">
@@ -88,44 +88,7 @@
           <h2>Exhibit Hall</h2>
           <p>Pick a wing. Each one opens a curated display panel.</p>
         </div>
-
-        <div class="grid cards">
-          <article class="card">
-            <h3>Exhibit A: The Rise</h3>
-            <p>How esports grew into a real community presence.</p>
-            <button class="btn secondary" data-open-modal="exhibitRise">Open exhibit</button>
-          </article>
-
-          <article class="card">
-            <h3>Exhibit B: The Arena</h3>
-            <p>Venues, events, broadcasts, and watch parties.</p>
-            <button class="btn secondary" data-open-modal="exhibitArena">Open exhibit</button>
-          </article>
-
-          <article class="card">
-            <h3>Exhibit C: The People</h3>
-            <p>Organizers, creators, volunteers, and the community behind the scenes.</p>
-            <button class="btn secondary" data-open-modal="exhibitPeople">Open exhibit</button>
-          </article>
-
-          <article class="card">
-            <h3>Exhibit D: The Impact</h3>
-            <p>Education, careers, tourism, and measurable local value.</p>
-            <button class="btn secondary" data-open-modal="exhibitImpact">Open exhibit</button>
-          </article>
-
-          <article class="card">
-            <h3>Exhibit E: Highlights</h3>
-            <p>Rotating wall of moments: photos, clips, winners, and recaps.</p>
-            <button class="btn secondary" data-open-modal="exhibitHighlights">Open exhibit</button>
-          </article>
-
-          <article class="card accent">
-            <h3>Curated Standards</h3>
-            <p>This exhibit is designed to feel intentional: concise, shareable, and visitor-first.</p>
-            <button class="link btn-inline" data-open-modal="curator">Read →</button>
-          </article>
-        </div>
+        <div class="grid cards" id="exhibitHallGrid"></div>
       </div>
     </section>
 
@@ -135,44 +98,7 @@
           <h2>Timeline Wall</h2>
           <p>A guided walk through key milestones. Tap a plaque to open the display.</p>
         </div>
-
-        <div class="grid cards">
-          <article class="card">
-            <h3>Milestone 1</h3>
-            <p>Origin moment: the first spark that started local momentum.</p>
-            <button class="btn secondary" data-open-modal="timeline1">Open plaque</button>
-          </article>
-
-          <article class="card">
-            <h3>Milestone 2</h3>
-            <p>The first big event: a turning point that brought people in.</p>
-            <button class="btn secondary" data-open-modal="timeline2">Open plaque</button>
-          </article>
-
-          <article class="card">
-            <h3>Milestone 3</h3>
-            <p>Broadcast era: production, streaming, and shareable moments.</p>
-            <button class="btn secondary" data-open-modal="timeline3">Open plaque</button>
-          </article>
-
-          <article class="card">
-            <h3>Milestone 4</h3>
-            <p>Community expansion: new partnerships, venues, or formats.</p>
-            <button class="btn secondary" data-open-modal="timeline4">Open plaque</button>
-          </article>
-
-          <article class="card">
-            <h3>Milestone 5</h3>
-            <p>Recognition: a highlight worth framing on the wall.</p>
-            <button class="btn secondary" data-open-modal="timeline5">Open plaque</button>
-          </article>
-
-          <article class="card accent">
-            <h3>Milestone 6</h3>
-            <p>The next chapter: what Marshalltown is building toward.</p>
-            <button class="btn primary" data-open-modal="timeline6">Open plaque</button>
-          </article>
-        </div>
+        <div class="grid cards" id="timelineGrid"></div>
       </div>
     </section>
 
@@ -182,32 +108,7 @@
           <h2>Collections</h2>
           <p>Organized like a museum: artifacts, media, and stories—ready to be expanded.</p>
         </div>
-
-        <div class="grid two">
-          <div class="card">
-            <h3>Artifacts</h3>
-            <p>Logos, flyers, posters, bracket screenshots, signage—visual history.</p>
-            <button class="btn secondary" data-open-modal="collectionArtifacts">Open collection</button>
-          </div>
-
-          <div class="card">
-            <h3>Media</h3>
-            <p>Highlight reels, photos, recaps, and broadcast clips.</p>
-            <button class="btn secondary" data-open-modal="collectionMedia">Open collection</button>
-          </div>
-
-          <div class="card">
-            <h3>Stories</h3>
-            <p>Short exhibit labels: the “why it mattered” behind big moments.</p>
-            <button class="btn secondary" data-open-modal="collectionStories">Open collection</button>
-          </div>
-
-          <div class="card accent">
-            <h3>Submit an Artifact</h3>
-            <p>Have something that belongs in the archive? Add it to the exhibit.</p>
-            <button class="btn primary" data-open-modal="submit">Submit</button>
-          </div>
-        </div>
+        <div class="grid two" id="collectionsGrid"></div>
       </div>
     </section>
   </main>
@@ -246,5 +147,180 @@
   </dialog>
 
   <script src="app.js"></script>
+
+  <script>
+    (function () {
+      const EXHIBIT_KEY = "kartKapitolExhibits";
+
+      const DEFAULTS = {
+        hall: [
+          {
+            id: "exhibitRise",
+            title: "Exhibit A: The Rise",
+            desc: "How esports grew into a real community presence.",
+            body: "How esports became a visible and organized part of the Marshalltown story.",
+            accent: false,
+            btnStyle: "secondary"
+          },
+          {
+            id: "exhibitArena",
+            title: "Exhibit B: The Arena",
+            desc: "Venues, events, broadcasts, and watch parties.",
+            body: "The spaces, setups, and live environments where esports becomes a shared experience.",
+            accent: false,
+            btnStyle: "secondary"
+          },
+          {
+            id: "exhibitPeople",
+            title: "Exhibit C: The People",
+            desc: "Organizers, creators, volunteers, and the community behind the scenes.",
+            body: "The organizers, creators, students, and supporters behind the scene.",
+            accent: false,
+            btnStyle: "secondary"
+          },
+          {
+            id: "exhibitImpact",
+            title: "Exhibit D: The Impact",
+            desc: "Education, careers, tourism, and measurable local value.",
+            body: "Education, leadership, tourism, and community value beyond gameplay.",
+            accent: false,
+            btnStyle: "secondary"
+          },
+          {
+            id: "exhibitHighlights",
+            title: "Exhibit E: Highlights",
+            desc: "Rotating wall of moments: photos, clips, winners, and recaps.",
+            body: "A wall of featured moments, media, and milestones worth revisiting.",
+            accent: false,
+            btnStyle: "secondary"
+          },
+          {
+            id: "curator",
+            title: "Curated Standards",
+            desc: "This exhibit is designed to feel intentional: concise, shareable, and visitor-first.",
+            body: null,
+            accent: true,
+            btnStyle: "link btn-inline",
+            btnText: "Read →"
+          }
+        ],
+        timeline: [
+          { id: "timeline1", title: "Milestone 1", desc: "Origin moment: the first spark that started local momentum.",   body: "Origin moment: the spark that started everything." },
+          { id: "timeline2", title: "Milestone 2", desc: "The first big event: a turning point that brought people in.",  body: "The first big event — a turning point that drew a crowd." },
+          { id: "timeline3", title: "Milestone 3", desc: "Broadcast era: production, streaming, and shareable moments.",  body: "Broadcast era: production, streaming, and shareable moments." },
+          { id: "timeline4", title: "Milestone 4", desc: "Community expansion: new partnerships, venues, or formats.",    body: "Community expansion: new partnerships, venues, and formats." },
+          { id: "timeline5", title: "Milestone 5", desc: "Recognition: a highlight worth framing on the wall.",           body: "Recognition: a milestone worth framing." },
+          { id: "timeline6", title: "Milestone 6", desc: "The next chapter: what Marshalltown is building toward.",       body: "The next chapter — what Marshalltown is building toward.", accent: true }
+        ],
+        collections: [
+          { id: "collectionArtifacts", title: "Artifacts", desc: "Logos, flyers, posters, bracket screenshots, signage—visual history.",    body: "Posters, graphics, overlays, flyers, and visual history." },
+          { id: "collectionMedia",     title: "Media",     desc: "Highlight reels, photos, recaps, and broadcast clips.",                   body: "Photos, recap clips, and highlight reels." },
+          { id: "collectionStories",   title: "Stories",   desc: "Short exhibit labels: the \"why it mattered\" behind big moments.",       body: "Short exhibit-style captions that explain why moments mattered." }
+        ]
+      };
+
+      function getExhibits() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(EXHIBIT_KEY) || "{}");
+          const merged = {};
+          ["hall", "timeline", "collections"].forEach(section => {
+            merged[section] = DEFAULTS[section].map((def, i) => {
+              const override = (stored[section] || [])[i] || {};
+              return Object.assign({}, def, override);
+            });
+          });
+          return merged;
+        } catch {
+          return DEFAULTS;
+        }
+      }
+
+      function openExhibitModal(title, body) {
+        const modal      = document.getElementById("modal");
+        const titleEl    = document.getElementById("modalTitle");
+        const bodyEl     = document.getElementById("modalBody");
+        if (!modal || !titleEl || !bodyEl) return;
+        titleEl.textContent = title;
+        // Wrap plain text in <p>, pass HTML through
+        bodyEl.innerHTML = body.trim().startsWith("<")
+          ? body
+          : "<p>" + body + "</p>";
+        modal.showModal();
+      }
+
+      function renderHall(items) {
+        const grid = document.getElementById("exhibitHallGrid");
+        if (!grid) return;
+        grid.innerHTML = items.map(item => {
+          const accentClass = item.accent ? " accent" : "";
+          const btnText     = item.btnText || "Open exhibit";
+          const btnStyle    = item.btnStyle || "secondary";
+          return `
+            <article class="card${accentClass}" data-exhibit-id="${item.id}">
+              <h3>${item.title}</h3>
+              <p>${item.desc}</p>
+              <button class="btn ${btnStyle}" data-exhibit-modal="${item.id}">${btnText}</button>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function renderTimeline(items) {
+        const grid = document.getElementById("timelineGrid");
+        if (!grid) return;
+        grid.innerHTML = items.map(item => {
+          const accentClass = item.accent ? " accent" : "";
+          const btnStyle    = item.accent ? "primary" : "secondary";
+          return `
+            <article class="card${accentClass}" data-exhibit-id="${item.id}">
+              <h3>${item.title}</h3>
+              <p>${item.desc}</p>
+              <button class="btn ${btnStyle}" data-exhibit-modal="${item.id}">Open plaque</button>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function renderCollections(items) {
+        const grid = document.getElementById("collectionsGrid");
+        if (!grid) return;
+        const regularCards = items.map(item => `
+          <div class="card" data-exhibit-id="${item.id}">
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+            <button class="btn secondary" data-exhibit-modal="${item.id}">Open collection</button>
+          </div>
+        `).join("");
+        const submitCard = `
+          <div class="card accent">
+            <h3>Submit an Artifact</h3>
+            <p>Have something that belongs in the archive? Add it to the exhibit.</p>
+            <button class="btn primary" data-open-modal="submit">Submit</button>
+          </div>
+        `;
+        grid.innerHTML = regularCards + submitCard;
+      }
+
+      // Handle exhibit modal buttons (separate from app.js's data-open-modal handler)
+      document.addEventListener("click", function (e) {
+        const btn = e.target.closest("[data-exhibit-modal]");
+        if (!btn) return;
+        e.stopPropagation();
+        const id = btn.getAttribute("data-exhibit-modal");
+        const exhibits = getExhibits();
+        const all = [...exhibits.hall, ...exhibits.timeline, ...exhibits.collections];
+        const item = all.find(x => x.id === id);
+        if (item && item.body) {
+          openExhibitModal(item.title, item.body);
+        }
+      }, true); // use capture so it fires before app.js's bubble-phase handler
+
+      // Init
+      const data = getExhibits();
+      renderHall(data.hall);
+      renderTimeline(data.timeline);
+      renderCollections(data.collections);
+    })();
+  </script>
 </body>
 </html>

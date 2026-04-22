@@ -689,6 +689,71 @@
       border-radius: 10px;
       border: 1px dashed rgba(255,255,255,.08);
     }
+
+    /* ── Exhibit editor rows ── */
+    .exhibit-section { display: none; }
+    .exhibit-section.active { display: block; }
+
+    .exhibit-row {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      background: rgba(255,255,255,.02);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .exhibit-row-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .12s;
+    }
+
+    .exhibit-row-header:hover {
+      background: rgba(255,255,255,.03);
+    }
+
+    .exhibit-row-num {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--sky);
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+
+    .exhibit-row-title-preview {
+      flex: 1;
+      font-size: .9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .exhibit-row-chevron {
+      flex-shrink: 0;
+      color: var(--muted);
+      transition: transform .2s;
+    }
+
+    .exhibit-row.open .exhibit-row-chevron {
+      transform: rotate(180deg);
+    }
+
+    .exhibit-row-body {
+      display: none;
+      padding: 0 14px 14px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .exhibit-row.open .exhibit-row-body {
+      display: block;
+    }
   </style>
 </head>
 
@@ -727,6 +792,13 @@
             <line x1="11" y1="1" x2="11" y2="4"/>
           </svg>
           Events
+        </button>
+
+        <button class="sidebar-link" data-panel="exhibits" type="button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M8 2L2 6v8h4v-4h4v4h4V6L8 2z"/>
+          </svg>
+          Exhibits
         </button>
 
         <button class="sidebar-link" data-panel="photos" type="button">
@@ -1027,6 +1099,51 @@
 
         </div><!-- /panel-events -->
 
+        <!-- ── Panel: Exhibits ── -->
+        <div class="admin-panel" id="panel-exhibits">
+
+          <div class="panel-block">
+            <div class="panel-block-header">
+              <div>
+                <h3>Exhibits Editor</h3>
+                <p>Edit the cards, modal copy, and timeline plaques shown on the Exhibits page.</p>
+              </div>
+              <div style="display:flex;gap:8px;flex-shrink:0;">
+                <button class="btn primary small" id="saveExhibitsBtn" type="button">Save all</button>
+                <button class="btn ghost small"   id="resetExhibitsBtn" type="button">Reset</button>
+              </div>
+            </div>
+            <div class="panel-block-body">
+
+              <!-- Sub-tabs -->
+              <div class="page-tabs" role="tablist" id="exhibitTabs">
+                <button class="page-tab-btn active" data-etab="hall"        type="button" role="tab">Exhibit Hall</button>
+                <button class="page-tab-btn"         data-etab="timeline"   type="button" role="tab">Timeline</button>
+                <button class="page-tab-btn"         data-etab="collections" type="button" role="tab">Collections</button>
+              </div>
+
+              <!-- Hall -->
+              <div class="exhibit-section active" id="esec-hall">
+                <div id="hallEditor"></div>
+              </div>
+
+              <!-- Timeline -->
+              <div class="exhibit-section" id="esec-timeline">
+                <div id="timelineEditor"></div>
+              </div>
+
+              <!-- Collections -->
+              <div class="exhibit-section" id="esec-collections">
+                <div id="collectionsEditor"></div>
+                <p class="status-msg" style="margin-top:8px;">The "Submit an Artifact" card is fixed and not editable.</p>
+              </div>
+
+              <p class="status-msg" style="margin-top:16px;" id="exhibitsMsg">Edit any field and click Save all.</p>
+            </div>
+          </div>
+
+        </div><!-- /panel-exhibits -->
+
         <!-- ── Panel: Photos ── -->
         <div class="admin-panel" id="panel-photos">
 
@@ -1088,9 +1205,10 @@
 
     // ── Sidebar panel switching ────────────────────────────────────────────────
     const PANEL_LABELS = {
-      content: "Page Content",
-      events:  "Events",
-      photos:  "Photos"
+      content:  "Page Content",
+      events:   "Events",
+      exhibits: "Exhibits",
+      photos:   "Photos"
     };
 
     function switchPanel(key) {
@@ -1119,6 +1237,162 @@
       this.classList.add("active");
       document.getElementById("previewDesktopBtn")?.classList.remove("active");
     });
+  </script>
+
+  <!-- Exhibits editor -->
+  <script>
+    (function () {
+      const EXHIBIT_KEY = "kartKapitolExhibits";
+
+      const DEFAULTS = {
+        hall: [
+          { id: "exhibitRise",       title: "Exhibit A: The Rise",       desc: "How esports grew into a real community presence.",                         body: "How esports became a visible and organized part of the Marshalltown story." },
+          { id: "exhibitArena",      title: "Exhibit B: The Arena",      desc: "Venues, events, broadcasts, and watch parties.",                           body: "The spaces, setups, and live environments where esports becomes a shared experience." },
+          { id: "exhibitPeople",     title: "Exhibit C: The People",     desc: "Organizers, creators, volunteers, and the community behind the scenes.",   body: "The organizers, creators, students, and supporters behind the scene." },
+          { id: "exhibitImpact",     title: "Exhibit D: The Impact",     desc: "Education, careers, tourism, and measurable local value.",                 body: "Education, leadership, tourism, and community value beyond gameplay." },
+          { id: "exhibitHighlights", title: "Exhibit E: Highlights",     desc: "Rotating wall of moments: photos, clips, winners, and recaps.",            body: "A wall of featured moments, media, and milestones worth revisiting." },
+          { id: "curator",           title: "Curated Standards",         desc: "This exhibit is designed to feel intentional: concise, shareable, and visitor-first.", body: "Kart Kapitol is designed as a visitor-facing portfolio for Marshalltown's esports culture. It blends tourism, community storytelling, and event presentation into a museum-style digital experience." }
+        ],
+        timeline: [
+          { id: "timeline1", title: "Milestone 1", desc: "Origin moment: the first spark that started local momentum.",   body: "Origin moment: the spark that started everything." },
+          { id: "timeline2", title: "Milestone 2", desc: "The first big event: a turning point that brought people in.",  body: "The first big event — a turning point that drew a crowd." },
+          { id: "timeline3", title: "Milestone 3", desc: "Broadcast era: production, streaming, and shareable moments.", body: "Broadcast era: production, streaming, and shareable moments." },
+          { id: "timeline4", title: "Milestone 4", desc: "Community expansion: new partnerships, venues, or formats.",   body: "Community expansion: new partnerships, venues, and formats." },
+          { id: "timeline5", title: "Milestone 5", desc: "Recognition: a highlight worth framing on the wall.",          body: "Recognition: a milestone worth framing." },
+          { id: "timeline6", title: "Milestone 6", desc: "The next chapter: what Marshalltown is building toward.",      body: "The next chapter — what Marshalltown is building toward." }
+        ],
+        collections: [
+          { id: "collectionArtifacts", title: "Artifacts", desc: "Logos, flyers, posters, bracket screenshots, signage—visual history.",  body: "Posters, graphics, overlays, flyers, and visual history." },
+          { id: "collectionMedia",     title: "Media",     desc: "Highlight reels, photos, recaps, and broadcast clips.",                 body: "Photos, recap clips, and highlight reels." },
+          { id: "collectionStories",   title: "Stories",   desc: "Short exhibit labels: the \"why it mattered\" behind big moments.",     body: "Short exhibit-style captions that explain why moments mattered." }
+        ]
+      };
+
+      function getExhibits() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(EXHIBIT_KEY) || "{}");
+          const merged = {};
+          ["hall", "timeline", "collections"].forEach(section => {
+            merged[section] = DEFAULTS[section].map((def, i) => {
+              const override = (stored[section] || [])[i] || {};
+              return Object.assign({}, def, override);
+            });
+          });
+          return merged;
+        } catch {
+          return JSON.parse(JSON.stringify(DEFAULTS));
+        }
+      }
+
+      // ── Build accordion editor for a section ────────────────────────────────
+      function buildEditor(containerId, items, sectionLabel) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+
+        items.forEach((item, i) => {
+          const row = document.createElement("div");
+          row.className = "exhibit-row";
+          row.innerHTML = `
+            <div class="exhibit-row-header">
+              <span class="exhibit-row-num">${sectionLabel}${i + 1}</span>
+              <span class="exhibit-row-title-preview" id="preview-${containerId}-${i}">${item.title}</span>
+              <svg class="exhibit-row-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M3 5l4 4 4-4"/>
+              </svg>
+            </div>
+            <div class="exhibit-row-body">
+              <div class="field-group" style="margin-top:12px;">
+                <label class="field-label" for="${containerId}-title-${i}">Card Title</label>
+                <input id="${containerId}-title-${i}" type="text" value="${item.title.replace(/"/g, '&quot;')}">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="${containerId}-desc-${i}">Card Description</label>
+                <input id="${containerId}-desc-${i}" type="text" value="${item.desc.replace(/"/g, '&quot;')}">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="${containerId}-body-${i}">Modal Body <span class="field-hint">(shown when the card is opened)</span></label>
+                <textarea id="${containerId}-body-${i}" rows="3">${item.body}</textarea>
+              </div>
+            </div>
+          `;
+
+          // Toggle open/close
+          row.querySelector(".exhibit-row-header").addEventListener("click", () => {
+            row.classList.toggle("open");
+          });
+
+          // Live update preview label as user types
+          row.querySelector(`#${containerId}-title-${i}`).addEventListener("input", e => {
+            const preview = document.getElementById(`preview-${containerId}-${i}`);
+            if (preview) preview.textContent = e.target.value || "(untitled)";
+          });
+
+          container.appendChild(row);
+        });
+      }
+
+      // ── Read values out of an editor ────────────────────────────────────────
+      function readEditor(containerId, count) {
+        return Array.from({ length: count }, (_, i) => ({
+          title: (document.getElementById(`${containerId}-title-${i}`)?.value || "").trim(),
+          desc:  (document.getElementById(`${containerId}-desc-${i}`)?.value  || "").trim(),
+          body:  (document.getElementById(`${containerId}-body-${i}`)?.value  || "").trim()
+        }));
+      }
+
+      // ── Save ────────────────────────────────────────────────────────────────
+      function saveExhibits() {
+        const current = getExhibits();
+        const saved = {
+          hall:        readEditor("hallEditor",       current.hall.length),
+          timeline:    readEditor("timelineEditor",   current.timeline.length),
+          collections: readEditor("collectionsEditor", current.collections.length)
+        };
+        // Merge IDs back from defaults (they are not editable)
+        ["hall", "timeline", "collections"].forEach(sec => {
+          saved[sec] = saved[sec].map((item, i) => Object.assign({}, item, { id: DEFAULTS[sec][i].id }));
+        });
+        localStorage.setItem(EXHIBIT_KEY, JSON.stringify(saved));
+        document.getElementById("exhibitsMsg").textContent = "Exhibits saved. Reload the Exhibits page to see changes.";
+        if (typeof showToast === "function") showToast("Exhibits saved.", "success");
+      }
+
+      // ── Reset ───────────────────────────────────────────────────────────────
+      function resetExhibits() {
+        if (!confirm("Reset all exhibit content to defaults?")) return;
+        localStorage.removeItem(EXHIBIT_KEY);
+        initEditors();
+        document.getElementById("exhibitsMsg").textContent = "Exhibits reset to defaults.";
+        if (typeof showToast === "function") showToast("Exhibits reset.", "info");
+      }
+
+      // ── Sub-tab switching ────────────────────────────────────────────────────
+      document.getElementById("exhibitTabs")?.addEventListener("click", function (e) {
+        const btn = e.target.closest("[data-etab]");
+        if (!btn) return;
+        const key = btn.dataset.etab;
+        document.querySelectorAll("#exhibitTabs [data-etab]").forEach(b => {
+          b.classList.toggle("active", b.dataset.etab === key);
+        });
+        document.querySelectorAll(".exhibit-section").forEach(sec => {
+          sec.classList.toggle("active", sec.id === "esec-" + key);
+        });
+      });
+
+      document.getElementById("saveExhibitsBtn")?.addEventListener("click", saveExhibits);
+      document.getElementById("resetExhibitsBtn")?.addEventListener("click", resetExhibits);
+
+      // ── Init ────────────────────────────────────────────────────────────────
+      function initEditors() {
+        const data = getExhibits();
+        buildEditor("hallEditor",       data.hall,        "#");
+        buildEditor("timelineEditor",   data.timeline,    "M");
+        buildEditor("collectionsEditor", data.collections, "C");
+      }
+
+      initEditors();
+    })();
   </script>
 
   <!-- Auth guard -->
