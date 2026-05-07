@@ -1,0 +1,328 @@
+{
+  "_comment": "KART KAPITOL — Central content file. Edit any value here and reload the page to see changes. The app.js file reads this on every load and injects everything into the site.",
+
+  "site": {
+    "name": "Kart Kapitol",
+    "tagline": "Marshalltown, Iowa's esports portfolio — built for the community, shown to the world."
+  },
+
+  "ticker": {
+    "items": [
+      "🎮 Weekly Smash Bros Tournament",
+      "Meet in Marshalltown",
+      "IAHSEA State Showdown",
+      "Esports Give Back — Big Brothers Big Sisters",
+      "MHS Esports",
+      "MCC Esports",
+      "Mechdyne — Technology Partner",
+      "Marshalltown Public Library Esports"
+    ]
+  },
+
+  "home": {
+    "eyebrow": "Marshalltown, Iowa · Esports Hub",
+    "heroLine1": "KART",
+    "heroLine2": "KAPITOL",
+    "lead": "The center of Iowa's esports scene. Where high school rivals compete, communities connect, and Marshalltown earns its place on the national map.",
+    "primaryCtaText": "View Events",
+    "primaryCtaLink": "events.html",
+    "secondaryCtaText": "Explore the Story",
+    "secondaryCtaLink": "exhibits.html",
+
+    "stats": [
+      { "num": "3+",     "label": "Orgs" },
+      { "num": "94",     "label": "Event Photos" },
+      { "num": "Weekly", "label": "Smash Tourneys" },
+      { "num": "Iowa",   "label": "State Events" }
+    ],
+
+    "orgsEyebrow": "The Organizations",
+    "orgsTitle":   "Built by real people. Powered by Marshalltown.",
+    "orgsLead":    "Three organizations form the backbone of Iowa's most active community esports scene — each playing a different role in building something that lasts.",
+    "orgs": [
+      {
+        "abbr":   "IA",
+        "name":   "IAHSEA",
+        "full":   "Iowa High School Esports Association",
+        "desc":   "The state's premiere organization connecting high school esports programs across Iowa. IAHSEA hosts the landmark State Showdown — bringing hundreds of students to Marshalltown to compete on a stage built for them.",
+        "tag":    "Statewide",
+        "accent": "sky",
+        "link":   "exhibits.html"
+      },
+      {
+        "abbr":   "MHS",
+        "name":   "MHS",
+        "full":   "Marshalltown High School",
+        "desc":   "Home team pride. MHS students compete at the high school level, represent Marshalltown in regional events, and are the heartbeat of the local youth esports pipeline — from after school to state competition.",
+        "tag":    "High School",
+        "accent": "gold",
+        "link":   "exhibits.html"
+      },
+      {
+        "abbr":   "MCC",
+        "name":   "MCC",
+        "full":   "Marshalltown Community College",
+        "desc":   "The collegiate tier. MCC provides a competitive and educational pathway for esports athletes, building on what begins in high school and creating careers — in play, production, and the business of esports.",
+        "tag":    "College",
+        "accent": "pink",
+        "link":   "exhibits.html"
+      }
+    ],
+
+    "eventsEyebrow":        "What's Happening",
+    "eventsTitle":          "Something's always going on.",
+    "eventsLead":           "From weekly tournaments to statewide showcases — Marshalltown's esports calendar stays full. Check in, show up, and be part of it.",
+    "featuredEventLabel":   "🏆 Signature Event",
+    "featuredEventTitle":   "IAHSEA State Showdown",
+    "featuredEventDesc":    "Iowa's premier high school esports championship. Hosted right here in Marshalltown — 94 captured moments from November 2025 and counting.",
+    "weeklyEventLabel":     "🎮 Every Week",
+    "weeklyEventTitle":     "Super Smash Bros Tournament",
+    "weeklyEventMeta":      "Open to all · Marshalltown · Weekly",
+
+    "givebackEyebrow": "Community Impact",
+    "givebackTitle":   "Esports that gives back.",
+    "givebackLead":    "Gaming is the vehicle. Community is the destination. Marshalltown's esports scene is woven into the fabric of the city — from schools to shelters to the library shelf.",
+    "givebackStats": [
+      {
+        "num":    "3+",
+        "label":  "Community Organizations",
+        "desc":   "Esports Give Back programs actively partnering with Marshalltown nonprofits and services.",
+        "accent": "sky"
+      },
+      {
+        "num":    "Youth",
+        "label":  "Programs & Pathways",
+        "desc":   "From Big Brothers Big Sisters mentorship to after-school library sessions — esports is reaching kids where they are.",
+        "accent": "gold"
+      },
+      {
+        "num":    "Iowa",
+        "label":  "Statewide Reach",
+        "desc":   "IAHSEA community programs extend Marshalltown's impact to students across the entire state of Iowa.",
+        "accent": "pink"
+      },
+      {
+        "num":    "Open",
+        "label":  "To Everyone",
+        "desc":   "You don't need to be a player. Events, watch parties, and community nights are family-friendly and open to all.",
+        "accent": "lime"
+      }
+    ],
+    "communityPartners": [
+      { "abbr": "BB",  "name": "Big Brothers Big Sisters",   "style": "" },
+      { "abbr": "LIB", "name": "Marshalltown Public Library", "style": "background:linear-gradient(135deg,#D42685,#8E0164);" },
+      { "abbr": "IA",  "name": "IAHSEA",                     "style": "background:linear-gradient(135deg,#05A8EA,#004F9E);" },
+      { "abbr": "MHS", "name": "Marshalltown High School",   "style": "background:linear-gradient(135deg,#FFA301,#F6750F);" },
+      { "abbr": "MCC", "name": "Marshalltown Community College", "style": "background:linear-gradient(135deg,#559D2D,#2e5a15);" }
+    ],
+
+    "mechdyneEyebrow": "Technology Partner",
+    "mechdyneTitle":   "Mechdyne",
+    "mechdyneDesc":    "A Marshalltown-based technology powerhouse, Mechdyne brings world-class visualization and immersive tech to the esports space. Their investment in the local scene elevates every event and signals to the country: Marshalltown means business.",
+
+    "galleryEyebrow": "From the Lens",
+    "galleryTitle":   "See it to believe it.",
+    "galleryLead":    "94 official photos from the IAHSEA State Showdown. Real moments, real players, real Marshalltown energy.",
+    "galleryPhotos": [
+      { "src": "Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-1.jpg",  "label": "State Showdown 2025", "alt": "State Showdown — players competing on stage" },
+      { "src": "Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-18.jpg", "label": "The Crowd",           "alt": "State Showdown — crowd energy" },
+      { "src": "Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-35.jpg", "label": "Competition",         "alt": "State Showdown — competitor focus" },
+      { "src": "Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-55.jpg", "label": "The Moments",         "alt": "State Showdown — event moments" }
+    ],
+
+    "visitCtaTitle": "Marshalltown is ready for you.",
+    "visitCtaLead":  "Whether you're driving in for a tournament or booking a weekend around the scene — this is a city building something worth the trip."
+  },
+
+  "exhibits": {
+    "eyebrow":   "The Exhibit Hall",
+    "heroLine1": "THE",
+    "heroLine2": "STORY",
+    "lead": "Five exhibits. One community. The rise of Marshalltown esports — curated, visitor-first, and built to last.",
+
+    "hallEyebrow": "Exhibit Hall",
+    "hallTitle":   "Pick a wing. Enter the exhibit.",
+    "hallLead":    "Each exhibit opens a curated display panel exploring a different dimension of Marshalltown's esports story.",
+    "exhibits": [
+      { "title": "Exhibit A: The Rise",      "desc": "How esports grew into a real community presence in Marshalltown — from first sparks to statewide recognition.",            "modal": "exhibitRise",       "btn": "primary"   },
+      { "title": "Exhibit B: The Arena",     "desc": "Venues, events, broadcasts, and watch parties — the live environments where esports becomes a shared experience.",          "modal": "exhibitArena",      "btn": "secondary" },
+      { "title": "Exhibit C: The People",    "desc": "Organizers, creators, volunteers, and the community that shows up behind the scenes every single time.",                     "modal": "exhibitPeople",     "btn": "pink"      },
+      { "title": "Exhibit D: The Impact",    "desc": "Education, careers, tourism, and measurable local value — esports as a force that extends beyond gameplay.",                "modal": "exhibitImpact",     "btn": "secondary" },
+      { "title": "Exhibit E: Highlights",    "desc": "Rotating wall of moments: photos, clips, winners, and recaps from across the seasons.",                                     "modal": "exhibitHighlights", "btn": "primary"   },
+      { "title": "Curated Standards",        "desc": "This exhibit is designed to feel intentional — concise, shareable, visitor-first. Read about the vision.",                   "modal": "curator",           "btn": "inline"    }
+    ],
+
+    "timelineEyebrow": "Timeline Wall",
+    "timelineTitle":   "Milestones that shaped us.",
+    "timelineLead":    "A guided walk through key moments. Tap a plaque to open the display.",
+    "milestones": [
+      { "title": "Milestone 1", "desc": "Origin moment — the first spark that started local momentum.",          "modal": "timeline1" },
+      { "title": "Milestone 2", "desc": "First big event — a turning point that brought people together.",       "modal": "timeline2" },
+      { "title": "Milestone 3", "desc": "Broadcast era — production, streaming, and shareable moments.",         "modal": "timeline3" },
+      { "title": "Milestone 4", "desc": "Community expansion — new partnerships, venues, and formats.",          "modal": "timeline4" },
+      { "title": "Milestone 5", "desc": "Recognition — a highlight worth framing on the wall.",                  "modal": "timeline5" },
+      { "title": "Milestone 6", "desc": "The next chapter — what Marshalltown is building toward.",              "modal": "timeline6" }
+    ],
+
+    "collectionsEyebrow": "Collections",
+    "collectionsTitle":   "The archive.",
+    "collectionsLead":    "Organized like a museum — artifacts, media, and stories ready to grow."
+  },
+
+  "events": {
+    "eyebrow":   "Events Calendar",
+    "heroLine1": "THE",
+    "heroLine2": "LINEUP",
+    "lead": "Live calendar + museum archive. Featured moments up front, everything else organized and ready for visitors.",
+
+    "showdownEyebrow": "Signature Event",
+    "showdownTitle":   "IAHSEA State Showdown",
+    "showdownLead":    "94 official photos from Iowa's premier high school esports event · November 2025 · Photography by Altar Media",
+
+    "featuredEyebrow": "Featured",
+    "featuredTitle":   "Big wall moments.",
+    "featuredLead":    "Highlighted for visitors and press — the events that define the season.",
+
+    "upcomingEyebrow": "Upcoming & Recent",
+    "upcomingTitle":   "What's next.",
+    "upcomingLead":    "Perfect for \"Plan Your Visit.\" Check what's coming, then show up.",
+
+    "archiveEyebrow": "Past Events",
+    "archiveTitle":   "The archive.",
+    "archiveLead":    "Documented moments that build Marshalltown's esports story."
+  },
+
+  "visit": {
+    "eyebrow":   "Plan Your Trip",
+    "heroLine1": "COME",
+    "heroLine2": "VISIT",
+    "lead": "Build a trip around esports moments — showcases, watch parties, live production, and community energy you won't find anywhere else.",
+
+    "expectTitle": "What to expect.",
+    "expectDesc":  "Kart Kapitol is built like an exhibit: curated, visitor-first, and easy to explore. You don't need to be a gamer — think of it like a live sports night with a modern twist.",
+    "expectChecklist": [
+      "Family-friendly vibes (depending on the event)",
+      "Live broadcast and production moments",
+      "Community + local partnership atmosphere",
+      "Great for visitors who want something different",
+      "Weekly Smash Bros tournaments — open to all"
+    ],
+
+    "pathsTitle": "Pick your style.",
+    "pathsLead":  "Keep it simple. Make it memorable.",
+    "paths": [
+      { "title": "Quick Stop",        "desc": "Catch one featured event, grab a photo, and head out with a story worth telling.",                     "cta": "Find One Event",  "link": "events.html" },
+      { "title": "Weekend Build",     "desc": "Two events, one exhibit deep dive, and a local hangout spot — a full Marshalltown experience.",        "cta": "View Itinerary",  "modal": "itinerary" },
+      { "title": "Tourism Highlight", "desc": "Plan around one \"big wall\" featured event and share the recap with the world.",                      "cta": "See Featured",    "link": "events.html" }
+    ],
+
+    "checklistTitle": "Visitor checklist.",
+    "checklistLead":  "Small steps that make the trip smoother.",
+    "beforeGo": [
+      "Check date, time, and location on the Events page",
+      "Confirm parking and entry for the venue",
+      "Bring a charger — you'll take photos",
+      "Follow #KartKapitol for real-time updates"
+    ],
+    "whileThere": [
+      "Ask what's \"featured\" tonight",
+      "Snap a highlight moment to share",
+      "Say hello to the organizers",
+      "Tag #KartKapitol #Marshalltown"
+    ]
+  },
+
+  "partners": {
+    "eyebrow":   "Build With Us",
+    "heroLine1": "PARTNER",
+    "heroLine2": "WITH US",
+    "lead": "Esports is a tourism story when the community builds it together. Venues, sponsors, schools, local business — everyone has a lane.",
+
+    "whyTitle": "Partnerships build the city.",
+    "whyDesc":  "Kart Kapitol exists to spotlight Marshalltown's esports ecosystem as a living portfolio. Partnerships turn events into visitor experiences — something the town can be proud of and share with the country.",
+    "whyChecklist": [
+      "Creates repeatable showcase weekends",
+      "Supports youth programs and education pathways",
+      "Builds local business visibility and involvement",
+      "Generates shareable media and town identity",
+      "Puts Marshalltown on the national esports map"
+    ],
+
+    "mechdyneTitle": "Mechdyne",
+    "mechdyneDesc":  "A Marshalltown-based technology company specializing in visualization, immersive environments, and simulation. Mechdyne's investment in the local esports scene elevates every event — and proves that Marshalltown's esports story has the full support of local industry.",
+
+    "tracksEyebrow": "Partnership Tracks",
+    "tracksTitle":   "Pick a lane.",
+    "tracksLead":    "Easy for local orgs to plug in — whatever level works for you.",
+    "tracks": [
+      { "title": "Venue Partner",           "desc": "Provide space for events, watch parties, showcases, or community workshops." },
+      { "title": "Sponsor",                 "desc": "Support production, prizes, promotion, or travel and tourism moments." },
+      { "title": "Community Partner",       "desc": "Help connect youth programs, schools, and community engagement initiatives." },
+      { "title": "Signature Event Partner", "desc": "Build one \"big wall\" event each season that visitors can plan a trip around." },
+      { "title": "Give Back Partner",       "desc": "Connect your nonprofit or service org with Marshalltown's esports Give Back events." },
+      { "title": "Media Partner",           "desc": "Amplify the story. Coverage, photography, and broadcast partnership opportunities." }
+    ]
+  },
+
+  "modals": {
+    "curator": {
+      "title": "Curator's Note",
+      "body":  "<p><strong>Kart Kapitol</strong> is Marshalltown's visitor-facing esports portfolio.</p><p>It blends tourism, community storytelling, and event presentation into a digital experience worthy of the scene we've built here.</p>"
+    },
+    "press": {
+      "title": "Media & Press Kit",
+      "body":  "<p>Recommended story angles:</p><ul><li>Esports as a community and tourism attraction</li><li>Student-led media and production</li><li>Visitor-friendly events and showcases</li><li>Local partnerships and regional growth</li><li>Mechdyne: tech industry meets grassroots esports</li></ul>"
+    },
+    "contact": {
+      "title": "Partnership Inquiry",
+      "body":  "<p>Interested in partnering with Kart Kapitol? We'd love to connect.</p><p>Reach out about hosting, sponsorship, venue support, or collaborative programming.</p>"
+    },
+    "submit": {
+      "title": "Submit an Event or Artifact",
+      "body":  "<p>Use this space for a form, QR link, or submission email.</p><p class='muted'>For the client demo, this acts as a placeholder for future community submissions.</p>"
+    },
+    "itinerary": {
+      "title": "Sample Visit Itinerary",
+      "body":  "<p><strong>Friday:</strong> Arrival, local dinner, community watch party.</p><p><strong>Saturday:</strong> Featured event, exhibit browsing, media / photo moments.</p><p><strong>Sunday:</strong> Brunch, final stops, archive recap.</p>"
+    },
+    "map": {
+      "title": "Visitor Map",
+      "body":  "<p>Coming soon — a guide to venues, event sites, watch-party locations, and community partner spaces across Marshalltown.</p>"
+    },
+    "exhibitRise": {
+      "title": "Exhibit A: The Rise",
+      "body":  "<p>How esports became a visible and organized part of the Marshalltown story — from first sparks to statewide recognition.</p>"
+    },
+    "exhibitArena": {
+      "title": "Exhibit B: The Arena",
+      "body":  "<p>The spaces, setups, and live environments where esports becomes a shared experience. Venues, streams, and the crowd that makes it electric.</p>"
+    },
+    "exhibitPeople": {
+      "title": "Exhibit C: The People",
+      "body":  "<p>The organizers, creators, students, coaches, and supporters behind every event. Marshalltown runs on real people who show up.</p>"
+    },
+    "exhibitImpact": {
+      "title": "Exhibit D: The Impact",
+      "body":  "<p>Education, leadership, tourism, community pride, and measurable local value — esports as a force beyond gameplay.</p>"
+    },
+    "exhibitHighlights": {
+      "title": "Exhibit E: Highlights",
+      "body":  "<p>A wall of featured moments, media, and milestones worth revisiting. The story so far.</p>"
+    },
+    "timeline1": { "title": "Milestone 1", "body": "<p>Origin moment — the first spark that started local momentum in Marshalltown.</p>" },
+    "timeline2": { "title": "Milestone 2", "body": "<p>First big event — a turning point that brought the community together.</p>" },
+    "timeline3": { "title": "Milestone 3", "body": "<p>Broadcast era — production, streaming, and shareable moments.</p>" },
+    "timeline4": { "title": "Milestone 4", "body": "<p>Community expansion — new partnerships, venues, and formats.</p>" },
+    "timeline5": { "title": "Milestone 5", "body": "<p>Recognition — a highlight worth framing on the wall.</p>" },
+    "timeline6": { "title": "Milestone 6", "body": "<p>The next chapter — what Marshalltown is building toward.</p>" },
+    "collectionArtifacts": { "title": "Artifacts", "body": "<p>Posters, graphics, overlays, flyers, and the visual history of Marshalltown esports.</p>" },
+    "collectionMedia":     { "title": "Media",     "body": "<p>Photos, recap clips, and highlight reels from events across the years.</p>" },
+    "collectionStories":   { "title": "Stories",   "body": "<p>Short exhibit-style captions that explain why moments mattered.</p>" }
+  },
+
+  "footer": {
+    "tagline":   "Marshalltown, Iowa's esports portfolio — built for the community, shown to the world.",
+    "adminText": "Team Sign In",
+    "adminLink": "login.html"
+  }
+}

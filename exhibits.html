@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Exhibits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="exhibits">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Kart Kapitol home">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span class="brand-wordmark">Kart Kapitol</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html" class="is-active">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="events.html" class="nav-cta">Join an Event</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link is-active">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+        <a href="gallery.html" class="mobile-link">Gallery</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" style="min-height:60vh;padding-bottom:60px;">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/kapitol.jpeg" alt="" />
+      </div>
+      <div class="kart-streak" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>The Exhibit Hall</div>
+        <h1 class="hero-title" style="font-size:clamp(3rem,9vw,7rem);" id="page-title">
+          <span class="line-1">THE</span>
+          <span class="line-2">STORY</span>
+        </h1>
+        <p class="hero-lead" id="page-lead">
+          Five exhibits. One community. The rise of Marshalltown esports — curated, visitor-first, and built to last.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary lg" href="#hall">Enter the Hall</a>
+          <button class="btn ghost lg" data-open-modal="curator">Curator's Note</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-badge"><span class="stat-num">5</span><span class="stat-label">Exhibits</span></div>
+          <div class="stat-badge"><span class="stat-num">6</span><span class="stat-label">Milestones</span></div>
+          <div class="stat-badge"><span class="stat-num">3</span><span class="stat-label">Collections</span></div>
+        </div>
+      </div>
+      <svg class="hero-cut" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 L0,30 Q360,80 720,40 Q1080,0 1440,50 L1440,80 Z"/>
+      </svg>
+    </section>
+
+    <!-- Exhibit Hall -->
+    <section id="hall" class="section" aria-labelledby="hall-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Exhibit Hall</div>
+          <h2 class="section-title" id="hall-heading">Pick a wing. <span class="accent-sky">Enter the exhibit.</span></h2>
+          <p class="section-sub">Each exhibit opens a curated display panel exploring a different dimension of Marshalltown's esports story.</p>
+        </div>
+        <div class="grid cards">
+          <article class="card reveal reveal-delay-1">
+            <h3>Exhibit A: The Rise</h3>
+            <p>How esports grew into a real community presence in Marshalltown — from first sparks to statewide recognition.</p>
+            <button class="btn primary sm" data-open-modal="exhibitRise">Open Exhibit</button>
+          </article>
+          <article class="card reveal reveal-delay-2">
+            <h3>Exhibit B: The Arena</h3>
+            <p>Venues, events, broadcasts, and watch parties — the live environments where esports becomes a shared experience.</p>
+            <button class="btn secondary sm" data-open-modal="exhibitArena">Open Exhibit</button>
+          </article>
+          <article class="card reveal reveal-delay-3">
+            <h3>Exhibit C: The People</h3>
+            <p>Organizers, creators, volunteers, and the community that shows up behind the scenes every single time.</p>
+            <button class="btn pink sm" data-open-modal="exhibitPeople">Open Exhibit</button>
+          </article>
+          <article class="card reveal reveal-delay-1">
+            <h3>Exhibit D: The Impact</h3>
+            <p>Education, careers, tourism, and measurable local value — esports as a force that extends beyond gameplay.</p>
+            <button class="btn secondary sm" data-open-modal="exhibitImpact">Open Exhibit</button>
+          </article>
+          <article class="card reveal reveal-delay-2">
+            <h3>Exhibit E: Highlights</h3>
+            <p>Rotating wall of moments: photos, clips, winners, and recaps from across the seasons.</p>
+            <button class="btn primary sm" data-open-modal="exhibitHighlights">Open Exhibit</button>
+          </article>
+          <article class="card accent reveal reveal-delay-3">
+            <h3>Curated Standards</h3>
+            <p>This exhibit is designed to feel intentional — concise, shareable, visitor-first. Read about the vision.</p>
+            <button class="btn-inline" data-open-modal="curator">Read the Curator's Note →</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Wall -->
+    <section class="section surface" aria-labelledby="timeline-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow gold"><span class="eyebrow-dot" aria-hidden="true"></span>Timeline Wall</div>
+          <h2 class="section-title" id="timeline-heading">Milestones that <span class="accent-gold">shaped us.</span></h2>
+          <p class="section-sub">A guided walk through key moments. Tap a plaque to open the display.</p>
+        </div>
+        <div class="grid cards">
+          <article class="card reveal reveal-delay-1">
+            <h3>Milestone 1</h3>
+            <p>Origin moment — the first spark that started local momentum.</p>
+            <button class="btn ghost sm" data-open-modal="timeline1">Open Plaque</button>
+          </article>
+          <article class="card reveal reveal-delay-2">
+            <h3>Milestone 2</h3>
+            <p>First big event — a turning point that brought people together.</p>
+            <button class="btn ghost sm" data-open-modal="timeline2">Open Plaque</button>
+          </article>
+          <article class="card reveal reveal-delay-3">
+            <h3>Milestone 3</h3>
+            <p>Broadcast era — production, streaming, and shareable moments.</p>
+            <button class="btn ghost sm" data-open-modal="timeline3">Open Plaque</button>
+          </article>
+          <article class="card reveal reveal-delay-1">
+            <h3>Milestone 4</h3>
+            <p>Community expansion — new partnerships, venues, and formats.</p>
+            <button class="btn ghost sm" data-open-modal="timeline4">Open Plaque</button>
+          </article>
+          <article class="card reveal reveal-delay-2">
+            <h3>Milestone 5</h3>
+            <p>Recognition — a highlight worth framing on the wall.</p>
+            <button class="btn ghost sm" data-open-modal="timeline5">Open Plaque</button>
+          </article>
+          <article class="card accent reveal reveal-delay-3">
+            <h3>Milestone 6</h3>
+            <p>The next chapter — what Marshalltown is building toward.</p>
+            <button class="btn primary sm" data-open-modal="timeline6">Open Plaque</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collections -->
+    <section class="section dark" aria-labelledby="collections-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow pink"><span class="eyebrow-dot" aria-hidden="true"></span>Collections</div>
+          <h2 class="section-title" id="collections-heading">The <span class="accent-pink">archive.</span></h2>
+          <p class="section-sub">Organized like a museum — artifacts, media, and stories ready to grow.</p>
+        </div>
+        <div class="grid two">
+          <div class="card reveal reveal-delay-1">
+            <h3>Artifacts</h3>
+            <p>Logos, flyers, posters, bracket screenshots, signage — the visual history of Marshalltown esports.</p>
+            <button class="btn secondary sm" data-open-modal="collectionArtifacts">Open Collection</button>
+          </div>
+          <div class="card reveal reveal-delay-2">
+            <h3>Media</h3>
+            <p>Highlight reels, photos, recaps, and broadcast clips from events across the years.</p>
+            <button class="btn secondary sm" data-open-modal="collectionMedia">Open Collection</button>
+          </div>
+          <div class="card reveal reveal-delay-1">
+            <h3>Stories</h3>
+            <p>Short exhibit labels — the "why it mattered" behind the big moments.</p>
+            <button class="btn secondary sm" data-open-modal="collectionStories">Open Collection</button>
+          </div>
+          <div class="card accent reveal reveal-delay-2">
+            <h3>Submit an Artifact</h3>
+            <p>Have something that belongs in the archive? Help us grow the collection.</p>
+            <button class="btn primary sm" data-open-modal="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-wordmark">Kart Kapitol</div>
+          <p class="footer-tagline">Marshalltown, Iowa's esports portfolio — built for the community, shown to the world.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="events.html">Events</a>
+          <a href="exhibits.html">Exhibits</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="visit.html">Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="partners.html">Partners</a>
+          <a href="exhibits.html">Give Back</a>
+          <a href="events.html">Smash Tourney</a>
+        </div>
+        <div class="footer-col">
+          <h4>Team</h4>
+          <a href="login.html">Staff Login</a>
+          <a href="admin.html">Admin</a>
+          <a href="partners.html">Press Kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Kart Kapitol · Marshalltown, Iowa</p>
+        <a class="btn ghost sm" href="login.html">Team Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Info</h3>
+        <button class="btn ghost sm" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn ghost sm" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

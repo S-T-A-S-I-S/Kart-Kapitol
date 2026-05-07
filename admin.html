@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Admin Control Center</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .admin-shell{ padding-top: 10px; }
+    .admin-layout{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .admin-form-grid{
+      display:grid;
+      gap:12px;
+    }
+    .admin-form-grid input,
+    .admin-form-grid textarea{
+      width:100%;
+      margin-top:6px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      outline:none;
+      font: inherit;
+    }
+    .admin-form-grid input:focus,
+    .admin-form-grid textarea:focus{
+      border-color: rgba(5,168,234,.40);
+      box-shadow: 0 0 0 3px rgba(5,168,234,.15);
+    }
+    .admin-toolbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .admin-note{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(5,168,234,.18);
+      background: rgba(5,168,234,.08);
+    }
+    .admin-list-item{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      margin-bottom:10px;
+      cursor:pointer;
+    }
+    .admin-list-item strong{
+      display:block;
+    }
+    @media (max-width: 920px){
+      .admin-layout{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body data-page="admin">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Kart Kapitol home">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span class="brand-wordmark">Kart Kapitol</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+      </nav>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn ghost sm" href="index.html">Public Site</a>
+        <button class="btn ghost sm" id="signOutBtn" type="button">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section admin-shell">
+    <div class="container">
+      <div class="section-head">
+        <h2>Admin Control Center</h2>
+        <p id="who">Verifying access…</p>
+      </div>
+
+      <!-- Team Access -->
+      <div class="card" style="margin-top:16px;" id="teamCard">
+        <div class="section-head" style="margin-bottom:16px;">
+          <h2>Team Access</h2>
+          <p>Generate invite codes to add new team members. Each code can only be used once.</p>
+        </div>
+
+        <div class="admin-layout">
+          <div>
+            <h3 style="font-size:1rem;margin-bottom:12px;">Current Team Members</h3>
+            <div id="adminsList"><p class="muted">Loading…</p></div>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;margin-bottom:12px;">Invite Codes</h3>
+            <button class="btn primary" type="button" id="generateInviteBtn">Generate New Code</button>
+            <p id="inviteGenStatus" style="font-size:.86rem;color:var(--muted);margin-top:8px;"></p>
+            <div id="generatedCode" style="display:none;margin-top:12px;padding:14px;border-radius:14px;border:1px solid rgba(5,168,234,.3);background:rgba(5,168,234,.08);">
+              <p style="font-size:.86rem;color:var(--muted);margin-bottom:6px;">Share this code — it works once:</p>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <strong id="codeDisplay" style="font-size:1.4rem;letter-spacing:.15em;color:var(--sky);font-family:monospace;"></strong>
+                <button class="btn ghost sm" type="button" id="copyCodeBtn">Copy</button>
+              </div>
+            </div>
+            <h3 style="font-size:1rem;margin:20px 0 10px;">Pending Invites</h3>
+            <div id="invitesList"><p class="muted">None yet.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-wordmark">Kart Kapitol</div>
+          <p class="footer-tagline">Admin control center — Marshalltown, Iowa.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="events.html">Events</a>
+          <a href="exhibits.html">Exhibits</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="visit.html">Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="partners.html">Partners</a>
+          <a href="exhibits.html">Give Back</a>
+          <a href="events.html">Smash Tourney</a>
+        </div>
+        <div class="footer-col">
+          <h4>Team</h4>
+          <a href="login.html">Staff Login</a>
+          <a href="admin.html">Admin</a>
+          <a href="partners.html">Press Kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Kart Kapitol · Marshalltown, Iowa</p>
+        <a class="btn ghost sm" href="login.html">Back to Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="btn ghost sm" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn secondary" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+
+  <script type="module">
+    import { auth, db } from "./firebase.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import {
+      collection, doc, getDoc, getDocs, setDoc, deleteDoc, query, where, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const OWNER_EMAILS = ["2024mmorgan@gmail.com"];
+
+    // ── Auth guard ──────────────────────────────────────────────────────────
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return window.location.replace("login.html");
+
+      const isOwner = OWNER_EMAILS.includes(user.email);
+      const snap    = isOwner ? null : await getDoc(doc(db, "admins", user.uid));
+
+      if (!isOwner && !snap?.exists()) {
+        await signOut(auth);
+        return window.location.replace("login.html");
+      }
+
+      document.getElementById("who").textContent = `Signed in as ${user.email}`;
+      loadTeam();
+      loadInvites();
+    });
+
+    document.getElementById("signOutBtn")?.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+
+    // ── Team management ────────────────────────────────────────────────────
+    async function loadTeam() {
+      const list = document.getElementById("adminsList");
+      try {
+        const snap = await getDocs(collection(db, "admins"));
+        if (snap.empty) {
+          list.innerHTML = `<p class="muted">No invited members yet.</p>`;
+          return;
+        }
+        list.innerHTML = snap.docs.map(d => {
+          const { email, addedVia } = d.data();
+          return `
+            <div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <strong>${email}</strong>
+                <span class="muted" style="font-size:.82rem;display:block;">via ${addedVia || "invite"}</span>
+              </div>
+              <button class="btn ghost sm" type="button" data-uid="${d.id}" data-email="${email}"
+                onclick="removeAdmin(this)">Remove</button>
+            </div>`;
+        }).join("");
+      } catch (err) {
+        list.innerHTML = `<p class="muted">Could not load team.</p>`;
+        console.error(err);
+      }
+    }
+
+    window.removeAdmin = async (btn) => {
+      const { uid, email } = btn.dataset;
+      if (!confirm(`Remove ${email} from the team?`)) return;
+      await deleteDoc(doc(db, "admins", uid));
+      loadTeam();
+    };
+
+    async function loadInvites() {
+      const list = document.getElementById("invitesList");
+      try {
+        const q    = query(collection(db, "invites"), where("used", "==", false));
+        const snap = await getDocs(q);
+        if (snap.empty) {
+          list.innerHTML = `<p class="muted">No pending invites.</p>`;
+          return;
+        }
+        list.innerHTML = snap.docs.map(d => `
+          <div class="admin-list-item" style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="font-family:monospace;letter-spacing:.1em;color:var(--sky);">${d.id}</strong>
+            <button class="btn ghost sm" type="button" data-code="${d.id}"
+              onclick="revokeInvite(this)">Revoke</button>
+          </div>`).join("");
+      } catch (err) {
+        list.innerHTML = `<p class="muted">Could not load invites.</p>`;
+        console.error(err);
+      }
+    }
+
+    window.revokeInvite = async (btn) => {
+      await deleteDoc(doc(db, "invites", btn.dataset.code));
+      loadInvites();
+    };
+
+    function makeCode() {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    document.getElementById("generateInviteBtn")?.addEventListener("click", async () => {
+      const statusEl = document.getElementById("inviteGenStatus");
+      const code = makeCode();
+      statusEl.textContent = "Saving…";
+
+      // Show the code immediately so it's never lost even if Firestore fails
+      document.getElementById("codeDisplay").textContent = code;
+      document.getElementById("generatedCode").style.display = "block";
+
+      try {
+        await setDoc(doc(db, "invites", code), {
+          used:      false,
+          createdAt: serverTimestamp(),
+          createdBy: auth.currentUser?.email || "owner"
+        });
+        statusEl.textContent = "Code saved — share it with your new team member.";
+        loadInvites();
+      } catch (err) {
+        console.error("Invite save failed:", err);
+        statusEl.style.color = "var(--harvest)";
+        statusEl.textContent = `Saved locally but Firestore write failed: ${err.code || err.message}. Check your Firestore security rules.`;
+      }
+    });
+
+    document.getElementById("copyCodeBtn")?.addEventListener("click", () => {
+      const code = document.getElementById("codeDisplay").textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        document.getElementById("copyCodeBtn").textContent = "Copied!";
+        setTimeout(() => document.getElementById("copyCodeBtn").textContent = "Copy", 2000);
+      });
+    });
+  </script>
+
+</body>
+</html>

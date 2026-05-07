@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — State Showdown Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Kart Kapitol home">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span class="brand-wordmark">Kart Kapitol</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+        <a href="gallery.html" class="is-active">Gallery</a>
+        <a href="events.html" class="nav-cta">Join an Event</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+        <a href="gallery.html" class="mobile-link is-active">Gallery</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" style="min-height:55vh;padding-bottom:60px;">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="hero-media" aria-hidden="true">
+        <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-1.jpg" alt="" />
+      </div>
+      <div class="kart-streak" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="eyebrow pink"><span class="eyebrow-dot" aria-hidden="true"></span>Iowa High School Esports Association</div>
+        <h1 class="hero-title" style="font-size:clamp(3rem,9vw,7rem);">
+          <span class="line-1">STATE</span>
+          <span class="line-2">SHOWDOWN</span>
+        </h1>
+        <p class="hero-lead">
+          94 official photos from Iowa's premier high school esports event — Marshalltown's largest showcase moment. Photography by Altar Media.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary lg" href="#gallery-section">View Photos</a>
+          <a class="btn ghost lg" href="events.html">Back to Events</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-badge"><span class="stat-num" style="color:var(--pink);">94</span><span class="stat-label">Photos</span></div>
+          <div class="stat-badge"><span class="stat-num" style="color:var(--sky);">Nov</span><span class="stat-label">2025</span></div>
+          <div class="stat-badge"><span class="stat-num" style="color:var(--gold);">IAHSEA</span><span class="stat-label">Official</span></div>
+        </div>
+      </div>
+      <svg class="hero-cut" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 L0,30 Q360,80 720,40 Q1080,0 1440,50 L1440,80 Z"/>
+      </svg>
+    </section>
+
+    <section id="gallery-section" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Photo Gallery</div>
+          <h2 class="section-title">Every <span class="accent-pink">moment.</span></h2>
+          <p class="section-sub">Photography by <strong style="color:var(--text)">Altar Media</strong> · Iowa High School Esports Association State Showdown · November 2025</p>
+        </div>
+
+        <div class="gallery-filters" role="group" aria-label="Filter photos">
+          <button class="filter-btn active" data-filter="all">All Photos <span class="filter-count">94</span></button>
+          <button class="filter-btn" data-filter="showcase">November 2025 Showcase <span class="filter-count">88</span></button>
+          <button class="filter-btn" data-filter="event">Event Photos <span class="filter-count">6</span></button>
+        </div>
+
+        <div class="photo-grid" id="photoGrid" role="list" aria-label="State Showdown event photos"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-wordmark">Kart Kapitol</div>
+          <p class="footer-tagline">Marshalltown, Iowa's esports portfolio — built for the community, shown to the world.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="events.html">Events</a>
+          <a href="exhibits.html">Exhibits</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="visit.html">Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="partners.html">Partners</a>
+          <a href="exhibits.html">Give Back</a>
+          <a href="events.html">Smash Tourney</a>
+        </div>
+        <div class="footer-col">
+          <h4>Team</h4>
+          <a href="login.html">Staff Login</a>
+          <a href="admin.html">Admin</a>
+          <a href="partners.html">Press Kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Kart Kapitol · Marshalltown, Iowa</p>
+        <a class="btn ghost sm" href="login.html">Team Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox" aria-modal="true" aria-label="Photo viewer">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close photo viewer">&#10005;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8592;</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightboxImg" src="" alt="" />
+      </div>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">&#8594;</button>
+      <p class="lightbox-caption" id="lightboxCaption" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+  <script>
+    const SHOWCASE_BASE = "Esports/Esports November 2025-photos from Altar Media/";
+    const photos = [];
+
+    for (let i = 1; i <= 88; i++) {
+      photos.push({
+        src: SHOWCASE_BASE + "MtownChamber_Esports-" + i + ".jpg",
+        caption: "State Showdown · " + i + " of 88 · Photography by Altar Media",
+        group: "showcase"
+      });
+    }
+
+    [
+      { src: "Esports/Esports Black Box.jpg",                 caption: "Esports — Black Box",          group: "event" },
+      { src: "Esports/Esports Teammates.jpg",                 caption: "Esports — Teammates",           group: "event" },
+      { src: "Esports/Esports-Winter-Showdown-Black-Box.jpg", caption: "Winter Showdown — Black Box",   group: "event" },
+      { src: "Esports/MHS Esports 2.jpg",                     caption: "MHS Esports",                        group: "event" },
+      { src: "Esports/MHS Esports.jpg",                       caption: "MHS Esports",                        group: "event" },
+      { src: "Esports/Mtown Chamber_Banquet-72.jpg",          caption: "Marshalltown Chamber Banquet",       group: "event" }
+    ].forEach(p => photos.push(p));
+
+    let currentFilter = "all";
+    let filteredPhotos = [];
+    let currentIndex = 0;
+
+    const grid       = document.getElementById("photoGrid");
+    const lightbox   = document.getElementById("lightbox");
+    const lbImg      = document.getElementById("lightboxImg");
+    const lbCaption  = document.getElementById("lightboxCaption");
+
+    function getFiltered() {
+      return currentFilter === "all" ? photos : photos.filter(p => p.group === currentFilter);
+    }
+
+    function renderGrid() {
+      filteredPhotos = getFiltered();
+      grid.innerHTML = "";
+      filteredPhotos.forEach((photo, i) => {
+        const tile = document.createElement("div");
+        tile.className = "photo-tile";
+        tile.setAttribute("role", "listitem");
+        tile.setAttribute("tabindex", "0");
+        tile.setAttribute("aria-label", "Open: " + photo.caption);
+
+        const img = document.createElement("img");
+        img.src = photo.src;
+        img.alt = photo.caption;
+        img.loading = "lazy";
+        img.decoding = "async";
+
+        tile.appendChild(img);
+        tile.addEventListener("click", () => openLightbox(i));
+        tile.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(i); }
+        });
+        grid.appendChild(tile);
+      });
+    }
+
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightbox();
+      lightbox.showModal();
+    }
+
+    function updateLightbox() {
+      const p = filteredPhotos[currentIndex];
+      lbImg.src = p.src;
+      lbImg.alt = p.caption;
+      lbCaption.textContent = p.caption + "  (" + (currentIndex + 1) + " / " + filteredPhotos.length + ")";
+    }
+
+    document.getElementById("lightboxClose").addEventListener("click", () => lightbox.close());
+
+    document.getElementById("lightboxPrev").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
+      updateLightbox();
+    });
+
+    document.getElementById("lightboxNext").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % filteredPhotos.length;
+      updateLightbox();
+    });
+
+    lightbox.addEventListener("click", e => { if (e.target === lightbox) lightbox.close(); });
+
+    lightbox.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft")  { currentIndex = (currentIndex - 1 + filteredPhotos.length) % filteredPhotos.length; updateLightbox(); }
+      if (e.key === "ArrowRight") { currentIndex = (currentIndex + 1) % filteredPhotos.length; updateLightbox(); }
+    });
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = btn.dataset.filter;
+        renderGrid();
+      });
+    });
+
+    renderGrid();
+  </script>
+</body>
+</html>

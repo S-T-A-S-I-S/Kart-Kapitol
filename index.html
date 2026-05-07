@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Marshalltown Esports</title>
+  <meta name="description" content="The center of Iowa esports. Marshalltown's competitive gaming community — tournaments, orgs, events, and the people who make it real." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="home">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ═══════════════ HEADER ═══════════════ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Kart Kapitol home">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span class="brand-wordmark">Kart Kapitol</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="is-active">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="events.html" class="nav-cta">Join an Event</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link is-active">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+        <a href="gallery.html" class="mobile-link">Gallery</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero hero-home" aria-label="Hero">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/kapitol.jpeg" alt="" />
+      </div>
+      <div class="kart-streak" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <!-- eyebrow-label is the editable text; eyebrow-dot stays untouched -->
+        <div class="eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span id="home-eyebrow-label">Marshalltown, Iowa · Esports Hub</span>
+        </div>
+
+        <h1 class="hero-title glitch" data-text="KART KAPITOL">
+          <span class="line-1" id="home-hero-line1">KART</span>
+          <span class="line-2" id="home-hero-line2">KAPITOL</span>
+        </h1>
+
+        <p class="hero-lead" id="home-lead">
+          The center of Iowa's esports scene. Where high school rivals compete, communities connect, and Marshalltown earns its place on the national map.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary lg" href="events.html" id="home-primary-cta">View Events</a>
+          <a class="btn ghost lg" href="exhibits.html" id="home-secondary-cta">Explore the Story</a>
+        </div>
+
+        <div class="hero-stats" role="list" aria-label="Quick stats">
+          <div class="stat-badge" role="listitem">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Orgs</span>
+          </div>
+          <div class="stat-badge" role="listitem">
+            <span class="stat-num">94</span>
+            <span class="stat-label">Event Photos</span>
+          </div>
+          <div class="stat-badge" role="listitem">
+            <span class="stat-num">Weekly</span>
+            <span class="stat-label">Smash Tourneys</span>
+          </div>
+          <div class="stat-badge" role="listitem">
+            <span class="stat-num">Iowa</span>
+            <span class="stat-label">State Events</span>
+          </div>
+        </div>
+      </div>
+
+      <svg class="hero-cut" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 L0,30 Q360,80 720,40 Q1080,0 1440,50 L1440,80 Z"/>
+      </svg>
+    </section>
+
+    <!-- ═══════════════ TICKER ═══════════════ -->
+    <div class="ticker-strip" aria-label="Live event ticker" role="marquee" aria-live="off">
+      <!-- Rendered by app.js from content.json → ticker.items -->
+      <div class="ticker-track" aria-hidden="true"></div>
+    </div>
+
+    <!-- ═══════════════ ORGANIZATIONS ═══════════════ -->
+    <section class="section dark" aria-labelledby="orgs-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>
+            <span data-content="home.orgsEyebrow">The Organizations</span>
+          </div>
+          <h2 class="section-title" id="orgs-heading">
+            <span data-content="home.orgsTitle">Built by real people. Powered by Marshalltown.</span>
+          </h2>
+          <p class="section-sub" data-content="home.orgsLead">
+            Three organizations form the backbone of Iowa's most active community esports scene — each playing a different role in building something that lasts.
+          </p>
+        </div>
+
+        <!-- Rendered by app.js from content.json → home.orgs -->
+        <div class="org-grid" id="home-orgs-grid" aria-label="Partner organizations"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EVENTS ═══════════════ -->
+    <section class="section" aria-labelledby="events-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow gold"><span class="eyebrow-dot" aria-hidden="true"></span>
+            <span data-content="home.eventsEyebrow">What's Happening</span>
+          </div>
+          <h2 class="section-title" id="events-heading">
+            <span data-content="home.eventsTitle">Something's always going on.</span>
+          </h2>
+          <p class="section-sub" data-content="home.eventsLead">
+            From weekly tournaments to statewide showcases — Marshalltown's esports calendar stays full.
+          </p>
+        </div>
+
+        <div class="events-split">
+          <!-- Event rows rendered by app.js (from localStorage demo events or defaults) -->
+          <div>
+            <div class="events-stack" id="eventsList" aria-live="polite"></div>
+            <div style="margin-top:20px;">
+              <a class="btn primary" href="events.html">All Events →</a>
+            </div>
+          </div>
+
+          <div class="event-feature-card reveal">
+            <div class="event-feature-label" id="featured-event-label">🏆 Signature Event</div>
+            <h3 class="event-feature-title" id="featured-event-title">IAHSEA State Showdown</h3>
+            <p class="event-feature-sub" id="featured-event-desc">
+              Iowa's premier high school esports championship. Hosted right here in Marshalltown — 94 captured moments from November 2025 and counting.
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a class="btn primary sm" href="gallery.html">See the Photos</a>
+              <a class="btn ghost sm" href="events.html">Event Archive</a>
+            </div>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);">
+              <div class="event-feature-label" id="weekly-event-label">🎮 Every Week</div>
+              <div style="font-weight:700;margin-bottom:4px;" id="weekly-event-title">Super Smash Bros Tournament</div>
+              <div style="font-size:.86rem;color:var(--muted);" id="weekly-event-meta">Open to all · Marshalltown · Weekly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ GIVE BACK ═══════════════ -->
+    <section class="section surface" aria-labelledby="giveback-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow lime"><span class="eyebrow-dot" aria-hidden="true"></span>
+            <span data-content="home.givebackEyebrow">Community Impact</span>
+          </div>
+          <h2 class="section-title" id="giveback-heading">
+            <span data-content="home.givebackTitle">Esports that gives back.</span>
+          </h2>
+          <p class="section-sub" data-content="home.givebackLead">
+            Gaming is the vehicle. Community is the destination.
+          </p>
+        </div>
+
+        <!-- Rendered by app.js from content.json → home.givebackStats -->
+        <div class="giveback-grid reveal" id="home-giveback-grid" aria-label="Community impact stats"></div>
+
+        <!-- Rendered by app.js from content.json → home.communityPartners -->
+        <div class="partner-row reveal" id="home-partner-row" aria-label="Community partners"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MECHDYNE ═══════════════ -->
+    <section class="section dark" aria-labelledby="mechdyne-heading">
+      <div class="container">
+        <div class="mechdyne-block reveal">
+          <div>
+            <div class="mechdyne-eyebrow" data-content="home.mechdyneEyebrow">Technology Partner</div>
+            <h2 class="mechdyne-title" id="mechdyne-heading" data-content="home.mechdyneTitle">Mechdyne</h2>
+            <p class="mechdyne-desc" id="home-mechdyne-desc">
+              A Marshalltown-based technology powerhouse, Mechdyne brings world-class visualization and immersive tech to the esports space. Their investment in the local scene elevates every event and signals to the country: Marshalltown means business.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <a class="btn secondary" href="partners.html">Partner With Us</a>
+              <a class="btn ghost" href="exhibits.html">The Full Story</a>
+            </div>
+          </div>
+          <div class="mechdyne-badge" aria-hidden="true">
+            <span class="badge-text">MECH<br>DYNE</span>
+            <span class="badge-sub">Marshalltown, IA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ GALLERY ═══════════════ -->
+    <section class="section" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow pink"><span class="eyebrow-dot" aria-hidden="true"></span>
+            <span data-content="home.galleryEyebrow">From the Lens</span>
+          </div>
+          <h2 class="section-title" id="gallery-heading">
+            <span data-content="home.galleryTitle">See it to believe it.</span>
+          </h2>
+          <p class="section-sub" data-content="home.galleryLead">
+            94 official photos from the IAHSEA State Showdown. Real moments, real players, real Marshalltown energy.
+          </p>
+        </div>
+
+        <!-- Rendered by app.js from content.json → home.galleryPhotos -->
+        <div class="gallery-strip reveal" id="home-gallery-strip" role="list" aria-label="Photo highlights">
+          <!-- Fallback shown until JS loads -->
+          <div class="gallery-panel wide" role="listitem">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-1.jpg" alt="State Showdown 2025" loading="lazy" />
+            <div class="gallery-label">State Showdown 2025</div>
+          </div>
+          <div class="gallery-panel" role="listitem">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-18.jpg" alt="The Crowd" loading="lazy" />
+            <div class="gallery-label">The Crowd</div>
+          </div>
+          <div class="gallery-panel" role="listitem">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-35.jpg" alt="Competition" loading="lazy" />
+            <div class="gallery-label">Competition</div>
+          </div>
+          <div class="gallery-panel" role="listitem">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-55.jpg" alt="The Moments" loading="lazy" />
+            <div class="gallery-label">The Moments</div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;text-align:center;">
+          <a class="btn primary" href="gallery.html">View All 94 Photos →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ VISIT CTA ═══════════════ -->
+    <section class="section surface" aria-labelledby="visit-cta-heading">
+      <div class="container" style="text-align:center;max-width:700px;">
+        <div class="eyebrow" style="justify-content:center;margin-inline:auto;">
+          <span class="eyebrow-dot" aria-hidden="true"></span>Plan Your Visit
+        </div>
+        <h2 class="section-title reveal" id="home-visit-cta-title">
+          Marshalltown is <span class="accent-sky">ready for you.</span>
+        </h2>
+        <p class="section-sub reveal" id="home-visit-cta-lead" style="margin-inline:auto;text-align:center;">
+          Whether you're driving in for a tournament or booking a weekend around the scene — this is a city building something worth the trip.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;" class="reveal">
+          <a class="btn primary lg" href="visit.html">Plan Your Visit</a>
+          <a class="btn ghost lg" href="partners.html">Partner With Us</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-wordmark">Kart Kapitol</div>
+          <p class="footer-tagline">Marshalltown, Iowa's esports portfolio — built for the community, shown to the world.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="events.html">Events</a>
+          <a href="exhibits.html">Exhibits</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="visit.html">Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="partners.html">Partners</a>
+          <a href="partners.html">Mechdyne</a>
+          <a href="exhibits.html">Give Back</a>
+          <a href="events.html">Smash Tourney</a>
+        </div>
+        <div class="footer-col">
+          <h4>Team</h4>
+          <a href="login.html">Staff Login</a>
+          <a href="admin.html">Admin</a>
+          <a href="partners.html">Press Kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Kart Kapitol · Marshalltown, Iowa</p>
+        <a class="btn ghost sm" href="login.html">Team Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Info</h3>
+        <button class="btn ghost sm" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn ghost sm" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

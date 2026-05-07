@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Kart Kapitol home">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span class="brand-wordmark">Kart Kapitol</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html" class="is-active">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="events.html" class="nav-cta">Join an Event</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link is-active">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+        <a href="gallery.html" class="mobile-link">Gallery</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" style="min-height:55vh;padding-bottom:60px;">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/kapitol.jpeg" alt="" />
+      </div>
+      <div class="kart-streak" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="eyebrow gold"><span class="eyebrow-dot" aria-hidden="true"></span>Events Calendar</div>
+        <h1 class="hero-title" style="font-size:clamp(3rem,9vw,7rem);">
+          <span class="line-1">THE</span>
+          <span class="line-2">LINEUP</span>
+        </h1>
+        <p class="hero-lead">
+          Live calendar + museum archive. Featured moments up front, everything else organized and ready for visitors.
+        </p>
+        <div class="hero-actions">
+          <button class="btn primary lg" data-open-modal="submit">Submit an Event</button>
+          <a class="btn ghost lg" href="gallery.html">State Showdown Photos</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-badge"><span class="stat-num" style="color:var(--gold);">Now</span><span class="stat-label">Upcoming</span></div>
+          <div class="stat-badge"><span class="stat-num" style="color:var(--sky);">Wall</span><span class="stat-label">Featured</span></div>
+          <div class="stat-badge"><span class="stat-num" style="color:var(--pink);">Archive</span><span class="stat-label">Past Events</span></div>
+        </div>
+      </div>
+      <svg class="hero-cut" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 L0,30 Q360,80 720,40 Q1080,0 1440,50 L1440,80 Z"/>
+      </svg>
+    </section>
+
+    <!-- State Showdown Preview -->
+    <section class="section surface" aria-labelledby="showdown-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow pink"><span class="eyebrow-dot" aria-hidden="true"></span>Signature Event</div>
+          <h2 class="section-title" id="showdown-heading">IAHSEA <span class="accent-pink">State Showdown</span></h2>
+          <p class="section-sub">94 official photos from Iowa's premier high school esports event · November 2025 · Photography by Altar Media</p>
+        </div>
+        <div class="showdown-preview reveal">
+          <div class="showdown-preview-img">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-1.jpg" alt="State Showdown" loading="lazy" />
+          </div>
+          <div class="showdown-preview-img">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-18.jpg" alt="State Showdown" loading="lazy" />
+          </div>
+          <div class="showdown-preview-img">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-35.jpg" alt="State Showdown" loading="lazy" />
+          </div>
+          <div class="showdown-preview-img">
+            <img src="Esports/Esports November 2025-photos from Altar Media/MtownChamber_Esports-55.jpg" alt="State Showdown" loading="lazy" />
+          </div>
+        </div>
+        <a class="btn primary" href="gallery.html">View All 94 Photos →</a>
+      </div>
+    </section>
+
+    <!-- Featured Events (Firestore) -->
+    <section class="section dark" aria-labelledby="featured-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Featured</div>
+          <h2 class="section-title" id="featured-heading">Big wall <span class="accent-sky">moments.</span></h2>
+          <p class="section-sub">Highlighted for visitors and press — the events that define the season.</p>
+        </div>
+        <div id="featuredGrid" class="grid cards"></div>
+        <p id="featuredEmpty" class="muted" style="display:none;">No featured events yet. Mark an event as <strong>featured</strong> in the admin panel.</p>
+      </div>
+    </section>
+
+    <!-- Upcoming & Recent (Firestore) -->
+    <section class="section" aria-labelledby="upcoming-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow gold"><span class="eyebrow-dot" aria-hidden="true"></span>Upcoming &amp; Recent</div>
+          <h2 class="section-title" id="upcoming-heading">What's <span class="accent-gold">next.</span></h2>
+          <p class="section-sub">Perfect for "Plan Your Visit." Check what's coming, then show up.</p>
+        </div>
+        <div class="card reveal">
+          <div class="events-head">
+            <h3>Event Feed</h3>
+            <button class="btn ghost sm" id="refreshBtn">Refresh</button>
+          </div>
+          <ul id="upcomingList" class="events-list" aria-live="polite"></ul>
+          <p id="upcomingEmpty" class="muted" style="display:none;">No upcoming events yet. Add one in <a class="link" href="admin.html">Admin</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Archive (Firestore) -->
+    <section class="section surface" aria-labelledby="archive-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow pink"><span class="eyebrow-dot" aria-hidden="true"></span>Past Events</div>
+          <h2 class="section-title" id="archive-heading">The <span class="accent-pink">archive.</span></h2>
+          <p class="section-sub">Documented moments that build Marshalltown's esports story.</p>
+        </div>
+        <div class="card reveal">
+          <ul id="pastList" class="events-list" aria-live="polite"></ul>
+          <p id="pastEmpty" class="muted" style="display:none;">No past events yet. When events pass, switch <strong>status</strong> to <em>past</em> in Admin.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-wordmark">Kart Kapitol</div>
+          <p class="footer-tagline">Marshalltown, Iowa's esports portfolio — built for the community, shown to the world.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="events.html">Events</a>
+          <a href="exhibits.html">Exhibits</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="visit.html">Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="partners.html">Partners</a>
+          <a href="exhibits.html">Give Back</a>
+          <a href="events.html">Smash Tourney</a>
+        </div>
+        <div class="footer-col">
+          <h4>Team</h4>
+          <a href="login.html">Staff Login</a>
+          <a href="admin.html">Admin</a>
+          <a href="partners.html">Press Kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Kart Kapitol · Marshalltown, Iowa</p>
+        <a class="btn ghost sm" href="login.html">Team Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal" class="modal">
+    <form method="dialog" class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitle">Info</h3>
+        <button class="btn ghost sm" value="cancel" aria-label="Close">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-actions">
+        <button class="btn ghost sm" value="cancel">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+
+  <!-- Firestore feed -->
+  <script type="module">
+    import { db } from "./firebase.js";
+    import {
+      collection, getDocs, orderBy, query
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const featuredGrid  = document.getElementById("featuredGrid");
+    const featuredEmpty = document.getElementById("featuredEmpty");
+    const upcomingList  = document.getElementById("upcomingList");
+    const upcomingEmpty = document.getElementById("upcomingEmpty");
+    const pastList      = document.getElementById("pastList");
+    const pastEmpty     = document.getElementById("pastEmpty");
+    const refreshBtn    = document.getElementById("refreshBtn");
+
+    function safe(s){ return (s ?? "").toString(); }
+    function sortAsc(a,b){ return safe(a.date_start).localeCompare(safe(b.date_start)); }
+
+    function makeFeaturedCard(ev){
+      const card = document.createElement("article");
+      card.className = "card";
+      const img = ev.image ? `<img src="${ev.image}" alt="" style="width:100%;border-radius:10px;margin-bottom:12px;">` : "";
+      card.innerHTML = `
+        ${img}
+        <h3>${safe(ev.title) || "Untitled Event"}</h3>
+        <p>${safe(ev.short_blurb) || safe(ev.description).slice(0,140) || "A featured event in the Kart Kapitol archive."}</p>
+        <div style="margin-top:10px;font-size:.84rem;color:var(--muted);">
+          <strong>${safe(ev.date_start) || "TBD"}</strong>${ev.time ? " · " + safe(ev.time) : ""}<br>
+          ${safe(ev.location_name) || ""}${ev.address ? " · " + safe(ev.address) : ""}
+        </div>
+      `;
+      return card;
+    }
+
+    function makeEventRow(ev){
+      const li = document.createElement("li");
+      li.className = "event";
+      li.innerHTML = `
+        <div>
+          <strong>${safe(ev.title) || "Untitled Event"}</strong>
+          <span>${safe(ev.location_name) || safe(ev.address) || ""}</span>
+        </div>
+        <div><strong>${safe(ev.date_start) || "TBD"}</strong></div>
+      `;
+      return li;
+    }
+
+    async function loadEvents(){
+      featuredGrid.innerHTML = "";
+      upcomingList.innerHTML = "";
+      pastList.innerHTML = "";
+      featuredEmpty.style.display = "none";
+      upcomingEmpty.style.display = "none";
+      pastEmpty.style.display = "none";
+
+      const q = query(collection(db,"events"), orderBy("date_start","desc"));
+      const snap = await getDocs(q);
+      const events = [];
+      snap.forEach(doc => events.push({ id:doc.id, ...doc.data() }));
+
+      const featured = events.filter(e => !!e.featured);
+      const upcoming = events.filter(e => (e.status||"upcoming") !== "past");
+      const past     = events.filter(e => (e.status||"") === "past");
+
+      if (!featured.length){ featuredEmpty.style.display = "block"; }
+      else { featured.forEach(ev => featuredGrid.appendChild(makeFeaturedCard(ev))); }
+
+      const upcomingSorted = [...upcoming].sort(sortAsc);
+      if (!upcomingSorted.length){ upcomingEmpty.style.display = "block"; }
+      else { upcomingSorted.forEach(ev => upcomingList.appendChild(makeEventRow(ev))); }
+
+      if (!past.length){ pastEmpty.style.display = "block"; }
+      else { past.forEach(ev => pastList.appendChild(makeEventRow(ev))); }
+    }
+
+    refreshBtn?.addEventListener("click", loadEvents);
+    loadEvents();
+  </script>
+</body>
+</html>

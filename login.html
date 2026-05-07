@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kart Kapitol — Team Login</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .login-shell{
+      min-height: calc(100vh - 84px);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow: hidden;
+    }
+
+    .login-bg{
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(11,15,20,.45), rgba(11,15,20,.78)),
+        url("assets/kapitol.jpeg") center/cover no-repeat;
+      transform: scale(1.06);
+      filter: blur(10px) saturate(1.05);
+      opacity: .9;
+    }
+
+    .login-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(700px 420px at 15% 10%, rgba(5,168,234,.22), transparent 62%),
+        radial-gradient(650px 420px at 85% 18%, rgba(255,163,1,.14), transparent 60%),
+        radial-gradient(520px 360px at 22% 84%, rgba(212,38,133,.12), transparent 62%);
+    }
+
+    .login-panel{
+      position: relative;
+      z-index: 2;
+      width: min(460px, 100%);
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(17,24,38,.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+      text-align: center;
+    }
+
+    .login-logo{
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(135deg, rgba(5,168,234,.20), rgba(255,163,1,.14), rgba(212,38,133,.12)),
+        rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 0 16px 40px rgba(0,0,0,.28);
+    }
+
+    .login-title{
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+    }
+
+    .login-subtitle{
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .login-stack{
+      display: grid;
+      gap: 12px;
+      text-align: left;
+      margin-top: 18px;
+    }
+
+    .login-stack label{
+      font-size: .95rem;
+      color: var(--text);
+    }
+
+    .login-stack input{
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline: none;
+    }
+
+    .login-stack input::placeholder{
+      color: var(--muted);
+    }
+
+    .login-stack input:focus{
+      border-color: rgba(5,168,234,.45);
+      box-shadow: 0 0 0 3px rgba(5,168,234,.15);
+    }
+
+    .login-actions{
+      display:grid;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .login-actions .btn{
+      width:100%;
+    }
+
+    .login-divider{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin: 18px 0 8px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .login-divider::before,
+    .login-divider::after{
+      content:"";
+      flex:1;
+      height:1px;
+      background: rgba(255,255,255,.10);
+    }
+
+    .login-meta{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .demo-banner{
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,163,1,.22);
+      background: rgba(255,163,1,.10);
+      color: var(--text);
+      font-size: .92rem;
+      text-align: left;
+    }
+
+    .footer-admin-note{
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 640px){
+      .login-panel{
+        padding: 22px 18px;
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="login">
+  <div id="pageTransition" class="page-transition" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Kart Kapitol home">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <span class="brand-wordmark">Kart Kapitol</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="exhibits.html">Exhibits</a>
+        <a href="events.html">Events</a>
+        <a href="visit.html">Visit</a>
+        <a href="partners.html">Partners</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="events.html" class="nav-cta">Join an Event</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-controls="mobileNav" aria-expanded="false">
+        <span class="burger" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="exhibits.html" class="mobile-link">Exhibits</a>
+        <a href="events.html" class="mobile-link">Events</a>
+        <a href="visit.html" class="mobile-link">Visit</a>
+        <a href="partners.html" class="mobile-link">Partners</a>
+        <a href="gallery.html" class="mobile-link">Gallery</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="login-shell">
+    <div class="login-bg" aria-hidden="true"></div>
+
+    <section class="login-panel" aria-label="Team login">
+      <div class="login-logo">KK</div>
+      <h1 class="login-title">Team Sign In</h1>
+      <p class="login-subtitle">
+        Access the Kart Kapitol management side for events, exhibits, and site content.
+      </p>
+
+      <div class="login-actions">
+        <button class="btn primary" id="googleBtn" type="button">Continue with Google</button>
+      </div>
+
+      <div class="login-divider">or use email</div>
+
+      <div class="login-stack">
+        <label>
+          Email
+          <input id="email" type="email" autocomplete="email" placeholder="team@kartkapitol.com" />
+        </label>
+
+        <label>
+          Password
+          <input id="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+        </label>
+      </div>
+
+      <div class="login-actions">
+        <button class="btn secondary" id="emailSignInBtn" type="button">Sign in</button>
+      </div>
+
+      <p class="login-meta" id="status">Use Google or email to continue.</p>
+
+      <div class="login-divider">new to the team?</div>
+
+      <div id="inviteSection">
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:10px;text-align:left;">
+          Got an invite code from an admin? Enter it below to create your account.
+        </p>
+        <div class="login-stack" style="margin-top:0;">
+          <label>
+            Invite Code
+            <input id="inviteCode" type="text" placeholder="ABC123" autocomplete="off"
+              style="text-transform:uppercase;letter-spacing:.12em;font-weight:700;" />
+          </label>
+          <label>
+            Your Email
+            <input id="inviteEmail" type="email" autocomplete="email" placeholder="you@example.com" />
+          </label>
+          <label>
+            Choose a Password
+            <input id="invitePassword" type="password" autocomplete="new-password" placeholder="••••••••" />
+          </label>
+        </div>
+        <div style="margin-top:10px;">
+          <button class="btn primary" type="button" id="redeemInviteBtn" style="width:100%;">
+            Create Account with Invite
+          </button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-wordmark">Kart Kapitol</div>
+          <p class="footer-tagline">Marshalltown, Iowa's esports portfolio — built for the community, shown to the world.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="events.html">Events</a>
+          <a href="exhibits.html">Exhibits</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="visit.html">Visit</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="partners.html">Partners</a>
+          <a href="exhibits.html">Give Back</a>
+          <a href="events.html">Smash Tourney</a>
+        </div>
+        <div class="footer-col">
+          <h4>Team</h4>
+          <a href="login.html">Staff Login</a>
+          <a href="admin.html">Admin</a>
+          <a href="partners.html">Press Kit</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© <span id="year"></span> Kart Kapitol · Marshalltown, Iowa</p>
+        <a class="btn ghost sm" href="index.html">Public Site</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+  <script type="module">
+    import { auth, googleProvider, db } from "./firebase.js";
+    import {
+      signInWithPopup, signOut, onAuthStateChanged,
+      signInWithEmailAndPassword, createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import {
+      doc, getDoc, setDoc, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    // Owner emails always have access regardless of Firestore
+    const OWNER_EMAILS = ["2024mmorgan@gmail.com"];
+
+    const statusEl = document.getElementById("status");
+    const emailEl  = document.getElementById("email");
+    const passEl   = document.getElementById("password");
+
+    function setStatus(text) { statusEl.textContent = text; }
+
+    async function isApproved(user) {
+      if (OWNER_EMAILS.includes(user.email)) return true;
+      const snap = await getDoc(doc(db, "admins", user.uid));
+      return snap.exists();
+    }
+
+    async function checkAndRedirect(user) {
+      if (!user) return;
+      setStatus("Checking access…");
+      if (await isApproved(user)) {
+        window.location.href = "admin.html";
+      } else {
+        await signOut(auth);
+        setStatus("Access denied — ask an admin for an invite code.");
+      }
+    }
+
+    // Google sign-in
+    document.getElementById("googleBtn").addEventListener("click", async () => {
+      try {
+        setStatus("Signing in with Google…");
+        const { user } = await signInWithPopup(auth, googleProvider);
+        await checkAndRedirect(user);
+      } catch (err) {
+        console.error(err);
+        setStatus(`Google sign-in failed: ${err?.message || err}`);
+      }
+    });
+
+    // Email sign-in (existing accounts only)
+    document.getElementById("emailSignInBtn").addEventListener("click", async () => {
+      try {
+        const email    = emailEl.value.trim();
+        const password = passEl.value;
+        if (!email || !password) return setStatus("Enter email and password.");
+        setStatus("Signing in…");
+        const { user } = await signInWithEmailAndPassword(auth, email, password);
+        await checkAndRedirect(user);
+      } catch (err) {
+        console.error(err);
+        setStatus(`Sign-in failed: ${err?.message || err}`);
+      }
+    });
+
+    // Invite code redemption — creates a new account
+    document.getElementById("redeemInviteBtn").addEventListener("click", async () => {
+      const code     = document.getElementById("inviteCode").value.trim().toUpperCase();
+      const email    = document.getElementById("inviteEmail").value.trim();
+      const password = document.getElementById("invitePassword").value;
+
+      if (!code || !email || !password) {
+        return setStatus("Fill in invite code, email, and password.");
+      }
+      if (password.length < 6) {
+        return setStatus("Password must be at least 6 characters.");
+      }
+
+      try {
+        setStatus("Checking invite code…");
+        const inviteRef  = doc(db, "invites", code);
+        const inviteSnap = await getDoc(inviteRef);
+
+        if (!inviteSnap.exists()) return setStatus("Invalid invite code.");
+        if (inviteSnap.data().used)  return setStatus("That invite code has already been used.");
+
+        setStatus("Creating your account…");
+        const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Register user as admin and mark invite used
+        await setDoc(doc(db, "admins", user.uid), {
+          email:       user.email,
+          addedAt:     serverTimestamp(),
+          addedVia:    "invite",
+          inviteCode:  code
+        });
+        await setDoc(inviteRef, {
+          ...inviteSnap.data(),
+          used:    true,
+          usedBy:  user.email,
+          usedAt:  serverTimestamp()
+        });
+
+        setStatus("Account created! Redirecting…");
+        window.location.href = "admin.html";
+      } catch (err) {
+        console.error(err);
+        setStatus(`Failed: ${err?.message || err}`);
+      }
+    });
+
+    // Redirect already-signed-in approved users
+    onAuthStateChanged(auth, async (user) => {
+      if (user && await isApproved(user)) {
+        window.location.href = "admin.html";
+      }
+    });
+  </script>
+</body>
+</html>
