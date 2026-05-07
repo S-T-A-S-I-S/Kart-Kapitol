@@ -225,6 +225,23 @@
   }
 
   // ─────────────────────────────
+  //  MCC TIMELINE RENDERER (exhibits page)
+  // ─────────────────────────────
+  function renderMccTimeline(years) {
+    const el = $("#mcc-timeline");
+    if (!el || !years?.length) return;
+    el.innerHTML = years.map(yr => `
+      <div class="mcc-year">
+        <div class="mcc-year-label">${yr.year}</div>
+        ${yr.items.map(item => `
+          <div class="mcc-item">
+            <div class="mcc-source">${item.source}</div>
+            <div class="mcc-headline">${item.headline}</div>
+          </div>`).join("")}
+      </div>`).join("");
+  }
+
+  // ─────────────────────────────
   //  FEATURED EVENT CARD INJECTOR
   // ─────────────────────────────
   function injectFeaturedEvent(home) {
@@ -334,6 +351,9 @@
     if (content.home?.givebackStats)     renderGivebackStats(content.home.givebackStats);
     if (content.home?.communityPartners) renderPartnerChips(content.home.communityPartners);
     if (content.home?.galleryPhotos)     renderGalleryStrip(content.home.galleryPhotos);
+
+    // MCC timeline (exhibits page)
+    if (content.exhibits?.mccTimeline) renderMccTimeline(content.exhibits.mccTimeline);
 
     // Featured event card text
     if (content.home) injectFeaturedEvent(content.home);

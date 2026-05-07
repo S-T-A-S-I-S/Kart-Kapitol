@@ -152,6 +152,55 @@
       { "title": "Curated Standards",        "desc": "This exhibit is designed to feel intentional — concise, shareable, visitor-first. Read about the vision.",                   "modal": "curator",           "btn": "inline"    }
     ],
 
+    "mccTimelineEyebrow": "MCC Esports · Press & Milestones",
+    "mccTimelineTitle":   "12 national titles. Countless headlines.",
+    "mccTimelineLead":    "Four years of MCC Esports coverage — from Mario Kart champions to Big Ten dominance. Every milestone, every story.",
+    "mccTimeline": [
+      {
+        "year": "2022–2023",
+        "items": [
+          { "source": "MCC Athletics",  "headline": "Lawthers Esports National Champion / Lawthers Makes MCC History" },
+          { "source": "MCC Athletics",  "headline": "Jesus Silva NJCAAE Player Spotlight of the Week" },
+          { "source": "KCCI News",      "headline": "An Iowa college student is a Mario Kart champion" },
+          { "source": "MCC YouTube",    "headline": "Marshalltown Community College Programs — Esports Management" },
+          { "source": "Livability",     "headline": "Game On in Marshalltown, IA" }
+        ]
+      },
+      {
+        "year": "2023–2024",
+        "items": [
+          { "source": "KCCI News",      "headline": "Marshalltown hosts middle and high school esports camp" },
+          { "source": "KCCI News",      "headline": "Iowa college home to a two-time esports national champion" },
+          { "source": "KFJB Radio",     "headline": "Iowa High School Esports Winter State Showdown Coming to Marshalltown Next Week" },
+          { "source": "KFJB Radio",     "headline": "MCC Esports Head Coaches Reflect on Back-to-Back National Championships" },
+          { "source": "KCRG News",      "headline": "Today in Iowa in Marshalltown: Esports at Marshalltown Community College" }
+        ]
+      },
+      {
+        "year": "2024–2025",
+        "items": [
+          { "source": "Times-Republican", "headline": "IVCCD bestows Outstanding Service Awards" },
+          { "source": "MCC Athletics",    "headline": "MCC Esports celebrates another semester of national championships" },
+          { "source": "MCC Athletics",    "headline": "Beyond Legendary: The Unrivaled Saga of MCC Overwatch" },
+          { "source": "KCCI News",        "headline": "Marshalltown Community College Esports team seeing success at nationals" },
+          { "source": "KFJB Radio",       "headline": "MCC to Partner with Big Brothers Big Sisters for Mario Kart Charity Tournament" },
+          { "source": "KFJB Radio",       "headline": "BBBS Mario Kart Fundraiser, Brookelyn Schlawin and Nathan Rodemeyer" },
+          { "source": "Sports Travel",    "headline": "For Marshalltown, Esports is Booming Business" }
+        ]
+      },
+      {
+        "year": "2025–2026",
+        "items": [
+          { "source": "MCC Athletics",    "headline": "MCC Esports to Host Hall of Fame Ceremony and Grand Opening of New Lounge" },
+          { "source": "Times-Republican", "headline": "MCC Esports Hall of Fame inducts first 11 members" },
+          { "source": "KFJB Radio",       "headline": "MCC dominates the Collegiate Karting League" },
+          { "source": "MCC Athletics",    "headline": "MCC 11-0 against Big 10 teams for national championship" },
+          { "source": "Times-Republican", "headline": "MCC defeats several larger schools to win Fall 2025 Mario Kart 8DX D2 national championship" },
+          { "source": "KCCI News",        "headline": "Marshalltown Community College esports wins 12th national title in four years" }
+        ]
+      }
+    ],
+
     "timelineEyebrow": "Timeline Wall",
     "timelineTitle":   "Milestones that shaped us.",
     "timelineLead":    "A guided walk through key moments. Tap a plaque to open the display.",
